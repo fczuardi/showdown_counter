@@ -198,26 +198,31 @@ module.exports = function (grunt) {
 
         //# Watch
         watch: {
+            options: {
+                spawn: false
+            },
             javascript: {
                 files: JAVASCRIPT_SOURCES,
-                tasks: ['jsvalidate', JS_LINTER],
-                options: {
-                    spawn: false
-                }
+                tasks: ['jsvalidate', JS_LINTER]
             },
             css: {
                 files: CSS_FILES,
-                tasks: ['autoprefixer', 'manifest'],
-                options: {
-                    spawn: false
-                }
+                tasks: ['autoprefixer', 'manifest']
+            },
+            assemble: {
+                files: [
+                    TEMPLATES_PATH + '/**/*.hbs',
+                    TEMPLATES_DATA_PATH + '**/*.{json,yml}'
+                ],
+                tasks: ['assemble']
             },
             copy_html: {
                 files: HTML_PAGES,
-                tasks: ['copy:html', 'manifest'],
-                options: {
-                    spawn: false
-                }
+                tasks: ['copy:html', 'manifest']
+            },
+            cache: {
+                files: HTDOCS_PATH + '**/*',
+                tasks: ['manifest']
             },
             update_htaccess: {
                 files: HTACCESS_FILE,
@@ -238,13 +243,6 @@ module.exports = function (grunt) {
                 tasks: ['compass', 'manifest'],
                 options: {
                     spawn: true
-                }
-            },
-            cache: {
-                files: HTDOCS_PATH + '**/*',
-                tasks: ['manifest'],
-                options: {
-                    spawn: false
                 }
             }
         }
