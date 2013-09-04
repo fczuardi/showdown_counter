@@ -1,0 +1,25 @@
+{
+  "name": "mnmo-counters",
+  "version": "0.0.0",
+  "license": "AGPL",
+  "author": "Fabricio C Zuardi <fabricio@fabricio.org> (http://fabricio.org)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fczuardi/showdown_counter.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "lodash": "~1.3.1",
+    "matchdep": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-compass": "~0.5.0",
+    "grunt-autoprefixer": "~0.2.20130806",
+    "grunt-jsvalidate": "~0.2.1",
+    "grunt-jslint": "~1.0.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-gjslint": "~0.1.1",
+    "grunt-manifest": "~0.4.0",
+    "grunt-contrib-concat": "~0.3.0"
+  }
+}

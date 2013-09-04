@@ -25,3 +25,15 @@ contest on
 and posting the link for the updates on the
 (Ubuntu App Showdown Subreddit)[http://www.reddit.com/r/ubuntuappshowdown]
 as well.
+
+Contributing
+------------
+
+You must have [git](http://git-scm.com/), [bundler](http://bundler.io/),
+[node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) installed.
+
+    $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
+    $ npm install
+    $ bundle install
+
+To be continued…
