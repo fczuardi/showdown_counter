@@ -15,6 +15,11 @@ module.exports = function (grunt) {
             '*.js',
             JAVASCRIPT_PATH + '**/*.js'
         ],
+        TEMPLATES_PATH = SOURCE_PATH + 'templates/',
+        TEMPLATES_LAYOUTS_PATH = TEMPLATES_PATH + 'layouts/',
+        TEMPLATES_PAGES_PATH = TEMPLATES_PATH + 'pages/',
+        TEMPLATES_PARTIALS_PATH = TEMPLATES_PATH + 'parts/',
+        TEMPLATES_DATA_PATH = TEMPLATES_PATH + 'data/',
         HTML5_BOILERPLATE_PATH = 'lib/html5-boilerplate/',
         HTACCESS_BASE_FILE = HTML5_BOILERPLATE_PATH + '.htaccess',
         HTACCESS_FILE = SOURCE_PATH + 'htaccess.conf',
@@ -131,6 +136,25 @@ module.exports = function (grunt) {
                         HTACCESS_FILE
                     ],
                     dest: HTDOCS_PATH + '.htaccess'
+                }]
+            }
+        },
+
+        //# Templates
+        assemble: {
+            options: {
+                flatten: true,
+                layout: 'layout.hbs',
+                layoutdir: TEMPLATES_LAYOUTS_PATH,
+                partials: [TEMPLATES_PARTIALS_PATH + '**/*.hbs'],
+                data: [TEMPLATES_DATA_PATH + '**/*.{json,yml}']
+            },
+            pages: {
+                files: [{
+                    src: [
+                        TEMPLATES_PAGES_PATH + '/**/*.hbs'
+                    ],
+                    dest: HTDOCS_PATH
                 }]
             }
         },
@@ -269,6 +293,7 @@ module.exports = function (grunt) {
 
     //run grunt.loadNpmTasks on each grunt plugin found in your package.json
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+    grunt.loadNpmTasks('assemble');
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask('default', [
@@ -276,6 +301,7 @@ module.exports = function (grunt) {
         'autoprefixer',
         'jsvalidate',
         JS_LINTER,
+        'assemble',
         'copy',
         'concat',
         'manifest'

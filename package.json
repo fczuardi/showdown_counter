@@ -20,6 +20,7 @@
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-gjslint": "~0.1.1",
     "grunt-manifest": "~0.4.0",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "assemble": "~0.4.5"
   }
 }
