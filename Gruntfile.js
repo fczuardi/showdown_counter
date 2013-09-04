@@ -4,44 +4,34 @@ var _ = require('lodash');
 module.exports = function (grunt) {
     'use strict';
 
-    // development files
-    var SOURCE_PATH = 'src/',
-        SASS_PATH = SOURCE_PATH + 'styles/',
-        SASS_FILES = [
-            SASS_PATH + '**/*.scss'
-        ],
-        JAVASCRIPT_PATH = SOURCE_PATH + 'scripts/',
-        JAVASCRIPT_SOURCES = [
-            '*.js',
-            JAVASCRIPT_PATH + '**/*.js'
-        ],
-        TEMPLATES_PATH = SOURCE_PATH + 'templates/',
-        TEMPLATES_LAYOUTS_PATH = TEMPLATES_PATH + 'layouts/',
-        TEMPLATES_PAGES_PATH = TEMPLATES_PATH + 'pages/',
-        TEMPLATES_PARTIALS_PATH = TEMPLATES_PATH + 'parts/',
-        TEMPLATES_DATA_PATH = TEMPLATES_PATH + 'data/',
-        HTML5_BOILERPLATE_PATH = 'lib/html5-boilerplate/',
-        HTACCESS_BASE_FILE = HTML5_BOILERPLATE_PATH + '.htaccess',
-        HTACCESS_FILE = SOURCE_PATH + 'htaccess.conf',
-        HTML_PAGES = [SOURCE_PATH + '**/*.html'],
-        MANIFEST_WEBAPP_NAME = 'manifest.webapp',
-        MANIFEST_WEBAPP_FILE = SOURCE_PATH + MANIFEST_WEBAPP_NAME,
+        // development folders and files
+    var SOURCE_PATH             =   'src/',
+        SASS_PATH               =   SOURCE_PATH + 'styles/',
+        JAVASCRIPT_PATH         =   SOURCE_PATH + 'scripts/',
+        TEMPLATES_PATH          =   SOURCE_PATH + 'templates/',
+        TEMPLATES_LAYOUTS_PATH  =   TEMPLATES_PATH + 'layouts/',
+        TEMPLATES_PAGES_PATH    =   TEMPLATES_PATH + 'pages/',
+        TEMPLATES_PARTIALS_PATH =   TEMPLATES_PATH + 'parts/',
+        TEMPLATES_DATA_PATH     =   TEMPLATES_PATH + 'data/',
+        HTML5_BOILERPLATE_PATH  =   'lib/html5-boilerplate/',
+
+        SASS_FILES              =   [SASS_PATH + '**/*.scss'],
+        JAVASCRIPT_SOURCES      =   ['*.js', JAVASCRIPT_PATH + '**/*.js'],
+        HTACCESS_BASE_FILE      =   HTML5_BOILERPLATE_PATH + '.htaccess',
+        HTACCESS_FILE           =   SOURCE_PATH + 'htaccess.conf',
+        HTML_PAGES              =   [SOURCE_PATH + '**/*.html'],
+        MANIFEST_WEBAPP_NAME    =   'manifest.webapp',
+        MANIFEST_WEBAPP_FILE    =   SOURCE_PATH + MANIFEST_WEBAPP_NAME,
 
         // build generated output
-        BUILD_PATH = 'build/',
-        HTDOCS_PATH = BUILD_PATH + 'www/',
-        CSS_PATH = HTDOCS_PATH + 'css/',
-        JS_PATH = HTDOCS_PATH + 'js/',
-        CSS_FILES = [
-            CSS_PATH + '**/*.css'
-        ],
-        HTML_FILES = [
-            HTDOCS_PATH + '**/*.html'
-        ],
-        JS_FILES = [
-            JS_PATH + '**/*.js'
-        ],
-        FILES_TO_CACHE = HTML_FILES.concat(CSS_FILES.concat(JS_FILES)),
+        BUILD_PATH              =   'build/',
+        HTDOCS_PATH             =   BUILD_PATH + 'www/',
+        CSS_PATH                =   HTDOCS_PATH + 'css/',
+        JS_PATH                 =   HTDOCS_PATH + 'js/',
+        CSS_FILES               =   [CSS_PATH + '**/*.css'],
+        HTML_FILES              =   [HTDOCS_PATH + '**/*.html'],
+        JS_FILES                =   [JS_PATH + '**/*.js'],
+        FILES_TO_CACHE          =   HTML_FILES.concat(CSS_FILES, JS_FILES),
 
         // browser compatibility
         BROWSER_SUPPORT = [
@@ -75,9 +65,11 @@ module.exports = function (grunt) {
         },
         JS_LINTER = 'jslint';
 
+// Grunt tasks
+// ---------------------------------------------------------------------------
     grunt.initConfig({
 
-        //# Stylesheets
+        // Stylesheets
         compass: {
             options: {
                 sassDir: SASS_PATH,
@@ -104,7 +96,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //# Javascript
+        // Javascript
         jsvalidate: {
             all: JAVASCRIPT_SOURCES
         },
@@ -127,7 +119,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //# Apache Config
+        // Apache Config
         concat: {
             htaccess: {
                 files: [{
@@ -140,7 +132,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //# Templates
+        // Templates
         assemble: {
             options: {
                 flatten: true,
@@ -159,7 +151,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //# Other Static files
+        // Other Static files
         copy: {
             webapp: {
                 files: [{
@@ -177,7 +169,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //# Appcache
+        // Appcache
         manifest: {
             generate: {
                 options: {
@@ -196,7 +188,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //# Watch
+        // Watch
         watch: {
             options: {
                 spawn: false
