@@ -35,5 +35,6 @@ You must have [git](http://git-scm.com/), [bundler](http://bundler.io/),
     $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
     $ npm install
     $ bundle install
+    $ grunt
 
 To be continued…

@@ -277,6 +277,7 @@ module.exports = function (grunt) {
         'jsvalidate',
         JS_LINTER,
         'copy',
+        'concat',
         'manifest'
     ]);
 
