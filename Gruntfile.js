@@ -19,9 +19,7 @@ module.exports = function (grunt) {
         JAVASCRIPT_SOURCES      =   ['*.js', JAVASCRIPT_PATH + '**/*.js'],
         HTACCESS_BASE_FILE      =   HTML5_BOILERPLATE_PATH + '.htaccess',
         HTACCESS_FILE           =   SOURCE_PATH + 'htaccess.conf',
-        HTML_PAGES              =   [SOURCE_PATH + '**/*.html'],
         MANIFEST_WEBAPP_NAME    =   'manifest.webapp',
-        MANIFEST_WEBAPP_FILE    =   SOURCE_PATH + MANIFEST_WEBAPP_NAME,
 
         // build generated output
         BUILD_PATH              =   'build/',
@@ -68,6 +66,7 @@ module.exports = function (grunt) {
 // Grunt tasks
 // ---------------------------------------------------------------------------
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
         // Stylesheets
         compass: {
@@ -136,10 +135,10 @@ module.exports = function (grunt) {
         assemble: {
             options: {
                 flatten: true,
-                layout: 'layout.hbs',
                 layoutdir: TEMPLATES_LAYOUTS_PATH,
                 partials: [TEMPLATES_PARTIALS_PATH + '**/*.hbs'],
-                data: [TEMPLATES_DATA_PATH + '**/*.{json,yml}']
+                data: [TEMPLATES_DATA_PATH + '**/*.{json,yml}'],
+                pkg: '<%= pkg %>'
             },
             pages: {
                 files: [{
@@ -151,20 +150,63 @@ module.exports = function (grunt) {
             }
         },
 
-        // Other Static files
-        copy: {
-            webapp: {
-                files: [{
-                    src: MANIFEST_WEBAPP_FILE,
-                    dest: HTDOCS_PATH + MANIFEST_WEBAPP_NAME
-                }]
+        // Open Web App Manifest
+        openwebapp: {
+            options: {
+                name: '<%= pkg.fullName %>',
+                version: '<%= pkg.version %>',
+                description: '<%= pkg.description %>',
+                launch_path: '/app.html',
+                developer: {
+                    name: '<%= pkg.author.name %>',
+                    url: '<%= pkg.author.url %>'
+                },
+                // icons: {
+                //     "128": "/img/icons/app_128.png"
+                // },
+                installs_allowed_from: ['*']
             },
-            html: {
+            all: {
+                dest: HTDOCS_PATH + MANIFEST_WEBAPP_NAME
+            }
+        },
+
+        //good html indentation
+        prettify: {
+            options: {
+                indent: 4,
+                indent_char: ' ',
+                wrap_line_length: 78
+                // brace_style: 'expand',
+                // unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u']
+            },
+            all: {
                 files: [{
                     expand: true,
-                    cwd: SOURCE_PATH,
+                    cwd: HTDOCS_PATH,
                     src: '**/*.html',
                     dest: HTDOCS_PATH
+                }]
+            }
+        },
+
+        //HTML Validation
+        validation: {
+            options: {
+                reportpath: '.temp/validation-report.json',
+                path: '.temp/validation-staus.json'
+            },
+            all: {
+                options: {
+                    reset: true
+                },
+                files: [{
+                    src: HTML_FILES
+                }]
+            },
+            repeat: {
+                files: [{
+                    src: HTML_FILES
                 }]
             }
         },
@@ -199,101 +241,88 @@ module.exports = function (grunt) {
             },
             css: {
                 files: CSS_FILES,
-                tasks: ['autoprefixer', 'manifest']
+                tasks: ['autoprefixer']
             },
             assemble: {
                 files: [
                     TEMPLATES_PATH + '/**/*.hbs',
                     TEMPLATES_DATA_PATH + '**/*.{json,yml}'
                 ],
-                tasks: ['assemble']
-            },
-            copy_html: {
-                files: HTML_PAGES,
-                tasks: ['copy:html', 'manifest']
-            },
-            cache: {
-                files: HTDOCS_PATH + '**/*',
-                tasks: ['manifest']
+                tasks: ['assemble'],
+                options: {
+                    spawn: true
+                }
             },
             update_htaccess: {
                 files: HTACCESS_FILE,
-                tasks: ['concat:htaccess'],
-                options: {
-                    spawn: true
-                }
-            },
-            copy_manifest_webapp: {
-                files: MANIFEST_WEBAPP_FILE,
-                tasks: ['copy:webapp'],
-                options: {
-                    spawn: true
-                }
+                tasks: ['concat:htaccess']
             },
             sass: {
                 files: SASS_FILES,
-                tasks: ['compass', 'manifest'],
+                tasks: ['compass'],
                 options: {
                     spawn: true
                 }
+            },
+            cache: {
+                files: FILES_TO_CACHE,
+                tasks: ['manifest']
             }
         }
     });
 
-    // on watch events update just the modified files
+    // on watch events configure certain tasks to only run on changed file
     grunt.event.on('watch', function (action, filepath) {
-        var fileExtension = filepath.split('.').pop(),
-            jshintConfig,
-            jslintConfig,
-            gjslintConfig,
-            autoprefixerConfig,
-            copyConfig,
-            isJSFile = (fileExtension === 'js'),
-            isCSSFile = (fileExtension === 'css'),
-            justCopy = _.contains(['html', 'htaccess'], fileExtension);
-
-        if (action === 'deleted') { return; }
-        if (isJSFile) {
-            jshintConfig = grunt.config.get('jshint');
-            jslintConfig = grunt.config.get('jslint');
-            gjslintConfig = grunt.config.get('gjslint');
-            jshintConfig.all.src = filepath;
-            jslintConfig.all.src = filepath;
-            gjslintConfig.all.src = filepath;
-            grunt.config.set('jsvalidate', jshintConfig);
-            grunt.config.set('jshint', jshintConfig);
-            grunt.config.set('jslint', jslintConfig);
-            grunt.config.set('gjslint', jslintConfig);
-        } else if (isCSSFile) {
-            autoprefixerConfig = grunt.config.get('autoprefixer');
-            autoprefixerConfig.all.files[0] = {
-                src: filepath,
-                dest: filepath
-            };
-            grunt.config.set('autoprefixer', autoprefixerConfig);
-        } else if (justCopy) {
-            copyConfig = grunt.config.get('copy');
-            copyConfig.html.files[0] = {
-                src: filepath,
-                dest: HTDOCS_PATH + filepath.substring(SOURCE_PATH.length)
-            };
-            grunt.config.set('copy', copyConfig);
-        }
+        grunt.verbose('Watch event', filepath, action);
+        grunt.config(['jsvalidate', 'all'], filepath);
+        grunt.config(['jshint', 'all'], filepath);
+        grunt.config(['jslint', 'all'], filepath);
+        grunt.config(['gjslint', 'all'], filepath);
+        grunt.config(['autoprefixer', 'all'], filepath);
     });
 
     //run grunt.loadNpmTasks on each grunt plugin found in your package.json
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     grunt.loadNpmTasks('assemble');
 
+    grunt.registerMultiTask(
+        'openwebapp',
+        'generate manifest.webapp file',
+        function () {
+            var task_options = {},
+                target_options,
+                done = this.async();
+            if (grunt.config(this.name).options) {
+                task_options = grunt.config(this.name).options;
+            }
+            if (this.target) {
+                target_options = grunt.config([this.name, this.target]).options;
+                // merge ("extend") the two option objects
+                _.assign(task_options, target_options);
+            }
+            this.files.forEach(function (item) {
+                if (item.dest) {
+                    grunt.file.write(item.dest,
+                        JSON.stringify(task_options, null, 4));
+                    grunt.log.writeln('File "' + item.dest + '" created.');
+                }
+            });
+            done(true);
+        }
+    );
+
+
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask('default', [
-        'compass',
-        'autoprefixer',
         'jsvalidate',
         JS_LINTER,
         'assemble',
-        'copy',
+        'compass',
+        'prettify',
+        'validation:all',
+        'autoprefixer',
         'concat',
+        'openwebapp',
         'manifest'
     ]);
 

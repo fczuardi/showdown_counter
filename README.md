@@ -33,8 +33,8 @@ You must have [git](http://git-scm.com/), [bundler](http://bundler.io/),
 [node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) installed.
 
     $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
-    $ npm install
     $ bundle install
+    $ npm install
     $ grunt
 
 To be continued…

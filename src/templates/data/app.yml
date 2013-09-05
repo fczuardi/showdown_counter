@@ -1,2 +1,3 @@
-title: Counters
-description: A tally counter web-app with support for multiple Counters
+title: <%= pkg.fullName %>
+description: <%= pkg.description %>
+cachefile: manifest.appcache

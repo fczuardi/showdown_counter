@@ -1,6 +1,7 @@
 build/
 node_modules/
+npm-debug.log
 vendor/
 .bundle
 .sass-cache
-npm-debug.log
+.temp

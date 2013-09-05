@@ -1,11 +1,20 @@
 {
   "name": "mnmo-counters",
   "version": "0.0.0",
+  "fullName": "Counters",
+  "description": "A tally counter web-app with support for multiple counters.",
   "license": "AGPL",
-  "author": "Fabricio C Zuardi <fabricio@fabricio.org> (http://fabricio.org)",
+  "author": {
+    "name": "Fabricio C Zuardi",
+    "email": "fabricio@fabricio.org",
+    "url": "http://fabricio.org"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fczuardi/showdown_counter.git"
+  },
+  "scripts": {
+    "test": "grunt"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -21,6 +30,11 @@
     "grunt-gjslint": "~0.1.1",
     "grunt-manifest": "~0.4.0",
     "grunt-contrib-concat": "~0.3.0",
-    "assemble": "~0.4.5"
+    "assemble": "~0.4.5",
+    "grunt-html-validation": "~0.1.5",
+    "grunt-prettify": "~0.2.9"
+  },
+  "engines": {
+    "node": ">=0.8"
   }
 }
