@@ -233,6 +233,28 @@ module.exports = function (grunt) {
                     dest: HTDOCS_PATH + 'css/ubuntu/',
                     flatten: true
                 }]
+            },
+            ubuntu_img: {
+                files: [{
+                    expand: true,
+                    src: [UBUNTU_THEME_PATH + 'img/**/*'],
+                    dest: HTDOCS_PATH + 'img/ubuntu/',
+                    flatten: true
+                }]
+            }
+        },
+
+        "regex-replace": {
+            ubuntu_assets_url: {
+                src: [HTDOCS_PATH + 'css/ubuntu/**/*.css'],
+                actions: [
+                    {
+                        name: 'img_paths',
+                        search: '../img/',
+                        replace: '../../img/ubuntu/',
+                        flags: 'g'
+                    }
+                ]
             }
         },
 
@@ -357,6 +379,7 @@ module.exports = function (grunt) {
         'validation:all',
         'copy',
         'autoprefixer',
+        'regex-replace',
         'concat:htaccess',
         'openwebapp',
         'manifest'
