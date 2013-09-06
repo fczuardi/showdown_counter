@@ -275,7 +275,7 @@ module.exports = function (grunt) {
 
     // on watch events configure certain tasks to only run on changed file
     grunt.event.on('watch', function (action, filepath) {
-        grunt.verbose('Watch event', filepath, action);
+        // grunt.log.verbose('Watch event ' + filepath + action);
         grunt.config(['jsvalidate', 'all'], filepath);
         grunt.config(['jshint', 'all'], filepath);
         grunt.config(['jslint', 'all'], filepath);
