@@ -32,6 +32,9 @@ module.exports = function (grunt) {
         JS_FILES                =   [JS_PATH + '**/*.js'],
         FILES_TO_CACHE          =   HTML_FILES.concat(CSS_FILES, JS_FILES),
 
+        //themes
+        UBUNTU_THEME_PATH       =   'lib/ubuntu-html5-theme/0.1/ambiance/',
+
         // browser compatibility
         BROWSER_SUPPORT = [
             'last 2 version',
@@ -75,6 +78,7 @@ module.exports = function (grunt) {
                 sassDir: SASS_PATH,
                 cssDir: CSS_PATH,
                 bundleExec: true,
+                relativeAssets: true,
                 fontsDir: FONTS_PATH
             },
             dev: {
@@ -212,6 +216,26 @@ module.exports = function (grunt) {
             }
         },
 
+        // Theme assets
+        copy: {
+            ubuntu_fonts: {
+                files: [{
+                    expand: true,
+                    src: [UBUNTU_THEME_PATH + 'fonts/**/*.{ttf,woff,svg,eot}'],
+                    dest: HTDOCS_PATH + 'fonts/ubuntu/',
+                    flatten: true
+                }]
+            },
+            ubuntu_css: {
+                files: [{
+                    expand: true,
+                    src: [UBUNTU_THEME_PATH + 'css/**/*.css'],
+                    dest: HTDOCS_PATH + 'css/ubuntu/',
+                    flatten: true
+                }]
+            }
+        },
+
         // Appcache
         manifest: {
             generate: {
@@ -242,11 +266,17 @@ module.exports = function (grunt) {
             },
             css: {
                 files: CSS_FILES,
-                tasks: ['autoprefixer']
+                tasks: ['autoprefixer'],
+                options: {
+                    spawn: true
+                }
             },
             html: {
                 files: HTML_FILES,
-                tasks: ['prettify', 'validation:repeat']
+                tasks: ['prettify', 'validation:repeat'],
+                options: {
+                    spawn: true
+                }
             },
             assemble: {
                 files: [
@@ -325,6 +355,7 @@ module.exports = function (grunt) {
         'compass',
         'prettify',
         'validation:all',
+        'copy',
         'autoprefixer',
         'concat:htaccess',
         'openwebapp',
