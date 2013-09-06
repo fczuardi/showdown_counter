@@ -1,6 +1,8 @@
 Counters
 ========
 
+[![Build Status](https://travis-ci.org/fczuardi/showdown_counter.png?branch=master)](https://travis-ci.org/fczuardi/showdown_counter)
+
 Multiple counters for your mobile device
 ----------------------------------------
 
@@ -29,10 +31,11 @@ as well.
 Contributing
 ------------
 
-You must have [git](http://git-scm.com/), [bundler](http://bundler.io/),
+You must have [git >= v1.8.2](http://git-scm.com/), [bundler](http://bundler.io/),
 [node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) installed.
 
     $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
+    $ git submodule update --init --recursive
     $ bundle install
     $ npm install
     $ grunt

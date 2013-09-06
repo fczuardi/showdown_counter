@@ -25,6 +25,7 @@ module.exports = function (grunt) {
         BUILD_PATH              =   'build/',
         HTDOCS_PATH             =   BUILD_PATH + 'www/',
         CSS_PATH                =   HTDOCS_PATH + 'css/',
+        FONTS_PATH              =   HTDOCS_PATH + 'fonts/',
         JS_PATH                 =   HTDOCS_PATH + 'js/',
         CSS_FILES               =   [CSS_PATH + '**/*.css'],
         HTML_FILES              =   [HTDOCS_PATH + '**/*.html'],
@@ -73,7 +74,8 @@ module.exports = function (grunt) {
             options: {
                 sassDir: SASS_PATH,
                 cssDir: CSS_PATH,
-                bundleExec: true
+                bundleExec: true,
+                fontsDir: FONTS_PATH
             },
             dev: {
                 options: {

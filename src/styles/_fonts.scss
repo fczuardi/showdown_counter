@@ -1,0 +1,26 @@
+$font-name: "Ubuntu";
+$font-filename: "ubuntu/ubuntu-r-webfont";
+
+@include font-face(
+    "#{$font-name}",
+    font-files( "#{$font-filename}.woff",
+                "#{$font-filename}.ttf",
+                "#{$font-filename}.svg"
+    ),
+    "#{$font-filename}.eot",
+    400,
+    normal
+);
+
+$font-name: "Ubuntu Light";
+$font-filename: "ubuntu/ubuntu-l-webfont";
+@include font-face(
+    "#{$font-name}",
+    font-files( "#{$font-filename}.woff",
+                "#{$font-filename}.ttf",
+                "#{$font-filename}.svg"
+    ),
+    "#{$font-filename}.eot",
+    300,
+    normal
+);

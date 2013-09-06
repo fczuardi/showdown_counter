@@ -1,5 +1,7 @@
 @import "base";
-header h1{
-    color: $title-color;
-    font-size:25px;
+
+body {
+    background: #ededf0 url("../img/background_paper@30.png") repeat top left;
+    font-family: Ubuntu;
+    font-weight: normal;
 }
