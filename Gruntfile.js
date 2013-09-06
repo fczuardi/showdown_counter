@@ -173,22 +173,21 @@ module.exports = function (grunt) {
             }
         },
 
-        //good html indentation
+        //HTML indentation for generated pages
         prettify: {
             options: {
                 indent: 4,
                 indent_char: ' ',
-                wrap_line_length: 78
-                // brace_style: 'expand',
-                // unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u']
+                wrap_line_length: 78,
+                brace_style: 'expand',
+                unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u']
             },
             all: {
-                files: [{
-                    expand: true,
-                    cwd: HTDOCS_PATH,
-                    src: '**/*.html',
-                    dest: HTDOCS_PATH
-                }]
+                expand: true,
+                cwd: HTDOCS_PATH,
+                ext: '.html',
+                src: ['**/*.html'],
+                dest: HTDOCS_PATH
             }
         },
 
@@ -245,6 +244,10 @@ module.exports = function (grunt) {
                 files: CSS_FILES,
                 tasks: ['autoprefixer']
             },
+            html: {
+                files: HTML_FILES,
+                tasks: ['prettify', 'validation:repeat']
+            },
             assemble: {
                 files: [
                     TEMPLATES_PATH + '/**/*.hbs',
@@ -275,7 +278,7 @@ module.exports = function (grunt) {
 
     // on watch events configure certain tasks to only run on changed file
     grunt.event.on('watch', function (action, filepath) {
-        // grunt.log.verbose('Watch event ' + filepath + action);
+        if (action === 'deleted') { return; }
         grunt.config(['jsvalidate', 'all'], filepath);
         grunt.config(['jshint', 'all'], filepath);
         grunt.config(['jslint', 'all'], filepath);
@@ -323,7 +326,7 @@ module.exports = function (grunt) {
         'prettify',
         'validation:all',
         'autoprefixer',
-        'concat',
+        'concat:htaccess',
         'openwebapp',
         'manifest'
     ]);

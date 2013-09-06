@@ -4,6 +4,11 @@ title: <%= app.title %>
 description: <%= app.description %>
 #appcache: <%= app.cachefile %>
 ---
-{{>header}}
-{{>navbar}}
-<p>Your html there._</p>
+<div data-role="page">
+    {{>header}}
+    <div data-role="content">
+       <div data-role="pagestack">
+       </div>
+    </div>
+</div>
+
