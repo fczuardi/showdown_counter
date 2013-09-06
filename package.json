@@ -32,7 +32,8 @@
     "grunt-contrib-concat": "~0.3.0",
     "assemble": "~0.4.5",
     "grunt-html-validation": "~0.1.5",
-    "grunt-prettify": "~0.2.9"
+    "grunt-prettify": "~0.2.9",
+    "grunt-regex-replace": "~0.2.5"
   },
   "engines": {
     "node": ">=0.8"
