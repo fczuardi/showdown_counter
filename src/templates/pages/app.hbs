@@ -2,13 +2,22 @@
 layout: html_page.hbs
 title: <%= app.title %>
 description: <%= app.description %>
+theme: ubuntu
 #appcache: <%= app.cachefile %>
 ---
 <div data-role="page">
     {{>header}}
     <div data-role="content">
-       <div data-role="pagestack">
-       </div>
+        <div data-role="pagestack">
+            <div data-role="page" id="main">
+                <section data-role="list">
+                    <ul data-role="listview">
+                        {{>counter}}
+                        <li><a href="#">My Item 2</a></li>
+                    </ul>
+                </section>
+            </div>
+        </div>
     </div>
 </div>
 

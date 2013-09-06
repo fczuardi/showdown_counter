@@ -5,9 +5,12 @@
         <title>{{title}}</title>
         <meta name="description" content="{{description}}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{#if theme}}
+        <link rel="stylesheet" href="css/theme-{{theme}}.css">
+        {{/if}}
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-    {{>body}}
+        {{>body}}
     </body>
 </html>
