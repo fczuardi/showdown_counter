@@ -47,7 +47,9 @@ module.exports = function (grunt) {
         JSLINT_GLOBALS = [
             'module',
             'require',
-            'console'
+            'console',
+            'requirejs',
+            'define'
         ],
         JSLINT_DIRECTIVES = {
             nomen: true,
@@ -275,12 +277,12 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: JAVASCRIPT_PATH,
                     src: ['**/*.js'],
-                    dest: HTDOCS_PATH + 'js/',
+                    dest: HTDOCS_PATH + 'js/'
                 }]
             }
         },
 
-        "regex-replace": {
+        'regex-replace': {
             ubuntu_assets_url: {
                 src: [HTDOCS_PATH + 'css/ubuntu/**/*.css'],
                 actions: [

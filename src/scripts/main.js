@@ -1,10 +1,11 @@
 //Requirejs config
 requirejs.config({
     baseUrl: '../js',
-    paths:{
+    paths: {
     }
 });
 
-require([], function(util) {
+require([], function () {
+    'use strict';
     console.log('ready to roll');
 });
