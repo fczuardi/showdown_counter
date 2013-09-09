@@ -66,7 +66,8 @@ module.exports = function (grunt) {
                 name: 'console'
             }
         },
-        JS_LINTER = 'jshint';
+        JS_LINTER = 'jshint',
+        LIVE_RELOAD_ENABLED = true;
 
 // Grunt tasks
 // ---------------------------------------------------------------------------
@@ -96,7 +97,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: CSS_PATH,
-                    src: '**/*.css',
+                    src: '*.css',
                     dest: CSS_PATH
                 }]
             }
@@ -251,8 +252,16 @@ module.exports = function (grunt) {
                     flatten: true
                 }]
 
-            }
+            },
+            images: {
+                files: [{
+                    expand: true,
+                    src: [SOURCE_PATH + 'img/**/*'],
+                    dest: HTDOCS_PATH + 'img/',
+                    flatten: true
+                }]
 
+            }
         },
 
         "regex-replace": {
@@ -301,6 +310,7 @@ module.exports = function (grunt) {
                 files: CSS_FILES,
                 tasks: ['autoprefixer'],
                 options: {
+                    livereload: LIVE_RELOAD_ENABLED,
                     spawn: true
                 }
             },
@@ -309,6 +319,7 @@ module.exports = function (grunt) {
                 // tasks: ['prettify', 'validation:repeat'],
                 tasks: ['validation:repeat'],
                 options: {
+                    livereload: LIVE_RELOAD_ENABLED,
                     spawn: true
                 }
             },
@@ -335,7 +346,10 @@ module.exports = function (grunt) {
             },
             cache: {
                 files: FILES_TO_CACHE,
-                tasks: ['manifest']
+                tasks: ['manifest'],
+                options: {
+                    livereload: LIVE_RELOAD_ENABLED
+                }
             }
         }
     });
