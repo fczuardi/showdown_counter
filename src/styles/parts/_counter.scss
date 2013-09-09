@@ -1,9 +1,12 @@
 .counter{
+    position: relative;
     height: 7.4rem;
     background-color: rgba(255,255,255,0.5);
     border-bottom: 1px solid $hr-color;
 }
 .counter__display{
+    position: absolute;
+    width: 100%;
     text-align: center;
     font-size: 6rem;
     line-height: 8rem;

@@ -19,10 +19,11 @@ body{
     font-family: Pompiere;
 }
 
+// .counter button,
 header,
-footer,
-.counter button {
+footer {
     display: none;
 }
 
 @import "parts/counter";
+@import "parts/buttons";
