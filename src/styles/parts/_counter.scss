@@ -1,0 +1,31 @@
+.counter{
+    height: 7.4rem;
+    background-color: rgba(255,255,255,0.5);
+    border-bottom: 1px solid $hr-color;
+}
+.counter__display{
+    text-align: center;
+    font-size: 6rem;
+    line-height: 8rem;
+}
+.counter[data-color="1"]{
+    background-color: $color1;
+}
+.counter[data-color="2"]{
+    background-color: $color2;
+}
+.counter[data-color="3"]{
+    background-color: $color3;
+}
+.counter[data-color="4"]{
+    background-color: $color4;
+}
+.counter[data-color="5"]{
+    background-color: $color5;
+}
+.counter[data-color="6"]{
+    background-color: $color6;
+}
+.counter[data-color="7"]{
+    background-color: $color7;
+}

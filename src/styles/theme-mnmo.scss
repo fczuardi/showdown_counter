@@ -1,0 +1,28 @@
+@import "base";
+@import "fonts";
+
+$hr-color: black;
+$color1: #CBE494;
+$color2: #F4BF75;
+$color3: #79D9CD;
+$color4: #D3B1AE;
+$color5: #C4A2E0;
+$color6: #FF8CE7;
+$color7: #FB5B61;
+
+//css reset
+@include global-reset(){}
+
+body{
+    //debug
+    // background-image: url(../img/Counters_Pompiere.png);
+    font-family: Pompiere;
+}
+
+header,
+footer,
+.counter button {
+    display: none;
+}
+
+@import "parts/counter";

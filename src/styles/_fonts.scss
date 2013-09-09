@@ -1,0 +1,10 @@
+$font-name: "Pompiere";
+$font-filename: "Pompiere/Pompiere-Regular";
+
+@include font-face(
+    "#{$font-name}",
+    font-files("#{$font-filename}.ttf"),
+    null,
+    400,
+    normal
+);
