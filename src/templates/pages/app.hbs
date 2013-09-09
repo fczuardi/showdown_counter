@@ -3,25 +3,28 @@ layout: html_page.hbs
 title: <%= app.title %>
 description: <%= app.description %>
 theme: mnmo
-theme: ubuntu
+#theme: ubuntu
 #appcache: <%= app.cachefile %>
 ---
+{{#is theme 'ubuntu'}}
 <div data-role="page">
     <div data-role="content">
         <div data-role="pagestack">
+{{/is}}
             <div data-role="page" id="main">
                 {{>header}}
                 <section data-role="list">
                     <ul data-role="listview">
+                    {{#each default.counters}}
                         {{>counter}}
-                        {{>counter}}
-                        {{>counter}}
-                        {{>counter}}
+                    {{/each}}
                     </ul>
                 </section>
                 {{>footer}}
             </div>
+{{#is theme 'ubuntu'}}
         </div>
     </div>
 </div>
+{{/is}}
 

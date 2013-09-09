@@ -1,11 +1,13 @@
+{{#isnt theme 'mnmo'}}
 <header data-role="header">
-<nav data-role="navbar" class="tabs" >
-  <div class="tabs-inner">
-    <ul>
-      <li class="active" role="tab">
-        <a href="/app.html" class="tab-item">{{app.title}}</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+    <nav data-role="navbar" class="tabs" >
+        <div class="tabs-inner">
+            <ul role="tablist">
+                <li class="active" role="tab">
+                    <a href="/app.html" class="tab-item">{{app.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
+{{/isnt}}
