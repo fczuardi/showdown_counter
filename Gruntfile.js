@@ -14,6 +14,7 @@ module.exports = function (grunt) {
         TEMPLATES_PARTIALS_PATH =   TEMPLATES_PATH + 'parts/',
         TEMPLATES_DATA_PATH     =   TEMPLATES_PATH + 'data/',
         HTML5_BOILERPLATE_PATH  =   'lib/html5-boilerplate/',
+        JAVASCRIPT_LIBS         =   'lib/js/',
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
         JAVASCRIPT_SOURCES      =   ['*.js', JAVASCRIPT_PATH + '**/*.js'],
@@ -260,7 +261,22 @@ module.exports = function (grunt) {
                     dest: HTDOCS_PATH + 'img/',
                     flatten: true
                 }]
-
+            },
+            js_libs: {
+                files: [{
+                    expand: true,
+                    cwd: JAVASCRIPT_LIBS,
+                    src: ['**/*.js'],
+                    dest: HTDOCS_PATH + 'js/lib/'
+                }]
+            },
+            scripts: {
+                files: [{
+                    expand: true,
+                    cwd: JAVASCRIPT_PATH,
+                    src: ['**/*.js'],
+                    dest: HTDOCS_PATH + 'js/',
+                }]
             }
         },
 
@@ -304,7 +320,10 @@ module.exports = function (grunt) {
             },
             javascript: {
                 files: JAVASCRIPT_SOURCES,
-                tasks: ['jsvalidate', JS_LINTER]
+                tasks: ['jsvalidate', JS_LINTER, 'copy:scripts'],
+                options: {
+                    livereload: LIVE_RELOAD_ENABLED
+                }
             },
             css: {
                 files: CSS_FILES,
@@ -361,6 +380,7 @@ module.exports = function (grunt) {
         grunt.config(['jshint', 'all'], filepath);
         grunt.config(['jslint', 'all'], filepath);
         grunt.config(['gjslint', 'all'], filepath);
+        grunt.config(['copy:scripts'], filepath);
         grunt.config(['autoprefixer', 'all'], filepath);
     });
 

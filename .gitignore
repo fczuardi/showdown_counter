@@ -1,8 +1,8 @@
-build/
-node_modules/
-npm-debug.log
-vendor/
-lib/
+/build/
+/node_modules/
+/vendor/
+/lib/
 .bundle
 .sass-cache
 .temp
+npm-debug.log
