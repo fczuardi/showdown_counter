@@ -1,0 +1,20 @@
+{
+    "counters": [
+        {
+            "value": 999,
+            "color": 1
+        },
+        {
+            "value": 23,
+            "color": 2
+        },
+        {
+            "value": 35,
+            "color": 3
+        },
+        {
+            "value": 0,
+            "color": 7
+        }
+    ]
+}
