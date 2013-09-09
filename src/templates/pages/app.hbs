@@ -2,20 +2,24 @@
 layout: html_page.hbs
 title: <%= app.title %>
 description: <%= app.description %>
+theme: mnmo
 theme: ubuntu
 #appcache: <%= app.cachefile %>
 ---
 <div data-role="page">
-    {{>header}}
     <div data-role="content">
         <div data-role="pagestack">
             <div data-role="page" id="main">
+                {{>header}}
                 <section data-role="list">
                     <ul data-role="listview">
                         {{>counter}}
-                        <li><a href="#">My Item 2</a></li>
+                        {{>counter}}
+                        {{>counter}}
+                        {{>counter}}
                     </ul>
                 </section>
+                {{>footer}}
             </div>
         </div>
     </div>
