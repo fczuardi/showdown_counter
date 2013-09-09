@@ -40,4 +40,6 @@ You must have [git >= v1.8.2](http://git-scm.com/), [bundler](http://bundler.io/
     $ npm install
     $ grunt
 
+You might need to download the [Pompiere web font](https://www.google.com/fonts#UsePlace:use/Collection:Pompiere) and put it under ```/lib/Pompiere```
+
 To be continued…
