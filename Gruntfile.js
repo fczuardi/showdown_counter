@@ -33,6 +33,7 @@ module.exports = function (grunt) {
         FILES_TO_CACHE          =   HTML_FILES.concat(CSS_FILES, JS_FILES),
 
         //themes
+        POMPIERE_FONT_PATH      =   'lib/Pompiere',
         UBUNTU_THEME_PATH       =   'lib/ubuntu-html5-theme/0.1/ambiance/',
 
         // browser compatibility
@@ -65,7 +66,7 @@ module.exports = function (grunt) {
                 name: 'console'
             }
         },
-        JS_LINTER = 'jslint';
+        JS_LINTER = 'jshint';
 
 // Grunt tasks
 // ---------------------------------------------------------------------------
@@ -241,7 +242,17 @@ module.exports = function (grunt) {
                     dest: HTDOCS_PATH + 'img/ubuntu/',
                     flatten: true
                 }]
+            },
+            pompiere_fonts: {
+                files: [{
+                    expand: true,
+                    src: [POMPIERE_FONT_PATH + '/**/*.{ttf,woff,svg,eot}'],
+                    dest: HTDOCS_PATH + 'fonts/Pompiere/',
+                    flatten: true
+                }]
+
             }
+
         },
 
         "regex-replace": {
@@ -295,7 +306,8 @@ module.exports = function (grunt) {
             },
             html: {
                 files: HTML_FILES,
-                tasks: ['prettify', 'validation:repeat'],
+                // tasks: ['prettify', 'validation:repeat'],
+                tasks: ['validation:repeat'],
                 options: {
                     spawn: true
                 }

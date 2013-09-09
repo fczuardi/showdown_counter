@@ -2,6 +2,7 @@ build/
 node_modules/
 npm-debug.log
 vendor/
+lib/
 .bundle
 .sass-cache
 .temp
