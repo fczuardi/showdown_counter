@@ -5,10 +5,17 @@
   "description": "A tally counter web-app with support for multiple counters.",
   "license": "AGPL",
   "author": {
-    "name": "Fabricio C Zuardi",
-    "email": "fabricio@fabricio.org",
-    "url": "http://fabricio.org"
+    "name": "Mnmo",
+    "url": "http://mnmo.com.br"
   },
+  "contributors": [
+    {
+      "name": "Fabricio C Zuardi"
+    },
+    {
+      "name": "Mauricio C Zuardi"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/fczuardi/showdown_counter.git"

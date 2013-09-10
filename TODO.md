@@ -1,1 +1,2 @@
+- use the defaults.json data to create the first counterset instead of going to the DOM
 - javascript to check appcache updates

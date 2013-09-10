@@ -1,6 +1,6 @@
 .counter{
     position: relative;
-    height: 7.4rem;
+    height: $counter-height;
     background-color: rgba(255,255,255,0.5);
     border-bottom: 1px solid $hr-color;
 }

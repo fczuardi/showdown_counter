@@ -26,7 +26,6 @@ define(function () {
             value = Math.min(Math.max(v, bottomLimit), topLimit);
             domElement.dataset.value = value;
             displayElement.textContent = value;
-            console.log(value);
         };
 
     };

@@ -9,6 +9,10 @@ $color4: #D3B1AE;
 $color5: #C4A2E0;
 $color6: #FF8CE7;
 $color7: #FB5B61;
+$background-color: #232425;
+$footer-text-color: #424344;
+
+$counter-height: 7.4rem;
 
 //css reset
 @include global-reset(){}
@@ -21,9 +25,18 @@ body{
 
 // .counter button,
 header,
-footer {
+footer nav{
     display: none;
 }
 
-@import "parts/counter";
 @import "parts/buttons";
+@import "parts/counterlist";
+@import "parts/counter";
+@import "parts/footer";
+
+body {
+    background-color: $background-color;
+}
+#main{
+    text-align:center;
+}

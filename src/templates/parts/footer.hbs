@@ -1,5 +1,19 @@
-{{#isnt theme 'mnmo'}}
 <footer data-role="footer" class="revealed">
+    <header class="footer__badges">
+        <div class="logo mnmo"></div>
+        <div class="logo html"></div>
+        <div class="logo github"></div>
+    </header>
+    <p class="footer__text">
+        <strong>{{app.title}}</strong>
+        is free software, by
+        <a href="{{app.author.url}}">{{app.author.name}}</a>,
+        in HTML5.<br>
+        Know your rights and get the source at
+        <a target="_blank" href="{{app.repository.url}}">Github</a>
+    </p>
+{{#isnt theme 'mnmo'}}
+{{!-- Ubuntu toolbar --}}
     <nav>
         <ul>
             <li>
@@ -18,5 +32,5 @@
             </li>
         </ul>
     </nav>
-</footer>
 {{/isnt}}
+</footer>

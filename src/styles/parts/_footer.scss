@@ -1,0 +1,48 @@
+footer{
+    color: $footer-text-color;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin: auto;
+    position:relative;
+    margin-top: 23px;
+}
+footer strong{
+    font-weight: bold;
+}
+.footer__badges{
+    height: 48px;
+    display: block;
+}
+.logo{
+    display:inline-block;
+    height: 32px;
+    position:absolute;
+    backgrount-repeat: no-repeat;
+    margin-bottom: 12px;
+}
+.logo.mnmo{
+    width: 119px;
+    height: 48px;
+    background-image: url(../img/mnmo_logo.png);
+    left:0;
+}
+.logo.html{
+    background-image: url(../img/html5_logo.png);
+    width: 45px;
+    right:45px;
+}
+.logo.github{
+    background-image: url(../img/github_logo.png);
+    width: 45px;
+    right:0;
+    border-left: 1px solid $footer-text-color;
+}
+.footer__text{
+    border-top: 1px solid $footer-text-color;
+    padding-top: 1rem;
+    line-height: 1rem;
+}
+.footer__text a{
+    color: $footer-text-color;
+}
