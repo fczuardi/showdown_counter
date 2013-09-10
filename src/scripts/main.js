@@ -2,7 +2,7 @@
 requirejs.config({
     baseUrl: '../js/lib/',
     paths: {
-        'domReady': 'require/domReady',
+        'domReady': 'requirejs/domReady',
         'counter': 'mnmo/counter',
         'counterSet': 'mnmo/counterSet'
     }
@@ -25,6 +25,12 @@ require(
             node = nodes[i];
             counters.add(node);
         }
+        document.querySelector('body').addEventListener('touchstart', function (){
+            console.log('touch start');
+        }, true);
+        document.querySelector('body').addEventListener('touchstart', function (){
+            console.log('touch move');
+        }, true);
     });
 
 });

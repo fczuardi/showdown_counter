@@ -15,6 +15,10 @@ module.exports = function (grunt) {
         TEMPLATES_DATA_PATH     =   TEMPLATES_PATH + 'data/',
         HTML5_BOILERPLATE_PATH  =   'lib/html5-boilerplate/',
         JAVASCRIPT_LIBS         =   'lib/js/',
+        NODE_MODULES_PATH       =   'node_modules/',
+        JAVASCRIPT_LIBS_NODE    =   [
+                                        'requirejs/require.js'
+                                    ],
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
         JAVASCRIPT_SOURCES      =   ['*.js', JAVASCRIPT_PATH + '**/*.js'],
@@ -269,6 +273,14 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: JAVASCRIPT_LIBS,
                     src: ['**/*.js'],
+                    dest: HTDOCS_PATH + 'js/lib/'
+                }]
+            },
+            js_libs_node: {
+                files: [{
+                    expand: true,
+                    cwd: NODE_MODULES_PATH,
+                    src: JAVASCRIPT_LIBS_NODE,
                     dest: HTDOCS_PATH + 'js/lib/'
                 }]
             },
