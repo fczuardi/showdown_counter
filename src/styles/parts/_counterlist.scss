@@ -1,3 +1,14 @@
+.listviewport{
+
+}
 .counterlist{
     min-height: $counter-height * 4 + 4;
+    // padding-top: $counter-height;
+    position: relative;
+}
+.counterlist--with-space{
+    top: -$counter-height;
+}
+.counterlist.returning{
+    transition: top 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
 }

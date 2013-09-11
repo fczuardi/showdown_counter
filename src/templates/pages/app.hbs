@@ -13,12 +13,12 @@ theme: mnmo
 {{/is}}
             <div data-role="page" id="main">
                 {{>header}}
-                <section data-role="list">
-                    <ul class="counterlist" data-role="listview">
+                <section class="listviewport" data-role="list">
+                    <ol class="counterlist" data-role="listview">
                     {{#each default.counters}}
                         {{>counter}}
                     {{/each}}
-                    </ul>
+                    </ol>
                 </section>
                 {{>footer}}
             </div>

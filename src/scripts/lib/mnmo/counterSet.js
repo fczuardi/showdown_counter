@@ -10,11 +10,33 @@ define(['counter'], function (Counter) {
 
         //private vars
         var list = [],
-            counter;
+            counter,
+            viewport,
+            ol,
+            self = this;
 
         //methods
-        this.add = function (domElement) {
-            counter = new Counter(domElement, this, list.length);
+        this.init = function (viewportElement) {
+            var listElement = viewportElement.querySelector('.counterlist'),
+                nodes = viewportElement.querySelectorAll('.counter');
+            viewport = viewportElement;
+            ol = listElement;
+            for (var i = nodes.length - 1; i >= 0; i--) {
+                add(nodes[i]);
+            }
+        };
+
+        this.getCounterSize = function () {
+            return list[0].getNode().offsetHeight;
+        };
+
+        this.getListElement = function () {
+            return ol;
+        };
+
+        //helpers
+        var add = function (domElement) {
+            counter = new Counter(domElement, self, list.length);
             list.push(counter);
         };
     };

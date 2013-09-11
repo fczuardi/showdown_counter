@@ -27,6 +27,9 @@ define(function () {
             domElement.dataset.value = value;
             displayElement.textContent = value;
         };
+        this.getNode = function () {
+            return domElement;
+        };
 
     };
     return Counter;

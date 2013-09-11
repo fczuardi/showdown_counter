@@ -4,33 +4,27 @@ requirejs.config({
     paths: {
         'domReady': 'requirejs/domReady',
         'counter': 'mnmo/counter',
-        'counterSet': 'mnmo/counterSet'
+        'counterSet': 'mnmo/counterSet',
+        'behavior': 'mnmo/behavior'
     }
 });
 
 require(
     [
         'domReady',
-        'counterSet'
+        'counterSet',
+        'behavior'
     ],
-    function (domReady, CounterSet) {
+    function (domReady, CounterSet, Behavior) {
     'use strict';
     var counters = new CounterSet(),
-        nodes,
-        node;
+        behavior = new Behavior(),
+        viewportElement;
 
     domReady(function(){
-        nodes = document.querySelectorAll('.counter');
-        for (var i = nodes.length - 1; i >= 0; i--) {
-            node = nodes[i];
-            counters.add(node);
-        }
-        document.querySelector('body').addEventListener('touchstart', function (){
-            console.log('touch start');
-        }, true);
-        document.querySelector('body').addEventListener('touchstart', function (){
-            console.log('touch move');
-        }, true);
+        viewportElement = document.querySelector('.listviewport');
+        counters.init(viewportElement);
+        behavior.init(counters);
     });
 
 });
