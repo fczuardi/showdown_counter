@@ -23,6 +23,10 @@ define(function () {
         decrementButton.addEventListener('click', decrement, false);
 
         this.setValue = function (v) {
+            if ((v <= bottomLimit) || (v >= topLimit)){
+                console.log('should vibrate', value, bottomLimit, topLimit);
+                window.navigator.vibrate(50);
+            }
             value = Math.min(Math.max(v, bottomLimit), topLimit);
             domElement.dataset.value = value;
             displayElement.textContent = value;
