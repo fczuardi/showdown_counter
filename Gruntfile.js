@@ -55,7 +55,12 @@ module.exports = function (grunt) {
             'require',
             'console',
             'requirejs',
-            'define'
+            'define',
+            'window',
+            'document',
+            'onTouchStart',
+            'onTouchMove',
+            'onTouchEnd'
         ],
         JSLINT_DIRECTIVES = {
             nomen: true,
