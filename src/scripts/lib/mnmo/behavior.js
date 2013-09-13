@@ -37,7 +37,6 @@ define(function () {
         function onTouchEnd() {
             if (listElement.style.top.length > 0) {
                 if (willAddCounter) {
-                    console.log('ADD NEW COUNTER', counterset);
                     counterset.addCounter();
                     willAddCounter = false;
                 } else {
