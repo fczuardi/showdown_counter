@@ -16,15 +16,15 @@ require(
         'behavior'
     ],
     function (domReady, CounterSet, Behavior) {
-    'use strict';
-    var counters = new CounterSet(),
-        behavior = new Behavior(),
-        viewportElement;
+        'use strict';
+        var counters = new CounterSet(),
+            behavior = new Behavior(),
+            viewportElement;
 
-    domReady(function(){
-        viewportElement = document.querySelector('.listviewport');
-        counters.init(viewportElement);
-        behavior.init(counters);
-    });
-
-});
+        domReady(function () {
+            viewportElement = document.querySelector('.listviewport');
+            counters.init(viewportElement);
+            behavior.init(counters);
+        });
+    }
+);

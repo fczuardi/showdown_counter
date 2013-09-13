@@ -1,28 +1,35 @@
 define(['counter'], function (Counter) {
     'use strict';
     var CounterSet = function () {
-        //constants
+        //private vars
+        var list = [],
+            counter,
+            ol,
+            self = this;
+
+        //helpers
+        function add(domElement) {
+            // counter = new Counter(domElement, self, list.length);
+            counter = new Counter(domElement, self);
+            list.push(counter);
+        }
+
+        //config
         this.config = {
             incrementSize: 1,
             bottomLimit: 0,
             topLimit: Number.MAX_VALUE
         };
 
-        //private vars
-        var list = [],
-            counter,
-            viewport,
-            ol,
-            self = this;
 
         //methods
         this.init = function (viewportElement) {
             var listElement = viewportElement.querySelector('.counterlist'),
-                nodes = viewportElement.querySelectorAll('.counter');
-            viewport = viewportElement;
+                nodes = viewportElement.querySelectorAll('.counter'),
+                n;
             ol = listElement;
-            for (var i = nodes.length - 1; i >= 0; i--) {
-                add(nodes[i]);
+            for (n = nodes.length - 1; n >= 0; n -= 1) {
+                add(nodes[n]);
             }
         };
 
@@ -34,11 +41,6 @@ define(['counter'], function (Counter) {
             return ol;
         };
 
-        //helpers
-        var add = function (domElement) {
-            counter = new Counter(domElement, self, list.length);
-            list.push(counter);
-        };
     };
     return CounterSet;
 });
