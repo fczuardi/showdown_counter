@@ -1,4 +1,5 @@
 <footer data-role="footer" class="revealed">
+{{#is theme 'mnmo'}}
     <div class="footer__badges">
         <div class="logo mnmo"></div>
         <div class="logo html"></div>
@@ -12,6 +13,7 @@
         Know your rights and get the source at
         <a target="_blank" href="{{app.repository.url}}">Github</a>
     </p>
+{{/is}}
 {{#isnt theme 'mnmo'}}
 {{!-- Ubuntu toolbar --}}
     <nav>
