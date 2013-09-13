@@ -16,12 +16,14 @@ module.exports = function (grunt) {
         HTML5_BOILERPLATE_PATH  =   'lib/html5-boilerplate/',
         JAVASCRIPT_LIBS         =   'lib/js/',
         NODE_MODULES_PATH       =   'node_modules/',
-        JAVASCRIPT_LIBS_NODE    =   [
-                                        'requirejs/require.js'
-                                    ],
+        JAVASCRIPT_LIBS_NODE    =   ['requirejs/require.js'],
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
-        JAVASCRIPT_SOURCES      =   ['*.js', JAVASCRIPT_PATH + '**/*.js'],
+        SCRIPTS_TO_IGNORE       =   ['!build.js'],
+        JAVASCRIPT_SOURCES      =   ['*.js',
+                                     JAVASCRIPT_PATH + '**/*.js'
+                                    ].concat(SCRIPTS_TO_IGNORE),
+
         HTACCESS_BASE_FILE      =   HTML5_BOILERPLATE_PATH + '.htaccess',
         HTACCESS_FILE           =   SOURCE_PATH + 'htaccess.conf',
         MANIFEST_WEBAPP_NAME    =   'manifest.webapp',
