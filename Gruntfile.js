@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         JAVASCRIPT_LIBS_NODE    =   ['requirejs/require.js'],
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
-        SCRIPTS_TO_IGNORE       =   ['!build.js'],
+        SCRIPTS_TO_IGNORE       =   ['!build.js', '!main-built.js'],
         JAVASCRIPT_SOURCES      =   ['*.js',
                                      JAVASCRIPT_PATH + '**/*.js'
                                     ].concat(SCRIPTS_TO_IGNORE),
