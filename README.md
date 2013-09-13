@@ -34,12 +34,43 @@ Contributing
 You must have [git >= v1.8.2](http://git-scm.com/), [bundler](http://bundler.io/),
 [node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) installed.
 
+To install those on ubuntu:
+
+### node.js
+
+    $ sudo apt-get update
+    $ sudo apt-get install python-software-properties python g++ make
+    $ sudo add-apt-repository ppa:chris-lea/node.js
+    $ sudo apt-get update
+    $ sudo apt-get install nodejs
+
+### bundler
+
+    $ sudo apt-get install bundler
+
+### grunt
+
+    $ sudo npm install -g grunt-cli
+
+After that:
+
     $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
     $ git submodule update --init --recursive
     $ bundle install
     $ npm install
-    $ grunt
 
-You might need to download the [Pompiere web font](https://www.google.com/fonts#UsePlace:use/Collection:Pompiere) and put it under ```/lib/Pompiere```
+You also need to download the [Pompiere web font](https://www.google.com/fonts#UsePlace:use/Collection:Pompiere) and put it under ```/lib/Pompiere```
+
+    $ wget http://www.google.com/fonts/download?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU -O pompiere.zip
+    $ unzip pompiere.zip -d lib/Pompiere
+
+And the requirejs/domReady.js plugin:
+
+    $ mkdir lib/requirejs
+    $ wget https://raw.github.com/requirejs/domReady/latest/domReady.js -O lib/requirejs/domReady.js
+
+And finally:
+
+    $ grunt
 
 To be continued…
