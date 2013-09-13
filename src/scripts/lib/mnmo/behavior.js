@@ -5,7 +5,8 @@ define(function () {
             startListY,
             listElement,
             itemHeight,
-            willAddCounter = false;
+            willAddCounter = false,
+            counterset;
 
         function onTouchStart(event) {
             startFingerY = event.touches.item(0).clientY;
@@ -36,7 +37,8 @@ define(function () {
         function onTouchEnd() {
             if (listElement.style.top.length > 0) {
                 if (willAddCounter) {
-                    console.log('ADD NEW COUNTER');
+                    console.log('ADD NEW COUNTER', counterset);
+                    counterset.addCounter();
                     willAddCounter = false;
                 } else {
                     listElement.classList.add('returning');
@@ -49,6 +51,7 @@ define(function () {
             var li;
             itemHeight = counters.getCounterSize();
             listElement = counters.getListElement();
+            counterset = counters;
 
             console.log(itemHeight, listElement);
 

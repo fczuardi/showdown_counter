@@ -8,10 +8,8 @@ define(['counter'], function (Counter) {
             self = this;
 
         //helpers
-        function add(domElement) {
-            // counter = new Counter(domElement, self, list.length);
-            counter = new Counter(domElement, self);
-            list.push(counter);
+        function getNextColor(){
+            return Math.round(Math.random()*7);
         }
 
         //config
@@ -29,7 +27,7 @@ define(['counter'], function (Counter) {
                 n;
             ol = listElement;
             for (n = nodes.length - 1; n >= 0; n -= 1) {
-                add(nodes[n]);
+                self.addCounter(nodes[n]);
             }
         };
 
@@ -39,6 +37,21 @@ define(['counter'], function (Counter) {
 
         this.getListElement = function () {
             return ol;
+        };
+
+        this.addCounter = function (domElement) {
+            var firstCounter = ol.querySelector('.counter');
+            if (typeof domElement === 'undefined'){
+                domElement = firstCounter.cloneNode(true);
+                console.log(domElement, firstCounter);
+                domElement.classList.add('counter');
+                domElement.dataset.color = getNextColor();
+                console.log(ol, domElement, firstCounter);
+                ol.insertBefore(domElement, firstCounter);
+            }
+            counter = new Counter(domElement, self);
+            list.push(counter);
+            console.log('addCounter', list);
         };
 
     };
