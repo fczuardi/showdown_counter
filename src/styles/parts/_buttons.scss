@@ -14,16 +14,44 @@
 }
 .add-counter-button{
     cursor: pointer;
-    position:relative;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    height: $counter-height;
-    width: 100%;
-    background-color: transparent;
-    border: 1px solid $footer-text-color;
-    color: $footer-text-color;
-    font-size: 2rem;
-    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 90%;
+    position: relative;
+    display: inline-block;
+    border-radius: $button-border-radius;
+    line-height: 3rem;
+
+    border: 0.4rem solid $button-border-color;
+
+    // background-color: $button-border-color;
+    @include background-image(linear-gradient(#3e3f40, #4d4e4f));
+    color: black;
+    color: rgba(0,0,0,0.7);
+    font-size: 1.9rem;
     text-transform: lowercase;
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        // background-color: rgba(255,255,255,0.5);
+        border-radius: $button-border-radius;
+        width: 100%;
+        height: 100%;
+        border: 1px solid $button-inside-border-color;
+    }
+}
+.help-button{
+    cursor: pointer;
+    position: relative;
+    display: block;
+    margin:13px;
+    left: 50%;
+    margin-left: -13px;
+    width: 26px;
+    height: 26px;
+    opacity: 0.5;
+    background-image: url(../img/info-icon.png);
+    &:hover{
+        opacity: 1;
+    }
 }

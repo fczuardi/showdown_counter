@@ -14,7 +14,10 @@ theme: mnmo
             <div data-role="page" id="main">
                 {{>header}}
                 <section class="listviewport" data-role="list">
-                    {{>add-counter-button}}
+                    <div class="toolbar">
+                        <div class="help-button"></div>
+                        {{>add-counter-button}}
+                    </div>
                     <ol class="counterlist" data-role="listview">
                     {{#each default.counters}}
                         {{>counter}}

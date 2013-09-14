@@ -11,6 +11,10 @@ $color6: #FF8CE7;
 $color7: #FB5B61;
 $background-color: #232425;
 $footer-text-color: #424344;
+$button-border-color: #2C2D2E;
+$button-inside-border-color: #000;
+$button-border-radius: 0.3rem;
+$help-button-color: #333;
 
 $counter-height: 7.4rem;
 
@@ -20,6 +24,10 @@ $counter-height: 7.4rem;
 body{
     //debug
     // background-image: url(../img/Counters_Pompiere.png);
+    // background-image: url(../img/NewCounter.png);
+    // background-position-x: center;
+    // background-repeat: no-repeat;
+
     font-family: Pompiere;
 }
 
@@ -29,6 +37,7 @@ footer nav{
     display: none;
 }
 
+@import "parts/toolbar";
 @import "parts/buttons";
 @import "parts/counterlist";
 @import "parts/counter";
