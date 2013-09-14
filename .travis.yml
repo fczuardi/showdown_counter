@@ -8,5 +8,5 @@ before_script:
     - git submodule update --init --recursive
     - npm install -g grunt-cli
     - npm install grunt
-    - mkdir lib/requirejs
+    - mkdir -p lib/requirejs
     - wget https://raw.github.com/requirejs/domReady/latest/domReady.js -O lib/requirejs/domReady.js

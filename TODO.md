@@ -14,12 +14,13 @@
 
 #add-counter
 - pull to add is not goot on all platforms
-    - create a branch with an add-counter button and use that
+    + create a branch with an add-counter button and use that @done (2013-09-14 17:22)
 
 #polishin
 - animation
 
-
+#performance (future)
+- keep the dom small (the number of slots that fits on the screen is enough)
 
 
 
