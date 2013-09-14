@@ -7,6 +7,7 @@
         {{!-- https://github.com/EightMedia/hammer.js/wiki/Tips-&-Tricks --}}
         <meta name="viewport"
         content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         {{#if theme}}
         <link rel="stylesheet" href="css/theme-{{theme}}.css">
         {{/if}}
@@ -14,7 +15,10 @@
     </head>
     <body>
         {{>body}}
+<!--
         <script src="js/lib/requirejs/require.js"
                 data-main="js/main" ></script>
+-->
+    <script src="js/main-built.js"></script>
     </body>
 </html>

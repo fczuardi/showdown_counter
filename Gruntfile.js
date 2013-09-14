@@ -231,7 +231,24 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
+        //Javascript modules concatenation
+        requirejs: {
+            compile: {
+                options: {
+                    almond: true,
+                    baseUrl: "./build/www/js/lib",
+                    paths: {
+                        "main": '../main',
+                        'domReady': 'requirejs/domReady',
+                        'counter': 'mnmo/counter',
+                        'counterSet': 'mnmo/counterSet',
+                        'behavior': 'mnmo/behavior'
+                    },
+                    name: "main",
+                    out: "./build/www/js/main-built.js"
+                }
+            }
+        },
         // Theme assets
         copy: {
             ubuntu_fonts: {
@@ -438,6 +455,26 @@ module.exports = function (grunt) {
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask('default', [
+        'jsvalidate',
+        JS_LINTER,
+        'assemble',
+        'compass',
+        'prettify',
+        'validation:all',
+        'copy:pompiere_fonts',
+        'copy:images',
+        // 'copy:js_libs',
+        // 'copy:js_libs_node',
+        // 'copy:scripts',
+        'requirejs',
+        'autoprefixer',
+        'concat:htaccess',
+        'openwebapp',
+        'manifest'
+    ]);
+
+    // the default task can be run just by typing "grunt" on the command line
+    grunt.registerTask('with-ubuntu', [
         'jsvalidate',
         JS_LINTER,
         'assemble',

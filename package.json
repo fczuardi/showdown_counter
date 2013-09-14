@@ -41,7 +41,8 @@
     "grunt-html-validation": "~0.1.5",
     "grunt-prettify": "~0.2.9",
     "grunt-regex-replace": "~0.2.5",
-    "requirejs": "~2.1.8"
+    "requirejs": "~2.1.8",
+    "grunt-requirejs": "~0.4.0"
   },
   "engines": {
     "node": ">=0.8"
