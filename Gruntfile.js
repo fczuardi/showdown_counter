@@ -358,7 +358,7 @@ module.exports = function (grunt) {
             },
             javascript: {
                 files: JAVASCRIPT_SOURCES,
-                tasks: ['jsvalidate', JS_LINTER, 'copy:scripts'],
+                tasks: ['jsvalidate', JS_LINTER, 'copy:scripts', 'requirejs'],
                 options: {
                     livereload: LIVE_RELOAD_ENABLED
                 }
