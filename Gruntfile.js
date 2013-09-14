@@ -411,7 +411,7 @@ module.exports = function (grunt) {
         },
         // to grab dependencies
         curl: {
-            'lib/requirejs/domReady.js':
+            'lib/js/requirejs/domReady.js':
             'https://raw.github.com/requirejs/domReady/latest/domReady.js'
         }
     });
