@@ -24,7 +24,6 @@ require(
         domReady(function () {
             viewportElement = document.querySelector('.listviewport');
             counters.init(viewportElement);
-            behavior.init(counters);
         });
     }
 );

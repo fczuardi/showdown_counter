@@ -12,3 +12,18 @@
 .increment[data-role="button"]{
     left: 50%;
 }
+.add-counter-button{
+    cursor: pointer;
+    position:relative;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    height: $counter-height;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid $footer-text-color;
+    color: $footer-text-color;
+    font-size: 2rem;
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: lowercase;
+}

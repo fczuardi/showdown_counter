@@ -14,13 +14,14 @@ theme: mnmo
             <div data-role="page" id="main">
                 {{>header}}
                 <section class="listviewport" data-role="list">
+                    {{>add-counter-button}}
                     <ol class="counterlist" data-role="listview">
                     {{#each default.counters}}
                         {{>counter}}
                     {{/each}}
                     </ol>
+                    {{>footer}}
                 </section>
-                {{>footer}}
             </div>
 {{#is theme 'ubuntu'}}
         </div>
