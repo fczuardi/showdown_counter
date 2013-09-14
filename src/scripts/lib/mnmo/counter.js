@@ -24,8 +24,11 @@ define(function () {
 
         this.setValue = function (v) {
             if ((v <= bottomLimit) || (v >= topLimit)){
-                console.log('should vibrate', value, bottomLimit, topLimit);
-                window.navigator.vibrate(50);
+                if (window.navigator &&
+                    window.navigator.vibrate &&
+                    typeof window.navigator.vibrate === 'function'){
+                    window.navigator.vibrate(50);
+                }
             }
             value = Math.min(Math.max(v, bottomLimit), topLimit);
             domElement.dataset.value = value;
