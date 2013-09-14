@@ -408,6 +408,11 @@ module.exports = function (grunt) {
                     livereload: LIVE_RELOAD_ENABLED
                 }
             }
+        },
+        // to grab dependencies
+        curl: {
+            'lib/requirejs/domReady.js':
+            'https://raw.github.com/requirejs/domReady/latest/domReady.js'
         }
     });
 

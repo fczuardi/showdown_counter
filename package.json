@@ -42,7 +42,8 @@
     "grunt-prettify": "~0.2.9",
     "grunt-regex-replace": "~0.2.5",
     "requirejs": "~2.1.8",
-    "grunt-requirejs": "~0.4.0"
+    "grunt-requirejs": "~0.4.0",
+    "grunt-curl": "~1.1.1"
   },
   "engines": {
     "node": ">=0.8"
