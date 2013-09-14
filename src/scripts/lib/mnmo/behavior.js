@@ -55,10 +55,10 @@ define(function () {
             console.log(itemHeight, listElement);
 
             // add the space before first counter
-            li = document.createElement('li');
-            li.classList.add('counterlist__empty-space');
-            listElement.insertBefore(li, listElement.firstChild);
-            listElement.classList.add('counterlist--with-space');
+            // li = document.createElement('li');
+            // li.classList.add('counterlist__empty-space');
+            // listElement.insertBefore(li, listElement.firstChild);
+            // listElement.classList.add('counterlist--with-space');
 
             // listen for touch events
             document.body.addEventListener('touchstart', onTouchStart);
