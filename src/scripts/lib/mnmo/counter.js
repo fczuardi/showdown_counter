@@ -26,11 +26,11 @@ define(function () {
             }
         }
         this.increment = function (event) {
-            // removeRemainingClickEvents(event, self.increment);
+            removeRemainingClickEvents(event, self.increment);
             self.setValue(value + incrementSize);
         };
         this.decrement = function (event) {
-            // removeRemainingClickEvents(event, self.decrement);
+            removeRemainingClickEvents(event, self.decrement);
             self.setValue(value - incrementSize);
         };
 
@@ -40,29 +40,35 @@ define(function () {
         //atach listeners
 
         //attach click events
+        //attach pointerdown events
+        for (d = pointerDown.length - 1; d >= 0; d -= 1) {
+            eventName = pointerDown[d];
             incrementButton.addEventListener(
-                'touchstart',
+                eventName,
                 self.increment,
                 false
             );
             decrementButton.addEventListener(
-                'touchstart',
+                eventName,
                 self.decrement,
                 false
             );
-        //attach pointerdown events
             domElement.addEventListener(
-                'touchstart',
+                eventName,
                 contextMenu.touchStart,
                 false
             );
+        }
         //attach pointerup events
+        for (u = pointerUp.length - 1; u >= 0; u -= 1) {
+            eventName = pointerUp[u];
             domElement.addEventListener(
-                'touchend',
+                eventName,
                 contextMenu.touchEnd,
                 false
             );
-
+        }
+console.log(pointerUp[0], pointerDown[0], click[0], click[0]);
 
         this.reset = function () {
             self.setValue(bottomLimit);

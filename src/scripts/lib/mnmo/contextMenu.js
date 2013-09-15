@@ -17,6 +17,14 @@ define(function () {
             hiddenColor = 1,
             self = this;
 
+        function removeRemainingClickEvents(event, fn) {
+            for (c = click.length - 1; c >= 0; c -= 1) {
+                if (click[c] !== event.type) {
+                    event.target.removeEventListener(click[c], fn);
+                }
+            }
+        }
+
         function getScrollY() {
             var y = ( window.pageYOffset !== undefined) ? window.pageYOffset :
                     (
@@ -28,14 +36,19 @@ define(function () {
         }
 
         function getColorRowAndColumn(event){
-            var originX =   colorPicker.offsetLeft +event.target.offsetLeft,
+            console.log('getColorRowAndColumn', event);
+            var isTouchEvent = (event.type.indexOf('touch') !== -1),
+                isMouseEvent = (event.type.indexOf('mouse') !== -1),
+                clientX =   isTouchEvent ? event.touches[0].clientX : event.clientX,
+                clientY =   isTouchEvent ? event.touches[0].clientY : event.clientY,
+                originX =   colorPicker.offsetLeft +event.target.offsetLeft,
                 originY =   toolbarElement.offsetTop +
                             colorPicker.offsetTop +
                             event.target.offsetTop,
                 pickerHeight = colorPicker.offsetHeight,
                 pickerWidth = colorPicker.offsetWidth,
-                deltaX = event.touches[0].clientX - originX,
-                deltaY = event.touches[0].clientY - originY,
+                deltaX = clientX - originX,
+                deltaY = clientY - originY,
                 column = Math.floor(deltaX / (pickerWidth / 3)),
                 row = Math.ceil(deltaY / (pickerHeight / 2)) - 1;
                 column = Math.min(Math.max(column, 0), 2);
@@ -55,6 +68,7 @@ define(function () {
         }
 
         this.openMenu = function(event) {
+            console.log('Open menu', event);
             var scrollY = getScrollY(),
                 color;
             event.preventDefault();
@@ -95,8 +109,13 @@ define(function () {
             menuElement.classList.remove('context-menu--active');
         }
         function toolbarClicked(event) {
-            if ((event.touches[0].clientY < event.target.offsetTop) ||
-                (event.touches[0].clientY > event.target.offsetTop + event.target.offsetHeight)) {
+            var isTouchEvent = (event.type.indexOf('touch') !== -1),
+                isMouseEvent = (event.type.indexOf('mouse') !== -1),
+                clientX =   isTouchEvent ? event.touches[0].clientX : event.clientX,
+                clientY =   isTouchEvent ? event.touches[0].clientY : event.clientY;
+
+            if ((clientY < event.target.offsetTop) ||
+                (clientY > event.target.offsetTop + event.target.offsetHeight)) {
                 closeMenu();
             }
             event.stopPropagation();
@@ -106,19 +125,56 @@ define(function () {
             counterList[selectedCounterIndex].reset();
             closeMenu();
         }
-        function removeSelectedCounter (event){
+        this.removeSelectedCounter = function(event){
+            removeRemainingClickEvents(event, self.removeSelectedCounter);
             counterSet.removeCounter(selectedCounterIndex);
             closeMenu();
 
-        }
+        };
         // capture and disable system's context menu
         document.oncontextmenu = function (event) { // Use document as opposed to window for IE8 compatibility
             event.preventDefault();
             return false;
         };
+
         this.setCounterSet = function (cset) {
+            var pointerDown = cset.config.pointerDownEvents,
+                pointerUp = cset.config.pointerUpEvents,
+                click = cset.config.clickEvents,
+                eventName,
+                d,
+                m,
+                u;
             counterSet = cset;
             counterList = cset.getList();
+
+            console.log('pointerDown',counterSet.config.pointerDown);
+
+
+            //attach pointerdown events
+            for (d = pointerDown.length - 1; d >= 0; d -= 1) {
+                eventName = pointerDown[d];
+                menuElement.addEventListener(eventName, closeMenu, false);
+                toolbarElement.addEventListener(eventName, toolbarClicked, false);
+                resetButton.addEventListener(eventName, resetSelectedCounter, false);
+                removeButton.addEventListener(eventName, self.removeSelectedCounter, false);
+                colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            }
+
+
+            //attach pointermove events
+            for (m = pointerDown.length - 1; m >= 0; m -= 1) {
+                eventName = pointerDown[m];
+                colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            }
+
+            //attach pointermove events
+            for (u = pointerDown.length - 1; u >= 0; u -= 1) {
+                eventName = pointerDown[u];
+                colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            }
+
+
         };
 
         this.init = function (menu) {
@@ -128,16 +184,7 @@ define(function () {
             removeButton = menuElement.querySelector('.context-menu__remove-button');
             colorPicker = menuElement.querySelector('.context-menu__color-picker');
             colorHitArea = colorPicker.querySelector('.area');
-            menuElement.addEventListener('touchstart', closeMenu, false);
 
-            toolbarElement.addEventListener('touchstart', toolbarClicked, false);
-
-            resetButton.addEventListener('touchstart', resetSelectedCounter, false);
-            removeButton.addEventListener('touchstart', removeSelectedCounter, false);
-
-            colorHitArea.addEventListener('touchstart', paletteUpdate, false);
-            colorHitArea.addEventListener('touchmove', paletteUpdate, false);
-            colorHitArea.addEventListener('touchend', paletteUpdate, false);
         };
 
         this.touchStart = function (event) {

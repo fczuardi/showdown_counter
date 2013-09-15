@@ -14,8 +14,7 @@ require(
     [
         'domReady',
         'counterSet',
-        'contextMenu',
-        'cordova'
+        'contextMenu'
     ],
     function (domReady, CounterSet, ContextMenu) {
         'use strict';

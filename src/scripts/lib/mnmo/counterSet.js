@@ -44,6 +44,14 @@ define(['counter', 'modernizr'], function (Counter) {
             result.push('mouseup');
             return result;
         }
+        function getPointerMoveEvents() {
+            var result = [];
+            if (Modernizr.touchevents) {
+                result.push('touchmove');
+            }
+            result.push('mousemove');
+            return result;
+        }
 
         //config
         self.config = {
@@ -53,7 +61,8 @@ define(['counter', 'modernizr'], function (Counter) {
             colorPaletteSize: 7,
             clickEvents: getClickEvents(),
             pointerDownEvents: getPointerDownEvents(),
-            pointerUpEvents: getPointerUpEvents()
+            pointerUpEvents: getPointerUpEvents(),
+            pointerMoveEvents: getPointerMoveEvents
         };
 
 
