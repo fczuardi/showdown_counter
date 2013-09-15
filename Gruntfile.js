@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         JAVASCRIPT_LIBS_NODE    =   ['requirejs/require.js'],
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
-        SCRIPTS_TO_IGNORE       =   ['!build.js', '!main-built.js'],
+        SCRIPTS_TO_IGNORE       =   ['!main-built.js'],
         JAVASCRIPT_SOURCES      =   ['*.js',
                                      JAVASCRIPT_PATH + '**/*.js'
                                     ].concat(SCRIPTS_TO_IGNORE),
@@ -231,6 +231,51 @@ module.exports = function (grunt) {
                 }]
             }
         },
+
+
+        modernizr: {
+
+            dist: {
+                // Path to the build you're using for development.
+                // "devFile" : "build/www/js/lib/modernizr/modernizr-latest.js",
+                "devFile" : false,
+
+                // Path to save out the built file
+                "dest" : "build/www/js/lib/modernizr/modernizr-custom.js",
+
+                // Based on default settings on http://modernizr.com/download/
+                "options" : [
+                    // "setClasses",
+                    // "addTest",
+                    // "html5printshiv",
+                    // "load",
+                    // "testProp",
+                    // "fnBind"
+                ],
+
+                // By default, source is uglified before saving
+                "uglify" : true,
+
+                // Define any tests you want to impliticly include
+                "tests" : [],
+
+                // By default, will crawl your project for references to Modernizr tests
+                // Set to false to disable
+                "crawl" : true,
+
+                // By default, this task will crawl all *.js, *.css, *.scss files.
+                // "files" : [
+                //     "**/*.{js,css,scss}",
+                //     "!node_modules/**/*",
+                //     "!{Gruntfile,grunt}.js"
+                // ],
+                "files" : JS_FILES,
+
+                // Have custom Modernizr tests? Add them here.
+                "customTests" : []
+            }
+
+        },
         //Javascript modules concatenation
         requirejs: {
             compile: {
@@ -240,9 +285,10 @@ module.exports = function (grunt) {
                     paths: {
                         "main": '../main',
                         'domReady': 'requirejs/domReady',
+                        'modernizr': 'modernizr/modernizr-custom',
                         'counter': 'mnmo/counter',
                         'counterSet': 'mnmo/counterSet',
-                        'behavior': 'mnmo/behavior'
+                        'contextMenu': 'mnmo/contextMenu'
                     },
                     name: "main",
                     out: "./build/www/js/main-built.js"
@@ -412,7 +458,7 @@ module.exports = function (grunt) {
         // to grab dependencies
         curl: {
             'lib/js/requirejs/domReady.js':
-            'https://raw.github.com/requirejs/domReady/latest/domReady.js'
+                'https://raw.github.com/requirejs/domReady/latest/domReady.js',
         }
     });
 
@@ -471,24 +517,9 @@ module.exports = function (grunt) {
         'copy:js_libs',
         'copy:js_libs_node',
         'copy:scripts',
+        'modernizr',
         'requirejs',
         'autoprefixer',
-        'concat:htaccess',
-        'openwebapp',
-        'manifest'
-    ]);
-
-    // the default task can be run just by typing "grunt" on the command line
-    grunt.registerTask('with-ubuntu', [
-        'jsvalidate',
-        JS_LINTER,
-        'assemble',
-        'compass',
-        'prettify',
-        'validation:all',
-        'copy',
-        'autoprefixer',
-        'regex-replace',
         'concat:htaccess',
         'openwebapp',
         'manifest'

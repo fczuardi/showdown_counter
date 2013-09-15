@@ -43,7 +43,8 @@
     "grunt-regex-replace": "~0.2.5",
     "requirejs": "~2.1.8",
     "grunt-requirejs": "~0.4.0",
-    "grunt-curl": "~1.1.1"
+    "grunt-curl": "~1.1.1",
+    "grunt-modernizr": "https://github.com/Modernizr/grunt-modernizr/tarball/feature/modernizr-3.0"
   },
   "engines": {
     "node": ">=0.8"

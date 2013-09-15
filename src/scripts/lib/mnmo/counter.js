@@ -1,6 +1,6 @@
 define(function () {
     'use strict';
-    var Counter = function (domElement, parent) {
+    var Counter = function (domElement, contextMenu, parent) {
         var incrementButton = domElement.querySelector('.increment'),
             decrementButton = domElement.querySelector('.decrement'),
             displayElement = domElement.querySelector('.counter__display'),
@@ -9,24 +9,55 @@ define(function () {
             incrementSize = parent.config.incrementSize,
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
+            pointerDown = parent.config.pointerDownEvents,
+            pointerUp = parent.config.pointerUpEvents,
+            click = parent.config.clickEvents,
+            eventName,
+            c,
+            d,
+            u,
             self = this;
 
-        function increment() {
+        this.increment = function (event) {
+            event.preventDefault();
+            removeRemainingClickEvents(event, self.increment);
             self.setValue(value + incrementSize);
-        }
-        function decrement() {
+        };
+        this.decrement = function (event) {
+            event.preventDefault();
+            removeRemainingClickEvents(event, self.decrement);
             self.setValue(value - incrementSize);
+        };
+        function removeRemainingClickEvents(event, fn) {
+            for (c = click.length - 1; c >= 0; c--) {
+                if (click[c] != event.type){
+                    event.target.removeEventListener(click[c], fn);
+                }
+            }
         }
 
         //atach listeners
-        incrementButton.addEventListener('click', increment, false);
-        decrementButton.addEventListener('click', decrement, false);
+
+        //attach click events
+        for (c = click.length - 1; c >= 0; c--) {
+            eventName = click[c];
+            incrementButton.addEventListener(eventName, self.increment, false);
+            decrementButton.addEventListener(eventName, self.decrement, false);
+        }
+        for (d = pointerDown.length - 1; d >= 0; d--) {
+            eventName = pointerDown[d];
+            domElement.addEventListener(eventName, contextMenu.touchStart, false);
+        }
+        //attach pointerup events
+        for (u = pointerUp.length - 1; u >= 0; u--) {
+            eventName = pointerUp[u];
+            domElement.addEventListener(eventName, contextMenu.touchEnd, false);
+        }
+
 
         this.setValue = function (v) {
             if ((v <= bottomLimit) || (v >= topLimit)){
-                if (window.navigator &&
-                    window.navigator.vibrate &&
-                    typeof window.navigator.vibrate === 'function'){
+                if (Modernizr.vibrate){
                     window.navigator.vibrate(50);
                 }
             }

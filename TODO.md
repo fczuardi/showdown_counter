@@ -1,3 +1,9 @@
+#things to polyfills (according to grunt modernizr)
+- dataset
+- input (button maybe)
+- vibrate
+- classList ?
++ touchevents @done (2013-09-14 22:27)
 
 #context-menu
 - long press opens context

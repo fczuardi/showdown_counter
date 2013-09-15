@@ -1,12 +1,13 @@
-define(['counter'], function (Counter) {
+define(['counter', 'modernizr'], function (Counter) {
     'use strict';
     var CounterSet = function () {
         //private vars
         var list = [],
             counter,
+            contextMenu,
             ol,
-            firstItemColor,
             addButtonElement,
+            firstItemColor,
             self = this;
 
         //helpers
@@ -19,23 +20,53 @@ define(['counter'], function (Counter) {
             event.preventDefault();
             self.addCounter();
         }
+        function getClickEvents() {
+            var result = [];
+            // msPointerEnabled ?
+            // @TODO
+            if (Modernizr.touchevents) {
+                result.push('touchstart');
+            }
+            result.push('click');
+            return result;
+        }
+        function getPointerDownEvents() {
+            var result = [];
+            if (Modernizr.touchevents) {
+                result.push('touchstart');
+            }
+            result.push('mousedown');
+            return result;
+        }
+        function getPointerUpEvents() {
+            var result = [];
+            if (Modernizr.touchevents) {
+                result.push('touchend');
+            }
+            result.push('mouseup');
+            return result;
+        }
+
         //config
         self.config = {
             incrementSize: 1,
             bottomLimit: 0,
             topLimit: Number.MAX_VALUE,
             colorPaletteSize: 7,
-            clickEvent: 'thouchstart'
+            clickEvents: getClickEvents(),
+            pointerDownEvents: getPointerDownEvents(),
+            pointerUpEvents: getPointerUpEvents()
         };
 
 
         //methods
-        this.init = function (viewportElement) {
+        this.init = function (viewportElement, menu) {
             var listElement = viewportElement.querySelector('.counterlist'),
                 nodes = viewportElement.querySelectorAll('.counter'),
                 n;
 
             ol = listElement;
+            contextMenu = menu;
             addButtonElement = viewportElement.
                                 querySelector('.add-counter-button');
             // check localStorage to see if there are cached counters
@@ -53,10 +84,7 @@ define(['counter'], function (Counter) {
             firstItemColor = Number(nodes[n+1].dataset.color);
 
             // attach listeners for the addCounter button
-            console.log(addButtonElement);
             addButtonElement.addEventListener('click', addButtonClicked);
-
-
         };
 
         this.getCounterHeight = function () {
@@ -91,7 +119,7 @@ define(['counter'], function (Counter) {
                     },400, li);
                 },300, ol, domElement);
             }
-            counter = new Counter(domElement, self);
+            counter = new Counter(domElement, contextMenu, self);
             list.push(counter);
             // domElement.style.top = "0px";
         };

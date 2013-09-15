@@ -3,6 +3,7 @@ layout: html_page.hbs
 title: <%= app.title %>
 description: <%= app.description %>
 theme: mnmo
+built: true
 #theme: ubuntu
 #appcache: <%= app.cachefile %>
 ---
@@ -24,6 +25,7 @@ theme: mnmo
                     {{/each}}
                     </ol>
                     {{>footer}}
+                    {{>context-menu}}
                 </section>
             </div>
 {{#is theme 'ubuntu'}}

@@ -3,9 +3,10 @@ requirejs.config({
     baseUrl: '../js/lib/',
     paths: {
         'domReady': 'requirejs/domReady',
+        'modernizr': 'modernizr/modernizr-custom',
         'counter': 'mnmo/counter',
         'counterSet': 'mnmo/counterSet',
-        'behavior': 'mnmo/behavior'
+        'contextMenu': 'mnmo/contextMenu'
     }
 });
 
@@ -13,17 +14,20 @@ require(
     [
         'domReady',
         'counterSet',
-        'behavior'
+        'contextMenu'
     ],
-    function (domReady, CounterSet, Behavior) {
+    function (domReady, CounterSet, ContextMenu) {
         'use strict';
         var counters = new CounterSet(),
-            behavior = new Behavior(),
-            viewportElement;
+            contextMenu = new ContextMenu(),
+            viewportElement,
+            contextMenuElement;
 
         domReady(function () {
             viewportElement = document.querySelector('.listviewport');
-            counters.init(viewportElement);
+            contextMenuElement = document.querySelector('.context-menu');
+            contextMenu.init(contextMenuElement);
+            counters.init(viewportElement, contextMenu);
         });
     }
 );

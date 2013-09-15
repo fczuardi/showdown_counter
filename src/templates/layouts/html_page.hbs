@@ -15,10 +15,10 @@
     </head>
     <body>
         {{>body}}
-<!--
-        <script src="js/lib/requirejs/require.js"
-                data-main="js/main" ></script>
--->
+{{#if built}}
     <script src="js/main-built.js"></script>
+{{else}}
+    <script src="js/lib/requirejs/require.js" data-main="js/main" ></script>
+{{/if}}
     </body>
 </html>
