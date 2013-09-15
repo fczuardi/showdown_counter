@@ -310,30 +310,30 @@ module.exports = function (grunt) {
                     dest: HTDOCS_PATH + 'index.html'
                 }]
             },
-            ubuntu_fonts: {
-                files: [{
-                    expand: true,
-                    src: [UBUNTU_THEME_PATH + 'fonts/**/*.{ttf,woff,svg,eot}'],
-                    dest: HTDOCS_PATH + 'fonts/ubuntu/',
-                    flatten: true
-                }]
-            },
-            ubuntu_css: {
-                files: [{
-                    expand: true,
-                    src: [UBUNTU_THEME_PATH + 'css/**/*.css'],
-                    dest: HTDOCS_PATH + 'css/ubuntu/',
-                    flatten: true
-                }]
-            },
-            ubuntu_img: {
-                files: [{
-                    expand: true,
-                    src: [UBUNTU_THEME_PATH + 'img/**/*'],
-                    dest: HTDOCS_PATH + 'img/ubuntu/',
-                    flatten: true
-                }]
-            },
+            // ubuntu_fonts: {
+            //     files: [{
+            //         expand: true,
+            //         src: [UBUNTU_THEME_PATH + 'fonts/**/*.{ttf,woff,svg,eot}'],
+            //         dest: HTDOCS_PATH + 'fonts/ubuntu/',
+            //         flatten: true
+            //     }]
+            // },
+            // ubuntu_css: {
+            //     files: [{
+            //         expand: true,
+            //         src: [UBUNTU_THEME_PATH + 'css/**/*.css'],
+            //         dest: HTDOCS_PATH + 'css/ubuntu/',
+            //         flatten: true
+            //     }]
+            // },
+            // ubuntu_img: {
+            //     files: [{
+            //         expand: true,
+            //         src: [UBUNTU_THEME_PATH + 'img/**/*'],
+            //         dest: HTDOCS_PATH + 'img/ubuntu/',
+            //         flatten: true
+            //     }]
+            // },
             pompiere_fonts: {
                 files: [{
                     expand: true,
@@ -378,17 +378,17 @@ module.exports = function (grunt) {
         },
 
         'regex-replace': {
-            ubuntu_assets_url: {
-                src: [HTDOCS_PATH + 'css/ubuntu/**/*.css'],
-                actions: [
-                    {
-                        name: 'img_paths',
-                        search: '../img/',
-                        replace: '../../img/ubuntu/',
-                        flags: 'g'
-                    }
-                ]
-            }
+            // ubuntu_assets_url: {
+            //     src: [HTDOCS_PATH + 'css/ubuntu/**/*.css'],
+            //     actions: [
+            //         {
+            //             name: 'img_paths',
+            //             search: '../img/',
+            //             replace: '../../img/ubuntu/',
+            //             flags: 'g'
+            //         }
+            //     ]
+            // }
         },
 
         // Appcache

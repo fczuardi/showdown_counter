@@ -41,7 +41,6 @@ define(function () {
                 column = Math.min(Math.max(column, 0), 2);
                 row = Math.min(Math.max(row, 0), 1);
 
-                console.log(column, row);
             return [column, row];
         }
         function setBackgroundColorFromPallete(palettePosition){
@@ -96,7 +95,6 @@ define(function () {
             menuElement.classList.remove('context-menu--active');
         }
         function toolbarClicked(event) {
-            console.log(event.touches[0].clientY, event.target.offsetTop);
             if ((event.touches[0].clientY < event.target.offsetTop) ||
                 (event.touches[0].clientY > event.target.offsetTop + event.target.offsetHeight)) {
                 closeMenu();
@@ -116,8 +114,6 @@ define(function () {
         // capture and disable system's context menu
         document.oncontextmenu = function (event) { // Use document as opposed to window for IE8 compatibility
             event.preventDefault();
-            // console.log('oncontextmenu!');
-            // self.openMenu(event);
             return false;
         };
         this.setCounterSet = function (cset) {
@@ -126,7 +122,6 @@ define(function () {
         };
 
         this.init = function (menu) {
-            console.log('ContextMenu INIT', menu);
             menuElement = menu;
             toolbarElement = menuElement.querySelector('.context-menu__toolbar');
             resetButton = menuElement.querySelector('.context-menu__reset-button');
@@ -150,7 +145,6 @@ define(function () {
             if (menuElement.classList.contains('context-menu--active')){
                 return false;
             }
-            console.log('touchStart', event);
             pressing = window.setTimeout(
                                          self.openMenu,
                                          longPressTriggerTime,
@@ -163,7 +157,6 @@ define(function () {
         };
         this.touchEnd = function (event) {
             event.preventDefault();
-            console.log('touchEnd', event);
             clearTimeout(pressing);
         };
 
