@@ -60,6 +60,7 @@ define(function () {
                 color;
             event.preventDefault();
             event.stopPropagation();
+            self.killTimer();
 
             counterElement = event.target;
             // get the li counter
@@ -86,6 +87,7 @@ define(function () {
 
         };
         function paletteUpdate(event) {
+            event.preventDefault();
             event.stopPropagation();
             var gridPosition = getColorRowAndColumn(event);
             setBackgroundColorFromPallete(gridPosition);
@@ -115,7 +117,8 @@ define(function () {
         document.oncontextmenu = function (event) { // Use document as opposed to window for IE8 compatibility
             event.preventDefault();
             // console.log('oncontextmenu!');
-            self.openMenu(event);
+            // self.openMenu(event);
+            return false;
         };
         this.setCounterSet = function (cset) {
             counterSet = cset;
@@ -131,9 +134,12 @@ define(function () {
             colorPicker = menuElement.querySelector('.context-menu__color-picker');
             colorHitArea = colorPicker.querySelector('.area');
             menuElement.addEventListener('touchstart', closeMenu, false);
+
             toolbarElement.addEventListener('touchstart', toolbarClicked, false);
+
             resetButton.addEventListener('touchstart', resetSelectedCounter, false);
             removeButton.addEventListener('touchstart', removeSelectedCounter, false);
+
             colorHitArea.addEventListener('touchstart', paletteUpdate, false);
             colorHitArea.addEventListener('touchmove', paletteUpdate, false);
             colorHitArea.addEventListener('touchend', paletteUpdate, false);
@@ -141,6 +147,9 @@ define(function () {
 
         this.touchStart = function (event) {
             // event.preventDefault();
+            if (menuElement.classList.contains('context-menu--active')){
+                return false;
+            }
             console.log('touchStart', event);
             pressing = window.setTimeout(
                                          self.openMenu,

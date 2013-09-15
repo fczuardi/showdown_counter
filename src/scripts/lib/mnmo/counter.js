@@ -26,14 +26,14 @@ define(function () {
             }
         }
         this.increment = function (event) {
-            removeRemainingClickEvents(event, self.increment);
+            // removeRemainingClickEvents(event, self.increment);
             self.setValue(value + incrementSize);
-            event.stopPropagation();
+            event.preventDefault();
         };
         this.decrement = function (event) {
-            removeRemainingClickEvents(event, self.decrement);
+            // removeRemainingClickEvents(event, self.decrement);
             self.setValue(value - incrementSize);
-            event.stopPropagation();
+            event.preventDefault();
         };
 
         //set index
@@ -42,37 +42,28 @@ define(function () {
         //atach listeners
 
         //attach click events
-        for (c = click.length - 1; c >= 0; c -= 1) {
-            eventName = click[c];
             incrementButton.addEventListener(
-                eventName,
+                'touchstart',
                 self.increment,
                 false
             );
             decrementButton.addEventListener(
-                eventName,
+                'touchstart',
                 self.decrement,
                 false
             );
-        }
         //attach pointerdown events
-        for (d = pointerDown.length - 1; d >= 0; d -= 1) {
-            eventName = pointerDown[d];
             domElement.addEventListener(
-                eventName,
+                'touchstart',
                 contextMenu.touchStart,
                 false
             );
-        }
         //attach pointerup events
-        for (u = pointerUp.length - 1; u >= 0; u -= 1) {
-            eventName = pointerUp[u];
             domElement.addEventListener(
-                eventName,
+                'touchend',
                 contextMenu.touchEnd,
                 false
             );
-        }
 
 
         this.reset = function () {
