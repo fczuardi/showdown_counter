@@ -471,11 +471,11 @@ module.exports = function (grunt) {
         // to grab dependencies
         curl: {
             'lib/js/requirejs/domReady.js':
-                'https://raw.github.com/requirejs/domReady/latest/domReady.js',
-            'build/www/plugins.xml':
-                'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/plugins.xml-20130718182619-c92il0qk6i2ni0xw-1/plugins.xml',
-            'build/www/counters.cordovaproject':
-                'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/qrcodescanner.cordov-20130718074154-454ovhnac2fgorus-1/qrcode-scanner.cordovaproject'
+                'https://raw.github.com/requirejs/domReady/latest/domReady.js'
+            // 'build/www/plugins.xml':
+            //     'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/plugins.xml-20130718182619-c92il0qk6i2ni0xw-1/plugins.xml',
+            // 'build/www/counters.cordovaproject':
+            //     'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/qrcodescanner.cordov-20130718074154-454ovhnac2fgorus-1/qrcode-scanner.cordovaproject'
         }
     });
 

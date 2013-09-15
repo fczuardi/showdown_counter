@@ -4,7 +4,6 @@ requirejs.config({
     paths: {
         'domReady': 'requirejs/domReady',
         'modernizr': 'modernizr/modernizr-custom',
-        'cordova': 'cordova/cordova-2.8',
         'counter': 'mnmo/counter',
         'counterSet': 'mnmo/counterSet',
         'contextMenu': 'mnmo/contextMenu'
@@ -30,14 +29,6 @@ require(
             contextMenuElement = document.querySelector('.context-menu');
             contextMenu.init(contextMenuElement);
             counters.init(viewportElement, contextMenu);
-            console.log('dom ready');
         });
-
-        document.addEventListener("deviceready", function() {
-            console.log('device ready');
-        }, false);
-
-
-
     }
 );
