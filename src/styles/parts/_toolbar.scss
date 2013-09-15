@@ -8,3 +8,45 @@
     text-align: center;
     font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.context-menu__reset-button,
+.context-menu__color-picker,
+.context-menu__remove-button{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+}
+.context-menu__reset-button,
+.context-menu__remove-button{
+    margin-top: -16px;
+    width: 35px;
+    height: 32px;
+}
+.context-menu__reset-button{
+    left: 7%;
+    background-image: url(../img/reset-button.png);
+}
+.context-menu__color-picker{
+    left: 50%;
+    margin-left: -61px;
+    width: 129px;
+    height: 87px;
+    margin-top: -43px;
+    background-color: #232425;
+    visibility: hidden;
+}
+.context-menu__color-picker-item{
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-right:5px;
+}
+
+.context-menu__remove-button{
+    right: 7%;
+    background-image: url(../img/delete-button.png);
+}
+/*
+        <div class="context-menu__reset-button"></div>
+        <div class="context-menu__color-picker"></div>
+        <div class="context-menu__remove-button"></div>
+ */

@@ -35,7 +35,7 @@ define(function () {
         };
 
         //set index
-        domElement.id = 'counter-' + index;
+        domElement.dataset.index = index;
 
         //atach listeners
 
@@ -72,6 +72,10 @@ define(function () {
             );
         }
 
+
+        this.reset = function () {
+            self.setValue(bottomLimit);
+        };
 
         this.setValue = function (v) {
             if ((v <= bottomLimit) || (v >= topLimit)) {

@@ -41,7 +41,6 @@
     }
 }
 .help-button{
-    display: none;
     cursor: pointer;
     position: relative;
     display: block;
@@ -56,4 +55,11 @@
     &:hover{
         opacity: 1;
     }
+}
+//debug
+.help-button{
+    display: none;
+}
+.add-counter-button{
+    top:28px;
 }

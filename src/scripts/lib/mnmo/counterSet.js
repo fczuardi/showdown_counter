@@ -88,6 +88,9 @@ define(['counter', 'modernizr'], function (Counter) {
             // attach listeners for the addCounter button
             addButtonElement.addEventListener('click', addButtonClicked);
 
+            // register the counterlist on the context menu
+            menu.setCounterSet(self);
+
             // scroll to the first counter
             window.scroll(0, nodes[n + 1].offsetHeight);
         };
@@ -98,6 +101,10 @@ define(['counter', 'modernizr'], function (Counter) {
 
         this.getCounterWidth = function () {
             return list[0].getNode().offsetWidth;
+        };
+
+        this.getList = function () {
+            return list;
         };
 
         this.getListElement = function () {
@@ -126,6 +133,21 @@ define(['counter', 'modernizr'], function (Counter) {
             }
             counter = new Counter(domElement, list.length, contextMenu, self);
             list.push(counter);
+        };
+        this.removeCounter = function (cindex) {
+            var li = list[cindex].getNode(),
+                remainingCounters = ol.querySelectorAll('.counter').length;
+
+            // when there is only 1 counter, hide the remove button
+            if (remainingCounters === 2) {
+                contextMenu.hideRemoveButton();
+            } else {
+                contextMenu.showRemoveButton();
+            }
+
+            // remove dom element
+            li.parentNode.removeChild(li);
+
         };
 
     };
