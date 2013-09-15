@@ -22,10 +22,11 @@ define(function () {
                     ).scrollTop;
             return y;
         }
-        function onLongPress(event) {
+        this.onLongPress = function(event) {
             var scrollY = getScrollY(),
                 counterElement = event.target;
 
+                console.log('open menu!', event);
 
             // get the li counter
             while (!counterElement.classList.contains('counter') &&
@@ -39,7 +40,7 @@ define(function () {
             toolbarElement.style.top = (counterElement.offsetTop - scrollY) + 'px';
             event.preventDefault();
             event.stopPropagation();
-        }
+        };
         function closeMenu() {
             menuElement.classList.remove('context-menu--active');
         }
@@ -58,6 +59,8 @@ define(function () {
         }
         // capture and disable system's context menu
         document.oncontextmenu = function (event) { // Use document as opposed to window for IE8 compatibility
+            console.log('oncontextmenu!');
+            self.onLongPress(event);
             // console.log('context menu!', event);
             // event.preventDefault();
             // event.stopPropagation();
@@ -83,7 +86,7 @@ define(function () {
         this.touchStart = function (event) {
             console.log('touchStart', event);
             pressing = window.setTimeout(
-                                         onLongPress,
+                                         self.onLongPress,
                                          longPressTriggerTime,
                                          event
                                         );
