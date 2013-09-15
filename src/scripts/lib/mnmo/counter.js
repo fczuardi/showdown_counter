@@ -73,6 +73,10 @@ define(function () {
             if ((v <= bottomLimit) || (v >= topLimit)) {
                 if (Modernizr.vibrate) {
                     window.navigator.vibrate(50);
+                } else if (navigator &&
+                           navigator.notification &&
+                           navigator.notification.vibrate) {
+                    navigator.notification.vibrate(50);
                 }
             }
             value = Math.min(Math.max(v, bottomLimit), topLimit);
