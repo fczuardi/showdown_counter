@@ -10,6 +10,7 @@
 }
 .context-menu__reset-button,
 .context-menu__color-picker,
+.context-menu__color-picker .area,
 .context-menu__remove-button{
     cursor: pointer;
     position: absolute;
@@ -25,28 +26,58 @@
     left: 7%;
     background-image: url(../img/reset-button.png);
 }
-.context-menu__color-picker{
+.context-menu__color-picker,
+.context-menu__color-picker .area{
     left: 50%;
     margin-left: -61px;
     width: 129px;
     height: 87px;
     margin-top: -43px;
     background-color: #232425;
-    visibility: hidden;
+    // overflow: hidden;
+    // visibility: hidden;
+}
+.context-menu__color-picker .area {
+    background-color: transparent;
 }
 .context-menu__color-picker-item{
-    display: inline-block;
+    display: block;
+    float: left;
     width: 36px;
     height: 36px;
-    margin-right:5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    &.color-1{
+        background-color: $color1;
+    }
+    &.color-2{
+        background-color: $color2;
+    }
+    &.color-3{
+        background-color: $color3;
+    }
+    &.color-4{
+        background-color: $color4;
+    }
+    &.color-5{
+        background-color: $color5;
+    }
+    &.color-6{
+        background-color: $color6;
+    }
+    &.color-7{
+        background-color: $color7;
+    }
+
+
+
+
+
+
+
 }
 
 .context-menu__remove-button{
     right: 7%;
     background-image: url(../img/delete-button.png);
 }
-/*
-        <div class="context-menu__reset-button"></div>
-        <div class="context-menu__color-picker"></div>
-        <div class="context-menu__remove-button"></div>
- */

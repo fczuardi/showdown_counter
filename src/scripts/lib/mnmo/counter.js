@@ -28,10 +28,12 @@ define(function () {
         this.increment = function (event) {
             removeRemainingClickEvents(event, self.increment);
             self.setValue(value + incrementSize);
+            event.stopPropagation();
         };
         this.decrement = function (event) {
             removeRemainingClickEvents(event, self.decrement);
             self.setValue(value - incrementSize);
+            event.stopPropagation();
         };
 
         //set index

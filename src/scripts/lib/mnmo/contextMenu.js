@@ -3,7 +3,10 @@ define(function () {
     var ContextMenu = function () {
 
         var menuElement,
+            counterElement,
             toolbarElement,
+            colorPicker,
+            colorHitArea,
             resetButton,
             removeButton,
             pressing,
@@ -11,6 +14,7 @@ define(function () {
             counterSet,
             counterList,
             longPressTriggerTime = 1000, //miliseconds
+            hiddenColor = 1,
             self = this;
 
         function getScrollY() {
@@ -22,29 +26,79 @@ define(function () {
                     ).scrollTop;
             return y;
         }
-        this.onLongPress = function(event) {
+
+        function getColorRowAndColumn(event){
+            var originX =   colorPicker.offsetLeft +event.target.offsetLeft,
+                originY =   toolbarElement.offsetTop +
+                            colorPicker.offsetTop +
+                            event.target.offsetTop,
+                pickerHeight = colorPicker.offsetHeight,
+                pickerWidth = colorPicker.offsetWidth,
+                deltaX = event.touches[0].clientX - originX,
+                deltaY = event.touches[0].clientY - originY,
+                column = Math.floor(deltaX / (pickerWidth / 3)),
+                row = Math.ceil(deltaY / (pickerHeight / 2)) - 1;
+                column = Math.min(Math.max(column, 0), 2);
+                row = Math.min(Math.max(row, 0), 1);
+
+                console.log(column, row);
+            return [column, row];
+        }
+        function setBackgroundColorFromPallete(palettePosition){
+            var colorIndex = 1 + palettePosition[0] +
+                            (palettePosition[1]) * 3;
+
+            if (colorIndex >= Number(hiddenColor) ){
+                colorIndex += 1;
+            }
+            menuElement.dataset.color = colorIndex;
+            counterElement.dataset.color = colorIndex;
+        }
+
+        this.openMenu = function(event) {
             var scrollY = getScrollY(),
-                counterElement = event.target;
+                color;
+            event.preventDefault();
+            event.stopPropagation();
 
-                console.log('open menu!', event);
-
+            counterElement = event.target;
             // get the li counter
             while (!counterElement.classList.contains('counter') &&
                    (counterElement !== document.body)) {
                 counterElement = counterElement.parentNode;
             }
-            console.log('selectedCounterIndex', counterElement, counterElement.dataset.index);
+
+            // based on the selected item's color, change the background
+            // and hide the current color from the pallete
+            color = counterElement.dataset.color;
+            menuElement.dataset.color = color;
+            menuElement.querySelector('.color-' + hiddenColor).style.display = "block";
+            menuElement.querySelector('.color-' + color).style.display = "none";
+            hiddenColor = color;
+
             selectedCounterIndex = counterElement.dataset.index;
-            menuElement.dataset.color = counterElement.dataset.color;
+
+            //display the menu
             menuElement.classList.add('context-menu--active');
+
+            //move the toolbar to over the selected counter
             toolbarElement.style.top = (counterElement.offsetTop - scrollY) + 'px';
-            event.preventDefault();
-            event.stopPropagation();
+
         };
+        function paletteUpdate(event) {
+            event.stopPropagation();
+            var gridPosition = getColorRowAndColumn(event);
+            setBackgroundColorFromPallete(gridPosition);
+        }
         function closeMenu() {
             menuElement.classList.remove('context-menu--active');
         }
-        function preventClosing(event) {
+        function toolbarClicked(event) {
+            console.log(event.touches[0].clientY, event.target.offsetTop);
+            if ((event.touches[0].clientY < event.target.offsetTop) ||
+                (event.touches[0].clientY > event.target.offsetTop + event.target.offsetHeight)) {
+                closeMenu();
+            }
             event.stopPropagation();
             return false;
         }
@@ -59,12 +113,9 @@ define(function () {
         }
         // capture and disable system's context menu
         document.oncontextmenu = function (event) { // Use document as opposed to window for IE8 compatibility
-            console.log('oncontextmenu!');
-            self.onLongPress(event);
-            // console.log('context menu!', event);
-            // event.preventDefault();
-            // event.stopPropagation();
-            // return false;
+            event.preventDefault();
+            // console.log('oncontextmenu!');
+            self.openMenu(event);
         };
         this.setCounterSet = function (cset) {
             counterSet = cset;
@@ -77,22 +128,32 @@ define(function () {
             toolbarElement = menuElement.querySelector('.context-menu__toolbar');
             resetButton = menuElement.querySelector('.context-menu__reset-button');
             removeButton = menuElement.querySelector('.context-menu__remove-button');
-            menuElement.addEventListener('click', closeMenu, false);
-            toolbarElement.addEventListener('click', preventClosing, false);
-            resetButton.addEventListener('click', resetSelectedCounter, false);
-            removeButton.addEventListener('click', removeSelectedCounter, false);
+            colorPicker = menuElement.querySelector('.context-menu__color-picker');
+            colorHitArea = colorPicker.querySelector('.area');
+            menuElement.addEventListener('touchstart', closeMenu, false);
+            toolbarElement.addEventListener('touchstart', toolbarClicked, false);
+            resetButton.addEventListener('touchstart', resetSelectedCounter, false);
+            removeButton.addEventListener('touchstart', removeSelectedCounter, false);
+            colorHitArea.addEventListener('touchstart', paletteUpdate, false);
+            colorHitArea.addEventListener('touchmove', paletteUpdate, false);
+            colorHitArea.addEventListener('touchend', paletteUpdate, false);
         };
 
         this.touchStart = function (event) {
+            // event.preventDefault();
             console.log('touchStart', event);
             pressing = window.setTimeout(
-                                         self.onLongPress,
+                                         self.openMenu,
                                          longPressTriggerTime,
                                          event
                                         );
         };
 
+        this.killTimer = function () {
+            clearTimeout(pressing);
+        }
         this.touchEnd = function (event) {
+            event.preventDefault();
             console.log('touchEnd', event);
             clearTimeout(pressing);
         };
