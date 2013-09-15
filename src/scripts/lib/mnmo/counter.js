@@ -19,12 +19,10 @@ define(function () {
             self = this;
 
         this.increment = function (event) {
-            event.preventDefault();
             removeRemainingClickEvents(event, self.increment);
             self.setValue(value + incrementSize);
         };
         this.decrement = function (event) {
-            event.preventDefault();
             removeRemainingClickEvents(event, self.decrement);
             self.setValue(value - incrementSize);
         };

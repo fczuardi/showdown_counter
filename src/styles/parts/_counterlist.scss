@@ -1,26 +1,7 @@
-html, body {
-  height: 100%;
-}
-[data-role="pagestack"]{
-    height: 100%;
-    overflow: hidden;
-    // border: 6px solid green;
-}
-#main{
-    height: 100%;
-    overflow: auto;
-// position:fixed !important;
-// position:absolute;
-// top:0;
-// right:0;
-// bottom:0;
-// left:0;
-}
 .listviewport{
-    // position: absolute;
+    text-align: center;
 }
 .counterlist{
-    // min-height: $counter-height * 4 + 4;
     top: -$counter-height;
     padding-top: $counter-height;
     position: relative;

@@ -17,7 +17,6 @@ define(['counter', 'modernizr'], function (Counter) {
             return firstItemColor;
         }
         function addButtonClicked(event) {
-            event.preventDefault();
             self.addCounter();
         }
         function getClickEvents() {
@@ -82,6 +81,9 @@ define(['counter', 'modernizr'], function (Counter) {
                 self.addCounter(nodes[n]);
             }
             firstItemColor = Number(nodes[n+1].dataset.color);
+
+            //debug
+            // nodes[0].querySelector('.counter__display').textContent = "9";
 
             // attach listeners for the addCounter button
             addButtonElement.addEventListener('click', addButtonClicked);

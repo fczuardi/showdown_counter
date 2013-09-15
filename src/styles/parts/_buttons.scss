@@ -1,16 +1,15 @@
 [data-role="button"]{
     position: absolute;
     height: 100%;
-    width: 50%;
+    width: 25%;
     opacity: 0;
     z-index: 2;
 }
 .decrement[data-role="button"]{
     left: 0;
-
 }
 .increment[data-role="button"]{
-    left: 50%;
+    right: 0;
 }
 .add-counter-button{
     cursor: pointer;

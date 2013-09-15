@@ -7,12 +7,10 @@ define(function () {
         };
 
         this.touchStart = function (event) {
-            event.preventDefault();
             // console.log('touchStart', event);
         };
 
         this.touchEnd = function (event) {
-            event.preventDefault();
             // console.log('touchEnd', event);
         };
 // var pressTimer
