@@ -11,18 +11,16 @@ define(['counter', 'modernizr'], function (Counter) {
             self = this;
 
         //helpers
-        function getNextColor(){
+        function getNextColor() {
             firstItemColor = 1 +
                 (firstItemColor % self.config.colorPaletteSize);
             return firstItemColor;
         }
-        function addButtonClicked(event) {
+        function addButtonClicked() {
             self.addCounter();
         }
         function getClickEvents() {
             var result = [];
-            // msPointerEnabled ?
-            // @TODO
             if (Modernizr.touchevents) {
                 result.push('touchstart');
             }
@@ -80,7 +78,7 @@ define(['counter', 'modernizr'], function (Counter) {
             for (n = nodes.length - 1; n >= 0; n -= 1) {
                 self.addCounter(nodes[n]);
             }
-            firstItemColor = Number(nodes[n+1].dataset.color);
+            firstItemColor = Number(nodes[n + 1].dataset.color);
 
             //debug
             // nodes[0].querySelector('.counter__display').textContent = "9";
@@ -104,26 +102,25 @@ define(['counter', 'modernizr'], function (Counter) {
         this.addCounter = function (domElement) {
             var firstCounter = ol.querySelector('.counter'),
                 value = self.config.bottomLimit;
-            if (typeof domElement === 'undefined'){
+            if (domElement === undefined) {
                 domElement = firstCounter.cloneNode(true);
                 domElement.classList.add('counter');
                 domElement.dataset.color = getNextColor();
                 domElement.dataset.value = self.config.bottomLimit;
                 domElement.querySelector('.counter__display').
                                             textContent = value.toString();
-                domElement.style.left = - (self.getCounterWidth()) + "px";
+                domElement.style.left = -(self.getCounterWidth()) + 'px';
                 ol.classList.add('counterlist--transition');
-                setTimeout(function(ol, li){
+                window.setTimeout(function (ol, li) {
                     ol.insertBefore(domElement, firstCounter);
                     ol.classList.remove('counterlist--transition');
-                    setTimeout(function(li){
-                        li.style.left = "0px";
-                    },400, li);
-                },300, ol, domElement);
+                    window.setTimeout(function (li) {
+                        li.style.left = '0px';
+                    }, 400, li);
+                }, 300, ol, domElement);
             }
             counter = new Counter(domElement, contextMenu, self);
             list.push(counter);
-            // domElement.style.top = "0px";
         };
 
     };

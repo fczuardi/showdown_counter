@@ -60,7 +60,8 @@ module.exports = function (grunt) {
             'document',
             'onTouchStart',
             'onTouchMove',
-            'onTouchEnd'
+            'onTouchEnd',
+            'Modernizr'
         ],
         JSLINT_DIRECTIVES = {
             nomen: true,
@@ -238,41 +239,43 @@ module.exports = function (grunt) {
             dist: {
                 // Path to the build you're using for development.
                 // "devFile" : "build/www/js/lib/modernizr/modernizr-latest.js",
-                "devFile" : false,
+                'devFile' : false,
 
                 // Path to save out the built file
-                "dest" : "build/www/js/lib/modernizr/modernizr-custom.js",
+                'dest' : 'build/www/js/lib/modernizr/modernizr-custom.js',
 
                 // Based on default settings on http://modernizr.com/download/
-                "options" : [
-                    // "setClasses",
-                    // "addTest",
-                    // "html5printshiv",
-                    // "load",
-                    // "testProp",
-                    // "fnBind"
+                'options' : [
+                    // 'setClasses',
+                    // 'addTest',
+                    // 'html5printshiv',
+                    // 'load',
+                    // 'testProp',
+                    // 'fnBind'
                 ],
 
                 // By default, source is uglified before saving
-                "uglify" : true,
+                'uglify' : true,
 
                 // Define any tests you want to impliticly include
-                "tests" : [],
+                'tests' : [],
 
-                // By default, will crawl your project for references to Modernizr tests
+                // By default, will crawl your project for references to
+                // Modernizr tests
                 // Set to false to disable
-                "crawl" : true,
+                'crawl' : true,
 
-                // By default, this task will crawl all *.js, *.css, *.scss files.
-                // "files" : [
-                //     "**/*.{js,css,scss}",
-                //     "!node_modules/**/*",
-                //     "!{Gruntfile,grunt}.js"
+                // By default, this task will crawl all *.js, *.css, *.scss
+                // files.
+                // 'files' : [
+                //     '**/*.{js,css,scss}',
+                //     '!node_modules/**/*',
+                //     '!{Gruntfile,grunt}.js'
                 // ],
-                "files" : JS_FILES,
+                'files' : JS_FILES,
 
                 // Have custom Modernizr tests? Add them here.
-                "customTests" : []
+                'customTests' : []
             }
 
         },
@@ -281,17 +284,17 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     almond: true,
-                    baseUrl: "./build/www/js/lib",
+                    baseUrl: './build/www/js/lib',
                     paths: {
-                        "main": '../main',
+                        'main': '../main',
                         'domReady': 'requirejs/domReady',
                         'modernizr': 'modernizr/modernizr-custom',
                         'counter': 'mnmo/counter',
                         'counterSet': 'mnmo/counterSet',
                         'contextMenu': 'mnmo/contextMenu'
                     },
-                    name: "main",
-                    out: "./build/www/js/main-built.js"
+                    name: 'main',
+                    out: './build/www/js/main-built.js'
                 }
             }
         },
@@ -458,7 +461,7 @@ module.exports = function (grunt) {
         // to grab dependencies
         curl: {
             'lib/js/requirejs/domReady.js':
-                'https://raw.github.com/requirejs/domReady/latest/domReady.js',
+                'https://raw.github.com/requirejs/domReady/latest/domReady.js'
         }
     });
 

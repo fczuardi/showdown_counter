@@ -3,15 +3,15 @@ define(function () {
     var ContextMenu = function () {
 
         this.init = function (menuElement) {
-            // console.log('ContextMenu INIT', menuElement);
+            console.log('ContextMenu INIT', menuElement);
         };
 
         this.touchStart = function (event) {
-            // console.log('touchStart', event);
+            console.log('touchStart', event);
         };
 
         this.touchEnd = function (event) {
-            // console.log('touchEnd', event);
+            console.log('touchEnd', event);
         };
 // var pressTimer
 
