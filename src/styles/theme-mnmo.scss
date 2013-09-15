@@ -21,6 +21,10 @@ $counter-height: 7.4rem;
 //css reset
 @include global-reset(){}
 
+html {
+    user-select: none;
+}
+
 body{
     //debug
     // background-image: url(../img/Counters_Pompiere.png);
@@ -37,6 +41,7 @@ footer nav{
     display: none;
 }
 
+@import "webkit";
 @import "parts/toolbar";
 @import "parts/buttons";
 @import "parts/counterlist";
@@ -50,3 +55,5 @@ body {
 #main{
     text-align:center;
 }
+
+
