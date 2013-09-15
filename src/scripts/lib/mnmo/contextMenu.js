@@ -151,7 +151,7 @@ define(function () {
 
         this.killTimer = function () {
             clearTimeout(pressing);
-        }
+        };
         this.touchEnd = function (event) {
             event.preventDefault();
             console.log('touchEnd', event);
