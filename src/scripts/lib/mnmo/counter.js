@@ -12,6 +12,7 @@ define(function () {
             pointerDown = parent.config.pointerDownEvents,
             pointerUp = parent.config.pointerUpEvents,
             click = parent.config.clickEvents,
+            preferredEventType = {},
             eventName,
             c,
             d,
@@ -26,11 +27,22 @@ define(function () {
             }
         }
         this.increment = function (event) {
-            removeRemainingClickEvents(event, self.increment);
+            if (preferredEventType.increment === undefined){
+                preferredEventType.increment = event.type;
+            }
+            if (event.type !== preferredEventType.increment){
+                return false;
+            }
             self.setValue(value + incrementSize);
+            event.stopPropagation();
         };
         this.decrement = function (event) {
-            removeRemainingClickEvents(event, self.decrement);
+            if (preferredEventType.decrement === undefined){
+                preferredEventType.decrement = event.type;
+            }
+            if (event.type !== preferredEventType.decrement){
+                return false;
+            }
             self.setValue(value - incrementSize);
         };
 

@@ -128,7 +128,9 @@ define(function () {
             closeMenu();
         }
         this.removeSelectedCounter = function(event){
-            removeRemainingClickEvents(event, self.removeSelectedCounter);
+            console.log('removeSelectedCounter!', event.type);
+            event.preventDefault();
+            event.stopPropagation();
             counterSet.removeCounter(selectedCounterIndex);
             closeMenu();
 
@@ -142,6 +144,7 @@ define(function () {
         this.setCounterSet = function (cset) {
             var pointerDown = cset.config.pointerDownEvents,
                 pointerUp = cset.config.pointerUpEvents,
+                pointerMove = cset.config.pointerMoveEvents,
                 eventName,
                 d,
                 m,
@@ -158,21 +161,21 @@ define(function () {
                 eventName = pointerDown[d];
                 menuElement.addEventListener(eventName, closeMenu, false);
                 toolbarElement.addEventListener(eventName, toolbarClicked, false);
-                resetButton.addEventListener(eventName, resetSelectedCounter, false);
+                colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            }
+
+
+            //attach pointermove events
+            for (m = pointerMove.length - 1; m >= 0; m -= 1) {
+                eventName = pointerMove[m];
+                colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            }
+
+            //attach pointerup events
+            for (u = pointerUp.length - 1; u >= 0; u -= 1) {
+                eventName = pointerUp[u];
                 removeButton.addEventListener(eventName, self.removeSelectedCounter, false);
-                colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            }
-
-
-            //attach pointermove events
-            for (m = pointerDown.length - 1; m >= 0; m -= 1) {
-                eventName = pointerDown[m];
-                colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            }
-
-            //attach pointermove events
-            for (u = pointerDown.length - 1; u >= 0; u -= 1) {
-                eventName = pointerDown[u];
+                resetButton.addEventListener(eventName, resetSelectedCounter, false);
                 colorHitArea.addEventListener(eventName, paletteUpdate, false);
             }
 
