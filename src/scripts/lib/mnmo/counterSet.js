@@ -6,6 +6,7 @@ define(['counter', 'modernizr'], function (Counter) {
             counter,
             contextMenu,
             ol,
+            toolbarElement,
             addButtonElement,
             firstItemColor,
             self = this;
@@ -64,6 +65,7 @@ define(['counter', 'modernizr'], function (Counter) {
 
             ol = listElement;
             contextMenu = menu;
+            toolbarElement = viewportElement.querySelector('.toolbar');
             addButtonElement = viewportElement.
                                 querySelector('.add-counter-button');
             // check localStorage to see if there are cached counters
@@ -85,6 +87,9 @@ define(['counter', 'modernizr'], function (Counter) {
 
             // attach listeners for the addCounter button
             addButtonElement.addEventListener('click', addButtonClicked);
+
+            // scroll to the first counter
+            window.scroll(0, toolbarElement.clientHeight);
         };
 
         this.getCounterHeight = function () {
