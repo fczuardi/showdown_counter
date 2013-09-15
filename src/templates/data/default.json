@@ -2,15 +2,15 @@
     "counters": [
         {
             "value": 0,
-            "color": 2
-        },
-        {
-            "value": 0,
             "color": 3
         },
         {
             "value": 0,
-            "color": 7
+            "color": 2
+        },
+        {
+            "value": 0,
+            "color": 1
         }
     ]
 }
