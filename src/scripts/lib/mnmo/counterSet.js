@@ -142,6 +142,8 @@ define(['counter', 'modernizr'], function (Counter) {
             }
             counter = new Counter(domElement, list.length, contextMenu, self);
             list.push(counter);
+            contextMenu.showRemoveButton();
+
         };
         this.removeCounter = function (cindex) {
             var li = list[cindex].getNode(),
@@ -150,8 +152,6 @@ define(['counter', 'modernizr'], function (Counter) {
             // when there is only 1 counter, hide the remove button
             if (remainingCounters === 2) {
                 contextMenu.hideRemoveButton();
-            } else {
-                contextMenu.showRemoveButton();
             }
 
             // remove dom element

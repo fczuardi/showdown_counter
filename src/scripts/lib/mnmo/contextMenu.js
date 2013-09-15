@@ -13,6 +13,8 @@ define(function () {
             selectedCounterIndex = 0,
             counterSet,
             counterList,
+            click,
+            c,
             longPressTriggerTime = 1000, //miliseconds
             hiddenColor = 1,
             self = this;
@@ -140,15 +142,15 @@ define(function () {
         this.setCounterSet = function (cset) {
             var pointerDown = cset.config.pointerDownEvents,
                 pointerUp = cset.config.pointerUpEvents,
-                click = cset.config.clickEvents,
                 eventName,
                 d,
                 m,
                 u;
+            click = cset.config.clickEvents;
             counterSet = cset;
             counterList = cset.getList();
 
-            console.log('pointerDown',counterSet.config.pointerDown);
+            console.log('pointerDown', cset.config.pointerDown);
 
 
             //attach pointerdown events
