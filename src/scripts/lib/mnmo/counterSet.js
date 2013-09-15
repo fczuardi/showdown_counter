@@ -89,7 +89,7 @@ define(['counter', 'modernizr'], function (Counter) {
             addButtonElement.addEventListener('click', addButtonClicked);
 
             // scroll to the first counter
-            window.scroll(0, toolbarElement.clientHeight);
+            window.scroll(0, nodes[n + 1].offsetHeight);
         };
 
         this.getCounterHeight = function () {
@@ -124,7 +124,7 @@ define(['counter', 'modernizr'], function (Counter) {
                     }, 400, li);
                 }, 300, ol, domElement);
             }
-            counter = new Counter(domElement, contextMenu, self);
+            counter = new Counter(domElement, list.length, contextMenu, self);
             list.push(counter);
         };
 

@@ -4,7 +4,76 @@
     left: 0;
     height:100%;
     width:100%;
-    background-color: rgba(255,255,0,0.5);
     z-index: 1000;
     display: none;
+}
+.context-menu--active{
+    display: block;
+}
+.context-menu__toolbar{
+    position: absolute;
+    height: $counter-height;
+    width: 100%;
+    background-color: rgba(255,255,255,0.5);
+    border-top: 1px solid black;
+    &:before {
+        content: "";
+        display: block;
+        position: relative;
+        height: 48px;
+        margin-top: -48px;
+        width: 100%;
+        background-image: url(../img/menu-shadow-top.png);
+    }
+    &:after {
+        content: "";
+        display: block;
+        position: relative;
+        top: $counter-height;
+        height: 48px;
+        width: 100%;
+        background-image: url(../img/menu-shadow-bottom.png);
+    }
+}
+.context-menu[data-color="1"]{
+    background-color: rgba($color1, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color1;
+    }
+}
+.context-menu[data-color="2"]{
+    background-color: rgba($color2, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color2;
+    }
+}
+.context-menu[data-color="3"]{
+    background-color: rgba($color3, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color3;
+    }
+}
+.context-menu[data-color="4"]{
+    background-color: rgba($color4, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color4;
+    }
+}
+.context-menu[data-color="5"]{
+    background-color: rgba($color5, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color5;
+    }
+}
+.context-menu[data-color="6"]{
+    background-color: rgba($color6, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color6;
+    }
+}
+.context-menu[data-color="7"]{
+    background-color: rgba($color7, $context-menu-background-opacity);
+    .context-menu__toolbar{
+        background-color: $color7;
+    }
 }

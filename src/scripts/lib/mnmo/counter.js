@@ -1,6 +1,6 @@
 define(function () {
     'use strict';
-    var Counter = function (domElement, contextMenu, parent) {
+    var Counter = function (domElement, index, contextMenu, parent) {
         var incrementButton = domElement.querySelector('.increment'),
             decrementButton = domElement.querySelector('.decrement'),
             displayElement = domElement.querySelector('.counter__display'),
@@ -34,6 +34,9 @@ define(function () {
             self.setValue(value - incrementSize);
         };
 
+        //set index
+        domElement.id = 'counter-' + index;
+
         //atach listeners
 
         //attach click events
@@ -50,6 +53,7 @@ define(function () {
                 false
             );
         }
+        //attach pointerdown events
         for (d = pointerDown.length - 1; d >= 0; d -= 1) {
             eventName = pointerDown[d];
             domElement.addEventListener(
