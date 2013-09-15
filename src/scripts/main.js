@@ -30,11 +30,11 @@ require(
             contextMenuElement = document.querySelector('.context-menu');
             contextMenu.init(contextMenuElement);
             counters.init(viewportElement, contextMenu);
-            alert('dom ready');
+            console.log('dom ready');
         });
 
         document.addEventListener("deviceready", function() {
-            alert('device ready');
+            console.log('device ready');
         }, false);
 
 

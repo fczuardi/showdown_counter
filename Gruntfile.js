@@ -304,6 +304,12 @@ module.exports = function (grunt) {
         },
         // Theme assets
         copy: {
+            app_as_index: {
+                files: [{
+                    src: HTDOCS_PATH + 'app.html',
+                    dest: HTDOCS_PATH + 'index.html'
+                }]
+            },
             ubuntu_fonts: {
                 files: [{
                     expand: true,
@@ -465,7 +471,11 @@ module.exports = function (grunt) {
         // to grab dependencies
         curl: {
             'lib/js/requirejs/domReady.js':
-                'https://raw.github.com/requirejs/domReady/latest/domReady.js'
+                'https://raw.github.com/requirejs/domReady/latest/domReady.js',
+            'build/www/plugins.xml':
+                'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/plugins.xml-20130718182619-c92il0qk6i2ni0xw-1/plugins.xml',
+            'build/www/counters.cordovaproject':
+                'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/qrcodescanner.cordov-20130718074154-454ovhnac2fgorus-1/qrcode-scanner.cordovaproject'
         }
     });
 
@@ -524,6 +534,7 @@ module.exports = function (grunt) {
         'copy:js_libs',
         'copy:js_libs_node',
         'copy:scripts',
+        'copy:app_as_index',
         'modernizr',
         'requirejs',
         'autoprefixer',
