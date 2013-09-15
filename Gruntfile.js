@@ -19,7 +19,10 @@ module.exports = function (grunt) {
         JAVASCRIPT_LIBS_NODE    =   ['requirejs/require.js'],
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
-        SCRIPTS_TO_IGNORE       =   ['!main-built.js'],
+        SCRIPTS_TO_IGNORE       =   [
+                                     '!main-built.js',
+                                     '!src/scripts/lib/cordova/*.js'
+                                    ],
         JAVASCRIPT_SOURCES      =   ['*.js',
                                      JAVASCRIPT_PATH + '**/*.js'
                                     ].concat(SCRIPTS_TO_IGNORE),
@@ -289,6 +292,7 @@ module.exports = function (grunt) {
                         'main': '../main',
                         'domReady': 'requirejs/domReady',
                         'modernizr': 'modernizr/modernizr-custom',
+                        'cordova': 'cordova/cordova-2.8',
                         'counter': 'mnmo/counter',
                         'counterSet': 'mnmo/counterSet',
                         'contextMenu': 'mnmo/contextMenu'

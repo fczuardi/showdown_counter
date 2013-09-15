@@ -14,11 +14,23 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
+
         {{>body}}
+
+{{#if ubuntucordova}}
+<!-- Cordova API script
+<script src="js/lib/cordova/cordova-2.8.js"></script>
+-->
+<!--
+<script language="javascript" type="text/javascript" src="file:///usr/share/cordova-ubuntu-2.8/www/cordova-2.8.js"></script>
+-->
+{{/if}}
+
 {{#if built}}
     <script src="js/main-built.js"></script>
 {{else}}
     <script src="js/lib/requirejs/require.js" data-main="js/main" ></script>
 {{/if}}
+
     </body>
 </html>
