@@ -484,12 +484,27 @@ module.exports = function (grunt) {
         },
         // to grab dependencies
         curl: {
-            'lib/js/requirejs/domReady.js':
-                'https://raw.github.com/requirejs/domReady/latest/domReady.js'
+            core:{
+                src: 'https://raw.github.com/requirejs/domReady/latest/domReady.js',
+                dest: 'lib/js/requirejs/domReady.js'
+
+            },
+            mnmo:{
+                src: 'http://www.google.com/fonts/download?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU',
+                dest: '.temp/pompiere.zip'
+            }
+            // 'ubuntu-cordova': {
             // 'build/www/plugins.xml':
             //     'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/plugins.xml-20130718182619-c92il0qk6i2ni0xw-1/plugins.xml',
             // 'build/www/counters.cordovaproject':
             //     'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/qrcodescanner.cordov-20130718074154-454ovhnac2fgorus-1/qrcode-scanner.cordovaproject'
+            // }
+        },
+        unzip: {
+            mnmo: {
+                src: '.temp/pompiere.zip',
+                dest: POMPIERE_FONT_PATH
+            }
         }
     });
 
@@ -534,6 +549,21 @@ module.exports = function (grunt) {
         }
     );
 
+// ----- more tasks
+
+    // fetch dependencies from the internet and put them on the expected places
+    grunt.registerTask('install', [
+        'curl',
+        'unzip'
+    ]);
+
+    // lint js files on all linters
+    grunt.registerTask('lint', [
+        'jsvalidate',
+        'jshint',
+        'gjslint',
+        'jslint'
+    ]);
 
     // the default task can be run just by typing "grunt" on the command line
     grunt.registerTask('default', [
@@ -557,11 +587,4 @@ module.exports = function (grunt) {
         'manifest'
     ]);
 
-    // lint js files on all linters
-    grunt.registerTask('lint', [
-        'jsvalidate',
-        'jshint',
-        'gjslint',
-        'jslint'
-    ]);
 };

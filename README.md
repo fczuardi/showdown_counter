@@ -58,19 +58,6 @@ After that:
     $ git submodule update --init --recursive
     $ bundle install
     $ npm install
-
-You also need to download the [Pompiere web font](https://www.google.com/fonts#UsePlace:use/Collection:Pompiere) and put it under ```/lib/Pompiere```
-
-    $ wget http://www.google.com/fonts/download?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU -O pompiere.zip
-    $ unzip pompiere.zip -d lib/Pompiere
-
-And the requirejs/domReady.js plugin:
-
-    $ mkdir lib/requirejs
-    $ wget https://raw.github.com/requirejs/domReady/latest/domReady.js -O lib/requirejs/domReady.js
-
-And finally:
-
+    $ grunt fetch
     $ grunt
 
-To be continued…

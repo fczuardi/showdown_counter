@@ -8,5 +8,4 @@ before_script:
     - git submodule update --init --recursive
     - npm install -g grunt-cli
     - npm install grunt
-    - npm install -g cordova
-    - grunt curl
+    - grunt fetch
