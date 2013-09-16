@@ -18,7 +18,7 @@ Ubuntu App Showdown
 -------------------
 
 This application is competing on the [Ubuntu App Showdown](http://developer.ubuntu.com/showdown/) 2013, a contest hosted by Canonical to promote the development of
-mobile apps for the Ubuntu Touch. I choose to develop it in HTML5 so other
+mobile apps for the Ubuntu Touch. I've chosen to develop it in HTML5 so other
 platforms could benefit from it in the future (and because I am a web developer).
 
 I am documenting my experience of developing this app and participating in the
@@ -58,6 +58,6 @@ After that:
     $ git submodule update --init --recursive
     $ bundle install
     $ npm install
-    $ grunt fetch
+    $ grunt install
     $ grunt
 
