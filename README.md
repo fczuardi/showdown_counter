@@ -1,7 +1,7 @@
 Counters
 ========
 
-[![Build Status](https://travis-ci.org/fczuardi/showdown_counter.png?branch=master)](https://travis-ci.org/fczuardi/showdown_counter)
+[![Build Status](https://travis-ci.org/fczuardi/showdown_counter.png?branch=master)](https://travis-ci.org/fczuardi/showdown_counter) ![dependencies](https://david-dm.org/fczuardi/showdown_counter.png)
 
 Multiple counters for your mobile device
 ----------------------------------------
