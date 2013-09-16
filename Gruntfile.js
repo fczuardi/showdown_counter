@@ -8,6 +8,7 @@ module.exports = function (grunt) {
     var SOURCE_PATH             =   'src/',
         SASS_PATH               =   SOURCE_PATH + 'styles/',
         JAVASCRIPT_PATH         =   SOURCE_PATH + 'scripts/',
+        IMAGES_PATH             =   SOURCE_PATH + 'img/',
         TEMPLATES_PATH          =   SOURCE_PATH + 'templates/',
         TEMPLATES_LAYOUTS_PATH  =   TEMPLATES_PATH + 'layouts/',
         TEMPLATES_PAGES_PATH    =   TEMPLATES_PATH + 'pages/',
@@ -36,15 +37,25 @@ module.exports = function (grunt) {
         HTDOCS_PATH             =   BUILD_PATH + 'www/',
         CSS_PATH                =   HTDOCS_PATH + 'css/',
         FONTS_PATH              =   HTDOCS_PATH + 'fonts/',
+        IMG_PATH                =   HTDOCS_PATH + 'img/',
         JS_PATH                 =   HTDOCS_PATH + 'js/',
         CSS_FILES               =   [CSS_PATH + '**/*.css'],
         HTML_FILES              =   [HTDOCS_PATH + '**/*.html'],
         JS_FILES                =   [JS_PATH + '**/*.js'],
-        FILES_TO_CACHE          =   HTML_FILES.concat(CSS_FILES, JS_FILES),
+        FONT_FILES              =   [FONTS_PATH +  '/**/*.{ttf,woff,svg,eot}'],
+        IMG_FILES               =   [IMG_PATH +  '/**/*.{png,jpg,gif}'],
 
         //themes
         POMPIERE_FONT_PATH      =   'lib/Pompiere',
         UBUNTU_THEME_PATH       =   'lib/ubuntu-html5-theme/0.1/ambiance/',
+
+        FILES_TO_CACHE          =   HTML_FILES.concat(
+                                                      CSS_FILES,
+                                                      JS_FILES,
+                                                      FONT_FILES,
+                                                      IMG_FILES
+                                                    ),
+
 
         // browser compatibility
         BROWSER_SUPPORT = [
@@ -183,13 +194,16 @@ module.exports = function (grunt) {
                 version: '<%= pkg.version %>',
                 description: '<%= pkg.description %>',
                 launch_path: '/app.html',
+                appcache_path: '/manifest.appcache',
                 developer: {
                     name: '<%= pkg.author.name %>',
                     url: '<%= pkg.author.url %>'
                 },
-                // icons: {
-                //     "128": "/img/icons/app_128.png"
-                // },
+                icons: {
+                    "128": "/img/icons/app_128.png",
+                    "64": "/img/icons/app_64.png",
+                    "60": "/img/icons/app_60.png"
+                },
                 installs_allowed_from: ['*']
             },
             all: {
@@ -346,9 +360,9 @@ module.exports = function (grunt) {
             images: {
                 files: [{
                     expand: true,
-                    src: [SOURCE_PATH + 'img/**/*'],
+                    cwd: IMAGES_PATH,
+                    src: ['**/*'],
                     dest: HTDOCS_PATH + 'img/',
-                    flatten: true
                 }]
             },
             js_libs: {
