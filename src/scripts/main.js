@@ -3,7 +3,8 @@ requirejs.config({
     baseUrl: '../js/lib/',
     paths: {
         'domReady': 'requirejs/domReady',
-        'pointer': 'mozilla/pointer',
+        'dom': 'mozilla/pointer/dom',
+        'pointer': 'mozilla/pointer/pointer',
         'modernizr': 'modernizr/modernizr-custom',
         'counter': 'mnmo/counter',
         'counterSet': 'mnmo/counterSet',

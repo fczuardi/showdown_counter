@@ -305,7 +305,8 @@ module.exports = function (grunt) {
                     paths: {
                         'main': '../main',
                         'domReady': 'requirejs/domReady',
-                        'pointer': 'mozilla/pointer',
+                        'dom': 'mozilla/pointer/dom',
+                        'pointer': 'mozilla/pointer/pointer',
                         'modernizr': 'modernizr/modernizr-custom',
                         'cordova': 'cordova/cordova-2.8',
                         'counter': 'mnmo/counter',

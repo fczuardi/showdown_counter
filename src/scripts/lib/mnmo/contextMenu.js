@@ -13,19 +13,9 @@ define(function () {
             selectedCounterIndex = 0,
             counterSet,
             counterList,
-            click,
-            c,
             longPressTriggerTime = 1000, //miliseconds
             hiddenColor = 1,
             self = this;
-
-        function removeRemainingClickEvents(event, fn) {
-            for (c = click.length - 1; c >= 0; c -= 1) {
-                if (click[c] !== event.type) {
-                    event.target.removeEventListener(click[c], fn);
-                }
-            }
-        }
 
         function getScrollY() {
             var y = ( window.pageYOffset !== undefined) ? window.pageYOffset :
@@ -149,7 +139,7 @@ define(function () {
                 d,
                 m,
                 u;
-            click = cset.config.clickEvents;
+            // click = cset.config.clickEvents;
             counterSet = cset;
             counterList = cset.getList();
 
@@ -157,27 +147,27 @@ define(function () {
 
 
             //attach pointerdown events
-            for (d = pointerDown.length - 1; d >= 0; d -= 1) {
-                eventName = pointerDown[d];
-                menuElement.addEventListener(eventName, closeMenu, false);
-                toolbarElement.addEventListener(eventName, toolbarClicked, false);
-                colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            }
+            // for (d = pointerDown.length - 1; d >= 0; d -= 1) {
+            //     eventName = pointerDown[d];
+            //     menuElement.addEventListener(eventName, closeMenu, false);
+            //     toolbarElement.addEventListener(eventName, toolbarClicked, false);
+            //     colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            // }
 
 
             //attach pointermove events
-            for (m = pointerMove.length - 1; m >= 0; m -= 1) {
-                eventName = pointerMove[m];
-                colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            }
+            // for (m = pointerMove.length - 1; m >= 0; m -= 1) {
+            //     eventName = pointerMove[m];
+            //     colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            // }
 
             //attach pointerup events
-            for (u = pointerUp.length - 1; u >= 0; u -= 1) {
-                eventName = pointerUp[u];
-                removeButton.addEventListener(eventName, self.removeSelectedCounter, false);
-                resetButton.addEventListener(eventName, resetSelectedCounter, false);
-                colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            }
+            // for (u = pointerUp.length - 1; u >= 0; u -= 1) {
+            //     eventName = pointerUp[u];
+            //     removeButton.addEventListener(eventName, self.removeSelectedCounter, false);
+            //     resetButton.addEventListener(eventName, resetSelectedCounter, false);
+            //     colorHitArea.addEventListener(eventName, paletteUpdate, false);
+            // }
 
 
         };

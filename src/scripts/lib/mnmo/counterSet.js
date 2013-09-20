@@ -1,4 +1,4 @@
-define(['counter', 'modernizr'], function (Counter) {
+define(['counter', 'dom', 'pointer', 'modernizr'], function (Counter) {
     'use strict';
     var CounterSet = function () {
         //private vars
@@ -7,7 +7,6 @@ define(['counter', 'modernizr'], function (Counter) {
             contextMenu,
             ol,
             toolbarElement,
-            addButtonElement,
             firstItemColor,
             self = this;
 
@@ -20,49 +19,13 @@ define(['counter', 'modernizr'], function (Counter) {
         function addButtonClicked() {
             self.addCounter();
         }
-        function getClickEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchstart');
-            }
-            result.push('click');
-            return result;
-        }
-        function getPointerDownEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchstart');
-            }
-            result.push('mousedown');
-            return result;
-        }
-        function getPointerUpEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchend');
-            }
-            result.push('mouseup');
-            return result;
-        }
-        function getPointerMoveEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchmove');
-            }
-            result.push('mousemove');
-            return result;
-        }
 
         //config
         self.config = {
             incrementSize: 1,
             bottomLimit: 0,
             topLimit: Number.MAX_VALUE,
-            colorPaletteSize: 7,
-            clickEvents: getClickEvents(),
-            pointerDownEvents: getPointerDownEvents(),
-            pointerUpEvents: getPointerUpEvents(),
-            pointerMoveEvents: getPointerMoveEvents
+            colorPaletteSize: 7
         };
 
 
@@ -75,8 +38,6 @@ define(['counter', 'modernizr'], function (Counter) {
             ol = listElement;
             contextMenu = menu;
             toolbarElement = viewportElement.querySelector('.toolbar');
-            addButtonElement = viewportElement.
-                                querySelector('.add-counter-button');
             // check localStorage to see if there are cached counters
             // @TBD
 
@@ -95,7 +56,17 @@ define(['counter', 'modernizr'], function (Counter) {
             // nodes[0].querySelector('.counter__display').textContent = "14";
 
             // attach listeners for the addCounter button
-            addButtonElement.addEventListener('click', addButtonClicked);
+            dom('body').delegate(
+                'pointerdown', '.add-counter-button', addButtonClicked);
+
+            //attach listeners to the increment buttons click
+            dom('body').delegate(
+                'pointerdown', '.increment',
+                function counterIncrementButtonClicked(e){
+                    var counter = list[e.target.dataset.counterIndex];
+                    console.log('maskedEvent', e.maskedEvent);
+                    counter.increment(self.config.incrementSize);
+                });
 
             // register the counterlist on the context menu
             menu.setCounterSet(self);
