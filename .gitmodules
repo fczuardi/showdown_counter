@@ -2,3 +2,6 @@
 	path = lib/ubuntu-html5-theme
 	url = https://github.com/fczuardi/ubuntu-html5-theme.git
 	branch = with-fonts
+[submodule "lib/js/mozilla/pointer"]
+	path = lib/js/mozilla/pointer
+	url = https://github.com/mozilla/pointer.js.git
