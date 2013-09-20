@@ -8,4 +8,4 @@ before_script:
     - git submodule update --init --recursive
     - npm install -g grunt-cli
     - npm install grunt
-    - grunt fetch
+    - grunt install
