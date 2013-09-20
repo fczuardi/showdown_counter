@@ -1,7 +1,8 @@
 /build/
 /node_modules/
 /vendor/
-/lib/
+/lib/Pompiere
+/lib/js/requirejs
 .bundle
 .sass-cache
 .temp
