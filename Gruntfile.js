@@ -305,6 +305,7 @@ module.exports = function (grunt) {
                     paths: {
                         'main': '../main',
                         'domReady': 'requirejs/domReady',
+                        'pointer': 'mozilla/pointer',
                         'modernizr': 'modernizr/modernizr-custom',
                         'cordova': 'cordova/cordova-2.8',
                         'counter': 'mnmo/counter',
@@ -484,12 +485,12 @@ module.exports = function (grunt) {
         },
         // to grab dependencies
         curl: {
-            core:{
+            domReady:{
                 src: 'https://raw.github.com/requirejs/domReady/latest/domReady.js',
                 dest: 'lib/js/requirejs/domReady.js'
 
             },
-            mnmo:{
+            pompiere:{
                 src: 'http://www.google.com/fonts/download?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU',
                 dest: '.temp/pompiere.zip'
             }

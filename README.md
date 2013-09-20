@@ -55,7 +55,7 @@ To install those on ubuntu:
 After that:
 
     $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
-    $ git submodule update --init --recursive
+    $ git submodule update --init --recursive lib/js/mozilla/pointer
     $ bundle install
     $ npm install
     $ grunt install
