@@ -8,44 +8,33 @@ define(function () {
             incrementSize = parent.config.incrementSize,
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
+            lastEvent,
             self = this;
 
         function increment(event) {
             if (!parent.isPreferredPointerType(event)){ return false; }
+            lastEvent = event;
             self.setValue(value + incrementSize);
         }
         function decrement(event) {
             if (!parent.isPreferredPointerType(event)){ return false; }
             self.setValue(value - incrementSize);
         }
+        function buttonUp(event) {
+            contextMenu.touchEnd(event);
+        }
 
         //set index
         domElement.dataset.index = index;
-
-        //atach listeners
 
         //attach pointerdown events
         incrementButton.addEventListener('pointerdown', increment, false);
         decrementButton.addEventListener('pointerdown', decrement, false);
 
-        // for (d = pointerDown.length - 1; d >= 0; d -= 1) {
-        //     eventName = pointerDown[d];
-        //     domElement.addEventListener(
-        //         eventName,
-        //         contextMenu.touchStart,
-        //         false
-        //     );
-        // }
         //attach pointerup events
-//         for (u = pointerUp.length - 1; u >= 0; u -= 1) {
-//             eventName = pointerUp[u];
-//             domElement.addEventListener(
-//                 eventName,
-//                 contextMenu.touchEnd,
-//                 false
-//             );
-//         }
-// console.log(pointerUp[0], pointerDown[0], click[0], click[0]);
+        incrementButton.addEventListener('pointerup', buttonUp, false);
+        decrementButton.addEventListener('pointerup', buttonUp, false);
+
 
         this.reset = function () {
             self.setValue(bottomLimit);

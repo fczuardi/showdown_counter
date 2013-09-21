@@ -28,15 +28,12 @@ define(function () {
         }
 
         function getColorRowAndColumn(event){
-            console.log('getColorRowAndColumn', event);
-            var isTouchEvent = (event.type.indexOf('touch') !== -1),
-                isMouseEvent = (event.type.indexOf('mouse') !== -1),
-                clientX =   isTouchEvent ? event.touches[0].clientX : event.clientX,
-                clientY =   isTouchEvent ? event.touches[0].clientY : event.clientY,
-                originX =   colorPicker.offsetLeft +event.target.offsetLeft,
-                originY =   toolbarElement.offsetTop +
-                            colorPicker.offsetTop +
-                            event.target.offsetTop,
+            var clientX = event.clientX,
+                clientY = event.clientY,
+                originX = colorPicker.offsetLeft +event.target.offsetLeft,
+                originY = toolbarElement.offsetTop +
+                          colorPicker.offsetTop +
+                          event.target.offsetTop,
                 pickerHeight = colorPicker.offsetHeight,
                 pickerWidth = colorPicker.offsetWidth,
                 deltaX = clientX - originX,
@@ -60,12 +57,9 @@ define(function () {
         }
 
         this.openMenu = function(event) {
-            console.log('Open menu', event);
+            event.stopPropagation();
             var scrollY = getScrollY(),
                 color;
-            event.preventDefault();
-            event.stopPropagation();
-            self.killTimer();
 
             counterElement = event.target;
             // get the li counter
@@ -91,39 +85,45 @@ define(function () {
             toolbarElement.style.top = (counterElement.offsetTop - scrollY) + 'px';
 
         };
+        function paletteUpdateStart(event){
+            paletteUpdate(event);
+            colorHitArea.addEventListener('pointermove', paletteUpdate, false);
+        }
+        function paletteUpdateEnd(event){
+            colorHitArea.removeEventListener('pointermove', paletteUpdate, false);
+        }
         function paletteUpdate(event) {
-            event.preventDefault();
-            event.stopPropagation();
             var gridPosition = getColorRowAndColumn(event);
             setBackgroundColorFromPallete(gridPosition);
         }
-        function closeMenu() {
+        function closeMenu(event) {
+            if (!counterSet.isPreferredPointerType(event)){ return false; }
             menuElement.classList.remove('context-menu--active');
         }
         function toolbarClicked(event) {
-            var isTouchEvent = (event.type.indexOf('touch') !== -1),
-                isMouseEvent = (event.type.indexOf('mouse') !== -1),
-                clientX =   isTouchEvent ? event.touches[0].clientX : event.clientX,
-                clientY =   isTouchEvent ? event.touches[0].clientY : event.clientY;
-
-            if ((clientY < event.target.offsetTop) ||
-                (clientY > event.target.offsetTop + event.target.offsetHeight)) {
-                closeMenu();
+            var clientX = event.clientX,
+                clientY = event.clientY;
+            if (counterSet.isPreferredPointerType(event) &&
+                event.target === toolbarElement && (
+                 (clientY < event.target.offsetTop) ||
+                 (clientY > event.target.offsetTop + event.target.offsetHeight)
+                )) {
+                closeMenu(event);
             }
-            event.stopPropagation();
-            return false;
+        }
+        function toolbarTouchEnd(event){
+            if (!counterSet.isPreferredPointerType(event)){ return false; }
+            self.touchEnd(event);
         }
         function resetSelectedCounter (event){
+            if (!counterSet.isPreferredPointerType(event)){ return false; }
             counterList[selectedCounterIndex].reset();
-            closeMenu();
+            closeMenu(event);
         }
         this.removeSelectedCounter = function(event){
-            console.log('removeSelectedCounter!', event.type);
-            event.preventDefault();
-            event.stopPropagation();
+            if (!counterSet.isPreferredPointerType(event)){ return false; }
             counterSet.removeCounter(selectedCounterIndex);
-            closeMenu();
-
+            closeMenu(event);
         };
         // capture and disable system's context menu
         document.oncontextmenu = function (event) { // Use document as opposed to window for IE8 compatibility
@@ -132,43 +132,22 @@ define(function () {
         };
 
         this.setCounterSet = function (cset) {
-            // var pointerDown = cset.config.pointerDownEvents,
-            //     pointerUp = cset.config.pointerUpEvents,
-            //     pointerMove = cset.config.pointerMoveEvents,
-            //     eventName,
-            //     d,
-            //     m,
-            //     u;
-            //click = cset.config.clickEvents;
             counterSet = cset;
             counterList = cset.getList();
 
-            // console.log('pointerDown', cset.config.pointerDown);
-
-
             //attach pointerdown events
-            // for (d = pointerDown.length - 1; d >= 0; d -= 1) {
-            //     eventName = pointerDown[d];
-            //     menuElement.addEventListener(eventName, closeMenu, false);
-            //     toolbarElement.addEventListener(eventName, toolbarClicked, false);
-            //     colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            // }
+            document.body.addEventListener('pointerdown', self.touchStart, false);
+            toolbarElement.addEventListener('pointerdown', toolbarClicked, false);
+            colorHitArea.addEventListener('pointerdown', paletteUpdateStart, false);
+            removeButton.addEventListener('pointerdown', self.removeSelectedCounter, false);
+            resetButton.addEventListener('pointerdown', resetSelectedCounter, false);
 
-
-            //attach pointermove events
-            // for (m = pointerMove.length - 1; m >= 0; m -= 1) {
-            //     eventName = pointerMove[m];
-            //     colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            // }
 
             //attach pointerup events
-            // for (u = pointerUp.length - 1; u >= 0; u -= 1) {
-            //     eventName = pointerUp[u];
-            //     removeButton.addEventListener(eventName, self.removeSelectedCounter, false);
-            //     resetButton.addEventListener(eventName, resetSelectedCounter, false);
-            //     colorHitArea.addEventListener(eventName, paletteUpdate, false);
-            // }
-
+            colorHitArea.addEventListener('pointerup', paletteUpdateEnd, false);
+            toolbarElement.addEventListener('pointerup', toolbarTouchEnd, false);
+            menuElement.addEventListener('pointerup', closeMenu, false);
+            document.body.addEventListener('pointerup', self.touchEnd, false);
 
         };
 
@@ -183,23 +162,24 @@ define(function () {
         };
 
         this.touchStart = function (event) {
-            // event.preventDefault();
+            event.stopPropagation();
+            if (!counterSet.isPreferredPointerType(event)){ return false; }
             if (menuElement.classList.contains('context-menu--active')){
                 return false;
             }
-            pressing = window.setTimeout(
-                                         self.openMenu,
-                                         longPressTriggerTime,
-                                         event
-                                        );
+            if (self.pressing === undefined){
+                self.pressing = window.setTimeout(
+                                             self.openMenu,
+                                             longPressTriggerTime,
+                                             event
+                                            );
+            }
         };
 
-        this.killTimer = function () {
-            clearTimeout(pressing);
-        };
         this.touchEnd = function (event) {
-            event.preventDefault();
-            clearTimeout(pressing);
+            clearTimeout(self.pressing);
+            self.pressing = undefined;
+            event.stopPropagation();
         };
 
         this.hideRemoveButton = function (){
