@@ -3,6 +3,7 @@
 /vendor/
 /lib/Pompiere
 /lib/js/requirejs
+/lib/js/microsoft
 .bundle
 .sass-cache
 .temp

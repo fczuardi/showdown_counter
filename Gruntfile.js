@@ -306,6 +306,7 @@ module.exports = function (grunt) {
                         'main': '../main',
                         'domReady': 'requirejs/domReady',
                         'modernizr': 'modernizr/modernizr-custom',
+                        'hand': 'microsoft/handjs/hand-1.1.2',
                         'counter': 'mnmo/counter',
                         'counterSet': 'mnmo/counterSet',
                         'contextMenu': 'mnmo/contextMenu'
@@ -491,6 +492,10 @@ module.exports = function (grunt) {
             mnmo:{
                 src: 'http://www.google.com/fonts/download?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU',
                 dest: '.temp/pompiere.zip'
+            },
+            handJS:{
+                src: 'http://download-codeplex.sec.s-msft.com/Download/SourceControlFileDownload.ashx?ProjectName=handjs&changeSetId=103849',
+                dest: '.temp/handjs.zip'
             }
             // 'ubuntu-cordova': {
             // 'build/www/plugins.xml':
@@ -503,6 +508,10 @@ module.exports = function (grunt) {
             mnmo: {
                 src: '.temp/pompiere.zip',
                 dest: POMPIERE_FONT_PATH
+            },
+            handJS: {
+                src: '.temp/handjs.zip',
+                dest: JAVASCRIPT_LIBS + 'microsoft/handjs'
             }
         }
     });

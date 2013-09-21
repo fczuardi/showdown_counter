@@ -4,6 +4,7 @@ requirejs.config({
     paths: {
         'domReady': 'requirejs/domReady',
         'modernizr': 'modernizr/modernizr-custom',
+        'hand': 'microsoft/handjs/hand-1.1.2',
         'counter': 'mnmo/counter',
         'counterSet': 'mnmo/counterSet',
         'contextMenu': 'mnmo/contextMenu'
