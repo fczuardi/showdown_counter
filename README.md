@@ -31,7 +31,7 @@ as well.
 Contributing
 ------------
 
-You must have [git >= v1.8.2](http://git-scm.com/), [bundler](http://bundler.io/),
+You must have [git](http://git-scm.com/), [bundler](http://bundler.io/),
 [node.js](http://nodejs.org/) and [grunt](http://gruntjs.com/) installed.
 
 To install those on ubuntu:
@@ -55,7 +55,6 @@ To install those on ubuntu:
 After that:
 
     $ git clone https://github.com/fczuardi/showdown_counter.git && cd $_
-    $ git submodule update --init --recursive
     $ bundle install
     $ npm install
     $ grunt install

@@ -4,7 +4,7 @@ var _ = require('lodash');
 module.exports = function (grunt) {
     'use strict';
 
-        // development folders and files
+    // development folders and files
     var SOURCE_PATH             =   'src/',
         SASS_PATH               =   SOURCE_PATH + 'styles/',
         JAVASCRIPT_PATH         =   SOURCE_PATH + 'scripts/',

@@ -6,30 +6,16 @@ theme: mnmo
 built: true
 appcache: <%= app.cachefile %>
 ---
-{{#is theme 'ubuntu'}}
-<div data-role="page">
-    <div data-role="content">
-        <div data-role="pagestack">
-            <div data-role="page" id="main">
-                {{>header}}
-{{/is}}
-                <section class="listviewport" data-role="list">
-                    <div class="toolbar">
-                        <div class="help-button"></div>
-                        {{>add-counter-button}}
-                    </div>
-                    <ol class="counterlist" data-role="listview">
-                    {{#each default.counters}}
-                        {{>counter}}
-                    {{/each}}
-                    </ol>
-                    {{>footer}}
-                    {{>context-menu}}
-                </section>
-{{#is theme 'ubuntu'}}
-            </div>
-        </div>
+<section class="listviewport" data-role="list">
+    <div class="toolbar">
+        {{!-- <div class="help-button"></div> --}}
+        {{>add-counter-button}}
     </div>
-</div>
-{{/is}}
-
+    <ol class="counterlist" data-role="listview">
+    {{#each default.counters}}
+        {{>counter}}
+    {{/each}}
+    </ol>
+    {{>footer}}
+    {{>context-menu}}
+</section>
