@@ -8,16 +8,14 @@ define(function () {
             incrementSize = parent.config.incrementSize,
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
-            lastEvent,
             self = this;
 
         function increment(event) {
-            if (!parent.isPreferredPointerType(event)){ return false; }
-            lastEvent = event;
+            if (!parent.isPreferredPointerType(event)) { return false; }
             self.setValue(value + incrementSize);
         }
         function decrement(event) {
-            if (!parent.isPreferredPointerType(event)){ return false; }
+            if (!parent.isPreferredPointerType(event)) { return false; }
             self.setValue(value - incrementSize);
         }
         function buttonUp(event) {
@@ -44,10 +42,10 @@ define(function () {
             if ((v <= bottomLimit) || (v >= topLimit)) {
                 if (Modernizr.vibrate) {
                     window.navigator.vibrate(50);
-                } else if (navigator &&
-                           navigator.notification &&
-                           navigator.notification.vibrate) {
-                    navigator.notification.vibrate(50);
+                } else if (window.navigator &&
+                           window.navigator.notification &&
+                           window.navigator.notification.vibrate) {
+                    window.navigator.notification.vibrate(50);
                 }
             }
             value = Math.min(Math.max(v, bottomLimit), topLimit);

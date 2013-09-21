@@ -20,10 +20,7 @@ module.exports = function (grunt) {
         JAVASCRIPT_LIBS_NODE    =   ['requirejs/require.js'],
 
         SASS_FILES              =   [SASS_PATH + '**/*.scss'],
-        SCRIPTS_TO_IGNORE       =   [
-                                     '!main-built.js',
-                                     '!src/scripts/lib/cordova/*.js'
-                                    ],
+        SCRIPTS_TO_IGNORE       =   [],
         JAVASCRIPT_SOURCES      =   ['*.js',
                                      JAVASCRIPT_PATH + '**/*.js'
                                     ].concat(SCRIPTS_TO_IGNORE),
@@ -42,19 +39,24 @@ module.exports = function (grunt) {
         CSS_FILES               =   [CSS_PATH + '**/*.css'],
         HTML_FILES              =   [HTDOCS_PATH + '**/*.html'],
         JS_FILES                =   [JS_PATH + '**/*.js'],
+        FINAL_JS_FILE           =   JS_PATH + 'main-built.js',
         FONT_FILES              =   [FONTS_PATH +  '/**/*.{ttf,woff,svg,eot}'],
         IMG_FILES               =   [IMG_PATH +  '/**/*.{png,jpg,gif}'],
 
+        //urls
+        GITHUB_RAW_URL          =   'https://raw.github.com',
+        GOOGLE_FONTS_URL        =   'http://www.google.com/fonts/download',
+        MS_CODEPLEX_URL         =   'http://download-codeplex.sec.s-msft.com',
+
+
         //themes
         POMPIERE_FONT_PATH      =   'lib/Pompiere',
-        UBUNTU_THEME_PATH       =   'lib/ubuntu-html5-theme/0.1/ambiance/',
 
-        FILES_TO_CACHE          =   HTML_FILES.concat(
-                                                      CSS_FILES,
-                                                      JS_FILES,
+        FILES_TO_CACHE          =   HTML_FILES.concat(CSS_FILES,
                                                       FONT_FILES,
-                                                      IMG_FILES
-                                                    ),
+                                                      IMG_FILES,
+                                                      FINAL_JS_FILE
+                                                     ),
 
 
         // browser compatibility
@@ -200,9 +202,9 @@ module.exports = function (grunt) {
                     url: '<%= pkg.author.url %>'
                 },
                 icons: {
-                    "128": "/img/icons/app_128.png",
-                    "64": "/img/icons/app_64.png",
-                    "60": "/img/icons/app_60.png"
+                    '128': '/img/icons/app_128.png',
+                    '64': '/img/icons/app_64.png',
+                    '60': '/img/icons/app_60.png'
                 },
                 installs_allowed_from: ['*']
             },
@@ -324,30 +326,6 @@ module.exports = function (grunt) {
                     dest: HTDOCS_PATH + 'index.html'
                 }]
             },
-            // ubuntu_fonts: {
-            //     files: [{
-            //         expand: true,
-            //         src: [UBUNTU_THEME_PATH + 'fonts/**/*.{ttf,woff,svg,eot}'],
-            //         dest: HTDOCS_PATH + 'fonts/ubuntu/',
-            //         flatten: true
-            //     }]
-            // },
-            // ubuntu_css: {
-            //     files: [{
-            //         expand: true,
-            //         src: [UBUNTU_THEME_PATH + 'css/**/*.css'],
-            //         dest: HTDOCS_PATH + 'css/ubuntu/',
-            //         flatten: true
-            //     }]
-            // },
-            // ubuntu_img: {
-            //     files: [{
-            //         expand: true,
-            //         src: [UBUNTU_THEME_PATH + 'img/**/*'],
-            //         dest: HTDOCS_PATH + 'img/ubuntu/',
-            //         flatten: true
-            //     }]
-            // },
             pompiere_fonts: {
                 files: [{
                     expand: true,
@@ -362,7 +340,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: IMAGES_PATH,
                     src: ['**/*'],
-                    dest: HTDOCS_PATH + 'img/',
+                    dest: HTDOCS_PATH + 'img/'
                 }]
             },
             js_libs: {
@@ -389,20 +367,6 @@ module.exports = function (grunt) {
                     dest: HTDOCS_PATH + 'js/'
                 }]
             }
-        },
-
-        'regex-replace': {
-            // ubuntu_assets_url: {
-            //     src: [HTDOCS_PATH + 'css/ubuntu/**/*.css'],
-            //     actions: [
-            //         {
-            //             name: 'img_paths',
-            //             search: '../img/',
-            //             replace: '../../img/ubuntu/',
-            //             flags: 'g'
-            //         }
-            //     ]
-            // }
         },
 
         // Appcache
@@ -484,25 +448,23 @@ module.exports = function (grunt) {
         },
         // to grab dependencies
         curl: {
-            core:{
-                src: 'https://raw.github.com/requirejs/domReady/latest/domReady.js',
+            core: {
+                src: GITHUB_RAW_URL +
+                        '/requirejs/domReady/latest/domReady.js',
                 dest: 'lib/js/requirejs/domReady.js'
 
             },
-            mnmo:{
-                src: 'http://www.google.com/fonts/download?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU',
+            mnmo: {
+                src: GOOGLE_FONTS_URL +
+                        '?kit=6WX-i9ddkT_xM2fhugoMRy3USBnSvpkopQaUR-2r7iU',
                 dest: '.temp/pompiere.zip'
             },
-            handJS:{
-                src: 'http://download-codeplex.sec.s-msft.com/Download/SourceControlFileDownload.ashx?ProjectName=handjs&changeSetId=103849',
+            handJS: {
+                src: MS_CODEPLEX_URL +
+                        '/Download/SourceControlFileDownload.ashx' +
+                        '?ProjectName=handjs&changeSetId=103849',
                 dest: '.temp/handjs.zip'
             }
-            // 'ubuntu-cordova': {
-            // 'build/www/plugins.xml':
-            //     'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/plugins.xml-20130718182619-c92il0qk6i2ni0xw-1/plugins.xml',
-            // 'build/www/counters.cordovaproject':
-            //     'http://bazaar.launchpad.net/~ubuntu-sdk-tutorials-dev/ubuntu-sdk-tutorials/trunk/download/head:/qrcodescanner.cordov-20130718074154-454ovhnac2fgorus-1/qrcode-scanner.cordovaproject'
-            // }
         },
         unzip: {
             mnmo: {

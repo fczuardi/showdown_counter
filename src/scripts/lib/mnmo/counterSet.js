@@ -6,7 +6,6 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
             counter,
             contextMenu,
             ol,
-            toolbarElement,
             addButtonElement,
             firstItemColor,
             preferredPointerType,
@@ -20,7 +19,7 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
         }
 
         function addButtonClicked(event) {
-            if (!self.isPreferredPointerType(event)){ return false; }
+            if (!self.isPreferredPointerType(event)) { return false; }
             self.addCounter();
         }
 
@@ -34,13 +33,13 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
 
 
         //methods
-        this.isPreferredPointerType = function(event){
+        this.isPreferredPointerType = function (event) {
             // first pointer interaction will defined the preferred pointer
             // type for the rest of the session
-            if (self.preferredPointerType === undefined){
-                self.preferredPointerType = event.pointerType;
+            if (preferredPointerType === undefined) {
+                preferredPointerType = event.pointerType;
             }
-            return (event.pointerType === self.preferredPointerType);
+            return (event.pointerType === preferredPointerType);
         };
 
         this.init = function (viewportElement, menu) {
@@ -50,7 +49,6 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
 
             ol = listElement;
             contextMenu = menu;
-            toolbarElement = viewportElement.querySelector('.toolbar');
             addButtonElement = viewportElement.
                                 querySelector('.add-counter-button');
             // check localStorage to see if there are cached counters
@@ -71,7 +69,11 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
             // nodes[0].querySelector('.counter__display').textContent = "14";
 
             // attach listeners for the addCounter button
-            addButtonElement.addEventListener("pointerdown", addButtonClicked, false);
+            addButtonElement.addEventListener(
+                'pointerdown',
+                addButtonClicked,
+                false
+            );
 
 
             // register the counterlist on the context menu

@@ -2,4 +2,5 @@ title: <%= pkg.fullName %>
 description: <%= pkg.description %>
 author: <%= pkg.author %>
 repository: <%= pkg.repository %>
+version: <%= pkg.version %>
 cachefile: manifest.appcache

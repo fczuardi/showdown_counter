@@ -1,4 +1,0 @@
-[submodule "lib/ubuntu-html5-theme"]
-	path = lib/ubuntu-html5-theme
-	url = https://github.com/fczuardi/ubuntu-html5-theme.git
-	branch = with-fonts
