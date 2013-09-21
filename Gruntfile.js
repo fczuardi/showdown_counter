@@ -306,7 +306,6 @@ module.exports = function (grunt) {
                         'main': '../main',
                         'domReady': 'requirejs/domReady',
                         'modernizr': 'modernizr/modernizr-custom',
-                        'cordova': 'cordova/cordova-2.8',
                         'counter': 'mnmo/counter',
                         'counterSet': 'mnmo/counterSet',
                         'contextMenu': 'mnmo/contextMenu'

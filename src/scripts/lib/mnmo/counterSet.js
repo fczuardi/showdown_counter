@@ -17,52 +17,13 @@ define(['counter', 'modernizr'], function (Counter) {
                 (firstItemColor % self.config.colorPaletteSize);
             return firstItemColor;
         }
-        function addButtonClicked() {
-            self.addCounter();
-        }
-        function getClickEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchstart');
-            }
-            result.push('click');
-            return result;
-        }
-        function getPointerDownEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchstart');
-            }
-            result.push('mousedown');
-            return result;
-        }
-        function getPointerUpEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchend');
-            }
-            result.push('mouseup');
-            return result;
-        }
-        function getPointerMoveEvents() {
-            var result = [];
-            if (Modernizr.touchevents) {
-                result.push('touchmove');
-            }
-            result.push('mousemove');
-            return result;
-        }
 
         //config
         self.config = {
             incrementSize: 1,
             bottomLimit: 0,
             topLimit: Number.MAX_VALUE,
-            colorPaletteSize: 7,
-            clickEvents: getClickEvents(),
-            pointerDownEvents: getPointerDownEvents(),
-            pointerUpEvents: getPointerUpEvents(),
-            pointerMoveEvents: getPointerMoveEvents
+            colorPaletteSize: 7
         };
 
 
@@ -95,7 +56,7 @@ define(['counter', 'modernizr'], function (Counter) {
             // nodes[0].querySelector('.counter__display').textContent = "14";
 
             // attach listeners for the addCounter button
-            addButtonElement.addEventListener('click', addButtonClicked);
+            // addButtonElement.addEventListener('click', addButtonClicked);
 
             // register the counterlist on the context menu
             menu.setCounterSet(self);
