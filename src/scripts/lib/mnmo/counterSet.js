@@ -19,16 +19,8 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
             return firstItemColor;
         }
 
-        function isPreferredPointerType(event){
-            // first pointer interaction will defined the preferred pointer
-            // type for the rest of the session
-            if (self.preferredPointerType === undefined){
-                self.preferredPointerType = event.pointerType;
-            }
-            return (event.pointerType === self.preferredPointerType);
-        }
         function addButtonClicked(event) {
-            if (!isPreferredPointerType(event)){ return false; }
+            if (!self.isPreferredPointerType(event)){ return false; }
             self.addCounter();
         }
 
@@ -42,6 +34,15 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
 
 
         //methods
+        this.isPreferredPointerType = function(event){
+            // first pointer interaction will defined the preferred pointer
+            // type for the rest of the session
+            if (self.preferredPointerType === undefined){
+                self.preferredPointerType = event.pointerType;
+            }
+            return (event.pointerType === self.preferredPointerType);
+        };
+
         this.init = function (viewportElement, menu) {
             var listElement = viewportElement.querySelector('.counterlist'),
                 nodes = viewportElement.querySelectorAll('.counter'),

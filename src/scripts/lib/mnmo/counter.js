@@ -5,38 +5,31 @@ define(function () {
             decrementButton = domElement.querySelector('.decrement'),
             displayElement = domElement.querySelector('.counter__display'),
             value = Number(domElement.dataset.value),
-            // color = domElement.dataset.color,
             incrementSize = parent.config.incrementSize,
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
             self = this;
 
-        this.increment = function (event) {
+        function increment(event) {
+            if (!parent.isPreferredPointerType(event)){ return false; }
             self.setValue(value + incrementSize);
-        };
-        this.decrement = function (event) {
+        }
+        function decrement(event) {
+            if (!parent.isPreferredPointerType(event)){ return false; }
             self.setValue(value - incrementSize);
-        };
+        }
 
         //set index
         domElement.dataset.index = index;
 
         //atach listeners
 
-        //attach click events
         //attach pointerdown events
+        incrementButton.addEventListener('pointerdown', increment, false);
+        decrementButton.addEventListener('pointerdown', decrement, false);
+
         // for (d = pointerDown.length - 1; d >= 0; d -= 1) {
         //     eventName = pointerDown[d];
-        //     incrementButton.addEventListener(
-        //         eventName,
-        //         self.increment,
-        //         false
-        //     );
-        //     decrementButton.addEventListener(
-        //         eventName,
-        //         self.decrement,
-        //         false
-        //     );
         //     domElement.addEventListener(
         //         eventName,
         //         contextMenu.touchStart,
