@@ -1,4 +1,4 @@
-define(['counter', 'modernizr'], function (Counter) {
+define(['counter', 'hand', 'modernizr'], function (Counter) {
     'use strict';
     var CounterSet = function () {
         //private vars
@@ -9,6 +9,7 @@ define(['counter', 'modernizr'], function (Counter) {
             toolbarElement,
             addButtonElement,
             firstItemColor,
+            preferredPointerType,
             self = this;
 
         //helpers
@@ -16,6 +17,19 @@ define(['counter', 'modernizr'], function (Counter) {
             firstItemColor = 1 +
                 (firstItemColor % self.config.colorPaletteSize);
             return firstItemColor;
+        }
+
+        function isPreferredPointerType(event){
+            // first pointer interaction will defined the preferred pointer
+            // type for the rest of the session
+            if (self.preferredPointerType === undefined){
+                self.preferredPointerType = event.pointerType;
+            }
+            return (event.pointerType === self.preferredPointerType);
+        }
+        function addButtonClicked(event) {
+            if (!isPreferredPointerType(event)){ return false; }
+            self.addCounter();
         }
 
         //config
@@ -56,7 +70,8 @@ define(['counter', 'modernizr'], function (Counter) {
             // nodes[0].querySelector('.counter__display').textContent = "14";
 
             // attach listeners for the addCounter button
-            // addButtonElement.addEventListener('click', addButtonClicked);
+            addButtonElement.addEventListener("pointerdown", addButtonClicked, false);
+
 
             // register the counterlist on the context menu
             menu.setCounterSet(self);
