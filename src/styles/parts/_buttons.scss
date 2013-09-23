@@ -30,12 +30,10 @@
     text-transform: lowercase;
 
     &:before {
-        content: "";
-        display: block;
+        @extend .inserted-content;
         position: absolute;
         // background-color: rgba(255,255,255,0.5);
         border-radius: $button-border-radius;
-        width: 100%;
         height: 100%;
         border: 1px solid $button-inside-border-color;
     }

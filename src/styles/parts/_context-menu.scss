@@ -1,9 +1,7 @@
 .context-menu{
+    @extend .top-left-fullwidth;
     position: fixed;
-    top: 0;
-    left: 0;
     height:100%;
-    width:100%;
     z-index: 1000;
     display: none;
 }
@@ -16,22 +14,18 @@
     width: 100%;
     background-color: rgba(255,255,255,0.5);
     border-top: 1px solid black;
-    &:before {
-        content: "";
-        display: block;
+    &:before,
+    &:after {
+        @extend .inserted-content;
         position: relative;
         height: 48px;
+    }
+    &:before {
         margin-top: -48px;
-        width: 100%;
         background-image: url(../img/menu-shadow-top.png);
     }
     &:after {
-        content: "";
-        display: block;
-        position: relative;
         top: $counter-height;
-        height: 48px;
-        width: 100%;
         background-image: url(../img/menu-shadow-bottom.png);
     }
 }
