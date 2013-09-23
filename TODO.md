@@ -1,6 +1,8 @@
+# working
+- swipe for bigger increments
+
 # new features
 - local storage counters should be persistent
-- swipe for bigger increments
 - help screen or FTU screen
 
 # icons

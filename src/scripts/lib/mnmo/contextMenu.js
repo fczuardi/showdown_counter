@@ -17,16 +17,6 @@ define(function () {
             hiddenColor = 1,
             self = this;
 
-        function getScrollY() {
-            var y = (window.pageYOffset !== undefined) ? window.pageYOffset :
-                    (
-                        document.documentElement ||
-                        document.body.parentNode ||
-                        document.body
-                    ).scrollTop;
-            return y;
-        }
-
         function getColorRowAndColumn(event) {
             var clientX = event.clientX,
                 clientY = event.clientY,
@@ -187,9 +177,21 @@ define(function () {
             );
 
         };
+        this.isActive = function () {
+            return menuElement.classList.contains('context-menu--active');
+        };
+        this.getScrollY = function() {
+            var y = (window.pageYOffset !== undefined) ? window.pageYOffset :
+                    (
+                        document.documentElement ||
+                        document.body.parentNode ||
+                        document.body
+                    ).scrollTop;
+            return y;
+        };
         this.openMenu = function (event) {
             event.stopPropagation();
-            var scrollY = getScrollY(),
+            var scrollY = self.getScrollY(),
                 color;
 
             counterElement = event.target;
@@ -223,7 +225,7 @@ define(function () {
         this.touchStart = function (event) {
             event.stopPropagation();
             if (!counterSet.isPreferredPointerType(event)) { return false; }
-            if (menuElement.classList.contains('context-menu--active')) {
+            if (self.isActive()) {
                 return false;
             }
             if (pressing === undefined) {
@@ -236,6 +238,7 @@ define(function () {
         };
 
         this.touchEnd = function (event) {
+            // console.log('Touch end');
             window.clearTimeout(pressing);
             pressing = undefined;
             event.stopPropagation();
