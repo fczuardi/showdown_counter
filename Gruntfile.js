@@ -134,6 +134,19 @@ module.exports = function (grunt) {
             }
         },
 
+        // CSS redundancy check
+        csscss: {
+            options: {
+                bundleExec: true,
+                failWhenDuplicates: true,
+                minMatch: 3,
+                shorthand: true
+            },
+            dist: {
+                src: CSS_FILES
+            }
+        },
+
         // Javascript
         jsvalidate: {
             all: JAVASCRIPT_SOURCES
@@ -532,7 +545,8 @@ module.exports = function (grunt) {
         'jsvalidate',
         'jshint',
         'gjslint',
-        'jslint'
+        'jslint',
+        'csscss'
     ]);
 
     // the default task can be run just by typing "grunt" on the command line
