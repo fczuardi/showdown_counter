@@ -156,6 +156,9 @@ define(function () {
                 false
             );
 
+            //scroll
+            window.onscroll = self.killTimer;
+
         };
 
         this.init = function (menu) {

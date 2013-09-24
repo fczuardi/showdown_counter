@@ -1,5 +1,4 @@
 # working
-- swipe for bigger increments
 
 # scroll
 - cancel increment if scroll
@@ -55,6 +54,7 @@
 - DONE
 
 -----
++ swipe for bigger increments @done (2013-09-24 17:53)
 + create a branch with an add-counter button and use that @done (2013-09-14 17:22)
 + reset @done (2013-09-21 12:47)
 + change color @done (2013-09-21 12:47)
