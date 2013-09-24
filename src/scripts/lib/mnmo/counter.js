@@ -10,6 +10,7 @@ define(function () {
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
             deltaX,
+            swiping = false,
             swipeWidth,
             swipeStartX,
             swipeTrigger = 1 / 3,
@@ -45,6 +46,22 @@ define(function () {
             }
             contextMenu.touchEnd(event);
         }
+        function counterDrag (event) {
+            if (!swiping) { return false; }
+            deltaX = event.clientX - swipeStartX;
+            swipeWidth = swipeTrigger * event.target.offsetWidth;
+            if (!parent.isPreferredPointerType(event)) { return false; }
+            contextMenu.killTimer();
+            // contextMenu.touchEnd(event);
+            if (Math.abs(deltaX) > swipeWidth) {
+                if (deltaX > 0) {
+                    biggerIncrement();
+                } else {
+                    biggerDecrement();
+                }
+                self.counterTouchEnd();
+            }
+        }
         this.isOutOfBounds = function (event) {
             return (
                 (event.clientY <
@@ -54,38 +71,13 @@ define(function () {
                         contextMenu.getScrollY())
             );
         };
-        this.counterDrag = function (event) {
-            deltaX = event.clientX - swipeStartX;
-            swipeWidth = swipeTrigger * event.target.offsetWidth;
-            if (!parent.isPreferredPointerType(event)) { return false; }
-            contextMenu.touchEnd(event);
-            if (Math.abs(deltaX) > swipeWidth) {
-                if (deltaX > 0) {
-                    biggerIncrement();
-                } else {
-                    biggerDecrement();
-                }
-                self.counterTouchEnd();
-            }
-            if (self.isOutOfBounds(event)) {
-                self.counterTouchEnd();
-            }
-        };
         this.counterTouchStart = function (event) {
             if (!parent.isPreferredPointerType(event)) { return false; }
-            domElement.addEventListener(
-                'pointermove',
-                self.counterDrag,
-                true
-            );
+            swiping = true;
             swipeStartX = event.clientX;
         };
         this.counterTouchEnd = function () {
-            domElement.removeEventListener(
-                'pointermove',
-                self.counterDrag,
-                true
-            );
+            swiping = false;
         };
 
         //set index
@@ -97,6 +89,9 @@ define(function () {
             self.counterTouchStart,
             false
         );
+
+        //attach pointermove events
+        domElement.addEventListener('pointermove', counterDrag, false);
 
         //attach pointerup events
         incrementButton.addEventListener('pointerup', buttonUp, false);

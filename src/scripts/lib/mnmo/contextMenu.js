@@ -211,8 +211,6 @@ define(function () {
                                         color).style.display = 'none';
             hiddenColor = color;
 
-            selectedCounterIndex = counterElement.dataset.index;
-
             counterList[selectedCounterIndex].counterTouchEnd();
             //display the menu
             menuElement.classList.add('context-menu--active');
@@ -225,6 +223,13 @@ define(function () {
 
         this.touchStart = function (event) {
             event.stopPropagation();
+            counterElement = event.target;
+            // get the li counter
+            while (!counterElement.classList.contains('counter') &&
+                    (counterElement !== document.body)) {
+                counterElement = counterElement.parentNode;
+            }
+            selectedCounterIndex = counterElement.dataset.index;
             if (!counterSet.isPreferredPointerType(event)) { return false; }
             if (self.isActive()) {
                 return false;
@@ -238,11 +243,15 @@ define(function () {
             }
         };
 
-        this.touchEnd = function (event) {
-            // console.log('Touch end');
+        this.killTimer = function () {
             window.clearTimeout(pressing);
             pressing = undefined;
+        };
+
+        this.touchEnd = function (event) {
             event.stopPropagation();
+            self.killTimer();
+            counterList[selectedCounterIndex].counterTouchEnd();
         };
 
         this.hideRemoveButton = function () {
