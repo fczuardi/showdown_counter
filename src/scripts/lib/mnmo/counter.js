@@ -10,9 +10,11 @@ define(function () {
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
             deltaX,
+            deltaY,
             swiping = false,
             swipeWidth,
             swipeStartX,
+            swipeStartY,
             swipeTrigger = 1 / 3,
             self = this;
 
@@ -47,12 +49,12 @@ define(function () {
             contextMenu.touchEnd(event);
         }
         function counterDrag (event) {
-            if (!swiping) { return false; }
+            if ((!swiping) ||
+                (!parent.isPreferredPointerType(event))) { return false; }
             deltaX = event.clientX - swipeStartX;
+            deltaY = event.clientY - swipeStartY;
             swipeWidth = swipeTrigger * event.target.offsetWidth;
-            if (!parent.isPreferredPointerType(event)) { return false; }
             contextMenu.killTimer();
-            // contextMenu.touchEnd(event);
             if (Math.abs(deltaX) > swipeWidth) {
                 if (deltaX > 0) {
                     biggerIncrement();
@@ -60,6 +62,9 @@ define(function () {
                     biggerDecrement();
                 }
                 self.counterTouchEnd();
+            }
+            if (Math.abs(deltaX) - Math.abs(deltaY) > 2){
+                event.preventDefault();
             }
         }
         this.isOutOfBounds = function (event) {
@@ -75,6 +80,7 @@ define(function () {
             if (!parent.isPreferredPointerType(event)) { return false; }
             swiping = true;
             swipeStartX = event.clientX;
+            swipeStartY = event.clientY;
         };
         this.counterTouchEnd = function () {
             swiping = false;
