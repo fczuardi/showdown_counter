@@ -1,6 +1,6 @@
 {
   "name": "mnmo-counters",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "fullName": "Counters",
   "description": "A tally counter web-app with support for multiple counters.",
   "license": "AGPL",

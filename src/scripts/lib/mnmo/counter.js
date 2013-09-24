@@ -15,7 +15,7 @@ define(function () {
             swipeWidth,
             swipeStartX,
             swipeStartY,
-            swipeTrigger = 1 / 3,
+            swipeTrigger = 1 / 4,
             self = this;
 
         function increment(event) {
@@ -33,7 +33,6 @@ define(function () {
             self.setValue(value - bigIncrementSize);
         }
         function buttonUp(event) {
-            self.counterTouchEnd();
             if (contextMenu.isActive() ||
                     self.isOutOfBounds(event) ||
                     (Math.abs(deltaX) > swipeWidth)
@@ -48,24 +47,20 @@ define(function () {
             }
             contextMenu.touchEnd(event);
         }
-        function counterDrag (event) {
-            if ((!swiping) ||
-                (!parent.isPreferredPointerType(event))) { return false; }
+        function counterDrag(event) {
             deltaX = event.clientX - swipeStartX;
             deltaY = event.clientY - swipeStartY;
-            swipeWidth = swipeTrigger * event.target.offsetWidth;
+            if ((!swiping) ||
+                    (Math.abs(deltaX) - Math.abs(deltaY) < 2)
+                    ) {
+                return false;
+            }
+            event.preventDefault();
             contextMenu.killTimer();
-            if (Math.abs(deltaX) > swipeWidth) {
-                if (deltaX > 0) {
-                    biggerIncrement();
-                } else {
-                    biggerDecrement();
-                }
-                self.counterTouchEnd();
-            }
-            if (Math.abs(deltaX) - Math.abs(deltaY) > 2){
-                event.preventDefault();
-            }
+            swipeWidth = swipeTrigger * domElement.offsetWidth;
+            domElement.classList.add('counter--swiping');
+            domElement.style.left = Math.min(swipeWidth,
+                                        Math.max(-swipeWidth, deltaX)) + 'px';
         }
         this.isOutOfBounds = function (event) {
             return (
@@ -77,13 +72,24 @@ define(function () {
             );
         };
         this.counterTouchStart = function (event) {
-            if (!parent.isPreferredPointerType(event)) { return false; }
             swiping = true;
             swipeStartX = event.clientX;
             swipeStartY = event.clientY;
         };
         this.counterTouchEnd = function () {
+            if (!swiping) { return false; }
             swiping = false;
+            domElement.classList.remove('counter--swiping');
+            swipeWidth = swipeTrigger * domElement.offsetWidth;
+
+            if (Math.abs(domElement.offsetLeft) >= swipeWidth) {
+                if (domElement.offsetLeft > 0) {
+                    biggerIncrement();
+                } else {
+                    biggerDecrement();
+                }
+            }
+            domElement.style.left = "0px";
         };
 
         //set index
@@ -91,6 +97,16 @@ define(function () {
 
         //attach pointerdown events
         domElement.addEventListener(
+            'pointerdown',
+            self.counterTouchStart,
+            false
+        );
+        incrementButton.addEventListener(
+            'pointerdown',
+            self.counterTouchStart,
+            false
+        );
+        decrementButton.addEventListener(
             'pointerdown',
             self.counterTouchStart,
             false

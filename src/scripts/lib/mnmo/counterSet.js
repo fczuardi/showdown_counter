@@ -67,7 +67,7 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
             firstItemColor = Number(nodes[n + 1].dataset.color);
 
             //debug
-            // nodes[0].querySelector('.counter__display').textContent = "14";
+            // nodes[0].querySelector('.counter__display').textContent = "2";
 
             // attach listeners for the addCounter button
             addButtonElement.addEventListener(

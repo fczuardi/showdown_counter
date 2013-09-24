@@ -1,16 +1,31 @@
-.counter,
-.counterlist__empty-space{
+.counter{
     position: relative;
     height: $counter-height;
-}
-.counterlist__empty-space{
-    padding-top: $counter-height;
-    transition: padding 100ms cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-.counter{
     background-color: rgba(255,255,255,0.5);
     border-bottom: 1px solid $hr-color;
     transition: left 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.counter--swiping{
+    transition: none;
+    &:before,
+    &:after{
+        content: "";
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 25%;
+        background-color: #4F5051;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+    &:before{
+        left: -25%;
+        background-image: url(../img/forward.png);
+    }
+    &:after{
+        right: -25%;
+        background-image: url(../img/rewind.png);
+    }
 }
 .counter__display{
     position: absolute;

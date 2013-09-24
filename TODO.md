@@ -20,6 +20,8 @@
 - javascript to check appcache updates and notify users
 
 # polishing
+- smaller Pompiere font-set
+- replace png icons with svg
 - animation for counter deletion
 - cleanup the background of the footer logo, make it a sprite for few requests
 
