@@ -1,6 +1,11 @@
 # working
 - swipe for bigger increments
 
+# scroll
+- cancel increment if scroll
+- stop scroll when context menu open
+- do not scroll if swiping
+
 # new features
 - local storage counters should be persistent
 - help screen or FTU screen

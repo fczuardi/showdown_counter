@@ -6,8 +6,13 @@ define(function () {
             displayElement = domElement.querySelector('.counter__display'),
             value = Number(domElement.dataset.value),
             incrementSize = parent.config.incrementSize,
+            bigIncrementSize = parent.config.bigIncrementSize,
             bottomLimit = parent.config.bottomLimit,
             topLimit = parent.config.topLimit,
+            deltaX,
+            swipeWidth,
+            swipeStartX,
+            swipeTrigger = 1 / 3,
             self = this;
 
         function increment(event) {
@@ -18,45 +23,68 @@ define(function () {
             if (!parent.isPreferredPointerType(event)) { return false; }
             self.setValue(value - incrementSize);
         }
+        function biggerIncrement() {
+            self.setValue(value + bigIncrementSize);
+        }
+        function biggerDecrement() {
+            self.setValue(value - bigIncrementSize);
+        }
         function buttonUp(event) {
+            self.counterTouchEnd();
             if (contextMenu.isActive() ||
-                self.isOutOfBounds(event)) {
+                    self.isOutOfBounds(event) ||
+                    (Math.abs(deltaX) > swipeWidth)
+                    ) {
+                deltaX = 0;
                 return false;
             }
             if (event.target === incrementButton) {
                 increment(event);
-            } else if (event.target === decrementButton){
+            } else if (event.target === decrementButton) {
                 decrement(event);
             }
             contextMenu.touchEnd(event);
         }
         this.isOutOfBounds = function (event) {
-            return  (
+            return (
                 (event.clientY <
-                domElement.offsetTop - contextMenu.getScrollY() ) ||
+                domElement.offsetTop - contextMenu.getScrollY()) ||
                 (event.clientY >
-                domElement.offsetTop + domElement.offsetHeight -
-                contextMenu.getScrollY())
+                        domElement.offsetTop + domElement.offsetHeight -
+                        contextMenu.getScrollY())
             );
         };
-        this.counterDrag = function(event) {
+        this.counterDrag = function (event) {
+            deltaX = event.clientX - swipeStartX;
+            swipeWidth = swipeTrigger * event.target.offsetWidth;
+            if (!parent.isPreferredPointerType(event)) { return false; }
             contextMenu.touchEnd(event);
-            if (self.isOutOfBounds(event)){
-                self.counterTouchEnd(event);
+            if (Math.abs(deltaX) > swipeWidth) {
+                if (deltaX > 0) {
+                    biggerIncrement();
+                } else {
+                    biggerDecrement();
+                }
+                self.counterTouchEnd();
+            }
+            if (self.isOutOfBounds(event)) {
+                self.counterTouchEnd();
             }
         };
-        this.counterTouchStart = function(event) {
-            event.target.addEventListener(
+        this.counterTouchStart = function (event) {
+            if (!parent.isPreferredPointerType(event)) { return false; }
+            domElement.addEventListener(
                 'pointermove',
                 self.counterDrag,
-                false
+                true
             );
+            swipeStartX = event.clientX;
         };
-        this.counterTouchEnd = function(event) {
-            event.target.removeEventListener(
+        this.counterTouchEnd = function () {
+            domElement.removeEventListener(
                 'pointermove',
                 self.counterDrag,
-                false
+                true
             );
         };
 
@@ -69,8 +97,6 @@ define(function () {
             self.counterTouchStart,
             false
         );
-        // incrementButton.addEventListener('pointerdown', increment, false);
-        // decrementButton.addEventListener('pointerdown', decrement, false);
 
         //attach pointerup events
         incrementButton.addEventListener('pointerup', buttonUp, false);
@@ -80,7 +106,6 @@ define(function () {
             self.counterTouchEnd,
             false
         );
-
 
         this.reset = function () {
             self.setValue(bottomLimit);

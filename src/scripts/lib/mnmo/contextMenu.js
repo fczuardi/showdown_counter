@@ -180,7 +180,7 @@ define(function () {
         this.isActive = function () {
             return menuElement.classList.contains('context-menu--active');
         };
-        this.getScrollY = function() {
+        this.getScrollY = function () {
             var y = (window.pageYOffset !== undefined) ? window.pageYOffset :
                     (
                         document.documentElement ||
@@ -213,6 +213,7 @@ define(function () {
 
             selectedCounterIndex = counterElement.dataset.index;
 
+            counterList[selectedCounterIndex].counterTouchEnd();
             //display the menu
             menuElement.classList.add('context-menu--active');
 
