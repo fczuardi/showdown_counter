@@ -36,6 +36,8 @@ body{
 
 body {
     background-color: $background-color;
+    width: 100%;
+    overflow: scroll-y;
 }
 
 #main{

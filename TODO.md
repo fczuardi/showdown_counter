@@ -1,5 +1,7 @@
 # working
 
+# bugs
+
 # scroll
 - prevent horizontal scrolling on firefox for android
 - cancel increment if scroll
@@ -57,6 +59,7 @@
 #context-menu
 
 -----
++ on mobile safari, swipe generates zoom @done (2013-09-25 15:20)
 + load all images on first load (issue #12) @done (2013-09-25 12:08)
 + replace x with trash bin @done (2013-09-25 11:36)
 + rounded borders @done (2013-09-25 11:36)
