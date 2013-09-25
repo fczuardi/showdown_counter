@@ -1,5 +1,4 @@
 # working
-- replace x with trash bin
 - load all images on first load
 
 #context-menu
@@ -54,8 +53,13 @@
 # refactor
 - use the defaults.json data to create the first counterset instead of going to the DOM
 
+# contributors
+- include built folder in the repository to make easier for people to
+    contribute without having to have the build system
 
 -----
++ replace x with trash bin @done (2013-09-25 11:36)
++ rounded borders @done (2013-09-25 11:36)
 + do not scroll if swiping @done (2013-09-24 23:43)
 + swipe for bigger increments @done (2013-09-24 17:53)
 + create a branch with an add-counter button and use that @done (2013-09-14 17:22)

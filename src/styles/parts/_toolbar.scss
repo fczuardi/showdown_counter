@@ -14,24 +14,35 @@
     position: absolute;
     top: 50%;
 }
-.context-menu__reset-button,
+.context-menu__reset-button
 .context-menu__remove-button{
-    margin-top: -16px;
-    width: 35px;
-    height: 32px;
 }
 .context-menu__reset-button{
-    left: 7%;
+    left: 11%;
+    margin-top: -17px;
+    width: 35px;
+    height: 32px;
     background-image: url(../img/reset-button.png);
 }
+.context-menu__remove-button{
+    right: 11%;
+    margin-top: -18px;
+    width: 29px;
+    height: 36px;
+    background-image: url(../img/delete-button.png);
+}
+
 .context-menu__color-picker,
 .context-menu__color-picker .area{
     left: 50%;
-    margin-left: -61px;
+    margin-left: -63px;
     width: 129px;
-    height: 87px;
+    height: 88px;
+    padding-top: 1px;
+    padding-left: 1px;
     margin-top: -43px;
     background-color: #232425;
+    border-radius: 5px;
     // overflow: hidden;
     // visibility: hidden;
 }
@@ -45,6 +56,7 @@
     height: 36px;
     margin-top: 5px;
     margin-left: 5px;
+    border-radius: 3px;
     &.color-1{
         background-color: $color1;
     }
@@ -66,9 +78,4 @@
     &.color-7{
         background-color: $color7;
     }
-}
-
-.context-menu__remove-button{
-    right: 7%;
-    background-image: url(../img/delete-button.png);
 }
