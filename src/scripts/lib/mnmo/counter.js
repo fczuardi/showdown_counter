@@ -89,7 +89,7 @@ define(function () {
                     biggerDecrement();
                 }
             }
-            domElement.style.left = "0px";
+            domElement.style.left = '0px';
         };
 
         //set index

@@ -1,9 +1,12 @@
 # working
 
+#context-menu
+- replace x with trash bin
+
 # scroll
+- prevent horizontal scrolling on firefox for android
 - cancel increment if scroll
 - stop scroll when context menu open
-- do not scroll if swiping
 
 # new features
 - local storage counters should be persistent
@@ -47,13 +50,12 @@
 # performance (future)
 - keep the dom small (the number of slots that fits on the screen is enough)
 
-# refactorate
+# refactor
 - use the defaults.json data to create the first counterset instead of going to the DOM
 
-#context-menu
-- DONE
 
 -----
++ do not scroll if swiping @done (2013-09-24 23:43)
 + swipe for bigger increments @done (2013-09-24 17:53)
 + create a branch with an add-counter button and use that @done (2013-09-14 17:22)
 + reset @done (2013-09-21 12:47)

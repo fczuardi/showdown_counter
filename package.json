@@ -48,6 +48,14 @@
     "grunt-zip": "~0.9.2",
     "grunt-csscss": "~0.6.1"
   },
+  "jshintConfig": {
+    "globals": {
+        "require": true,
+        "requirejs": true,
+        "define": true,
+        "Modernizr": true
+    }
+  },
   "engines": {
     "node": ">=0.8"
   }
