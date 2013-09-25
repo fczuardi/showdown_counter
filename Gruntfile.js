@@ -226,6 +226,20 @@ module.exports = function (grunt) {
             }
         },
 
+        // Reindent package.json
+        reindent: {
+            options: {
+                indent_size: 4,
+                insert_final_newline: true
+            },
+            package_json: {
+                files: [{
+                    src: 'package.json',
+                    dest: 'package.json'
+                }]
+            }
+        },
+
         //HTML indentation for generated pages
         prettify: {
             options: {
@@ -529,6 +543,46 @@ module.exports = function (grunt) {
                 }
             });
             done(true);
+        }
+    );
+
+    grunt.registerMultiTask(
+        'reindent',
+        'Reindent JSON files',
+        function () {
+            var jsonObject,
+                options = this.options({
+                indent_size: 4,
+                insert_final_newline: true
+            });
+            // Iterate over all specified file groups.
+            this.files.forEach(function(f) {
+                var src = f.src.filter(function(filepath) {
+                    // Warn on and remove invalid source files (if nonull was set).
+                    if (!grunt.file.exists(filepath)) {
+                        grunt.log.warn('Source file "' + filepath + '" not found.');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }).map(grunt.file.read).join(
+                grunt.util.normalizelf(grunt.util.linefeed)); // Read source files.
+
+                //reindent
+                jsonObject = JSON.parse(src, options.indent_size);
+                src = JSON.stringify(jsonObject, null, options.indent_size);
+
+                if (options.insert_final_newline){
+                    src += '\n';
+                }
+                console.log(options.insert_final_newline);
+
+                // // Write the destination file.
+                grunt.file.write(f.dest, src);
+
+                // Print a success message.
+                grunt.log.writeln('File "' + f.dest + '" created.');
+            });
         }
     );
 
