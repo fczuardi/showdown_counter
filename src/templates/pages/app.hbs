@@ -19,3 +19,8 @@ built: false
     {{>footer}}
     {{>context-menu}}
 </section>
+<div class="preload">
+    {{#each app.preload}}
+        <img src="{{.}}" />
+    {{/each}}
+</div>

@@ -4,3 +4,10 @@ author: <%= pkg.author %>
 repository: <%= pkg.repository %>
 version: <%= pkg.version %>
 cachefile: manifest.appcache
+preload:
+  - img/reset-button.png
+  - img/delete-button.png
+  - img/forward.png
+  - img/rewind.png
+  - img/menu-shadow-top.png
+  - img/menu-shadow-bottom.png

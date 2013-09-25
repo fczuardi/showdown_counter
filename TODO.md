@@ -1,7 +1,4 @@
 # working
-- load all images on first load
-
-#context-menu
 
 # scroll
 - prevent horizontal scrolling on firefox for android
@@ -9,8 +6,8 @@
 - stop scroll when context menu open
 
 # new features
-- local storage counters should be persistent
-- help screen or FTU screen
+- local storage counters should be persistent (issue #7)
+- help screen or FTU screen (issue #1)
 
 # icons
 - favicon
@@ -31,8 +28,8 @@
 - investigate if we still want "pull to add"
 
 # Firefox Marketplace
-- circle icons for FirefoxOS?
-- translate manifest fields for Portuguese (Firefox Marketplace)
+- circle icons for FirefoxOS (issue #10)
+- translate manifest fields for Portuguese
 
 # appstores
 - publish on Google Play
@@ -57,7 +54,10 @@
 - include built folder in the repository to make easier for people to
     contribute without having to have the build system
 
+#context-menu
+
 -----
++ load all images on first load (issue #12) @done (2013-09-25 12:08)
 + replace x with trash bin @done (2013-09-25 11:36)
 + rounded borders @done (2013-09-25 11:36)
 + do not scroll if swiping @done (2013-09-24 23:43)
