@@ -1,7 +1,8 @@
 # working
+- replace x with trash bin
+- load all images on first load
 
 #context-menu
-- replace x with trash bin
 
 # scroll
 - prevent horizontal scrolling on firefox for android
