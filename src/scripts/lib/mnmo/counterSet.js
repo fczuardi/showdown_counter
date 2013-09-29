@@ -26,7 +26,7 @@ define(['counter', 'hand', 'modernizr'], function (Counter) {
         //config
         self.config = {
             incrementSize: 1,
-            bigIncrementSize: 10,
+            bigIncrementSize: 5,
             bottomLimit: 0,
             topLimit: Number.MAX_VALUE,
             colorPaletteSize: 7

@@ -227,6 +227,11 @@ define(function () {
         this.touchStart = function (event) {
             event.stopPropagation();
             counterElement = event.target;
+            if (!event.target.classList.contains('counter') &&
+                !event.target.classList.contains('counter__display') &&
+                event.target.nodeName.toLowerCase() !== 'button')  {
+                return false;
+            }
             // get the li counter
             while (!counterElement.classList.contains('counter') &&
                     (counterElement !== document.body)) {
